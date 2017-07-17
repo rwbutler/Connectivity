@@ -1,0 +1,22 @@
+{
+  "name": "Connectivity",
+  "version": "0.1.0",
+  "summary": "A short description of Connectivity.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/rwbutler/Connectivity",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "rwbutler": "ross.butler@argos.co.uk"
+  },
+  "source": {
+    "git": "https://github.com/rwbutler/Connectivity.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "Connectivity/Classes/**/*"
+}
