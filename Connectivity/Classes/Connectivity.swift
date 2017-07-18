@@ -14,18 +14,17 @@ extension Notification.Name {
 public class Connectivity {
     public struct Percentage {
         let value: Double
-        init?(_ value: Double) {
-            guard (0.0...100.0).contains(value) else {
-                return nil
-            }
-            self.value = value
+        init(_ value: Double) {
+            var result = value < 0.0 ? 0.0 : value
+            result = value > 100.0 ? 100.0 : value
+            self.value = result
         }
     }
     public typealias NetworkConnected = (Connectivity) -> ()
     public typealias NetworkDisconnected = (Connectivity) -> ()
     
     public private(set) var isConnected: Bool = false
-    public static var connectivityThreshold: Connectivity.Percentage = Connectivity.Percentage(75.0)!
+    public static var connectivityThreshold: Connectivity.Percentage = Connectivity.Percentage(75.0)
     public static var connectivityURLs: [URL] = {
         var result: [URL] = []
         var useHTTP = false
