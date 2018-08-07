@@ -20,12 +20,46 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-Connectivity is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+### Cocoapods
 
-```ruby
+[CocoaPods](http://cocoapods.org) is a dependency manager which integrates dependencies into your Xcode workspace. To install it using [Ruby gems](https://rubygems.org/) run:
+
+```
+gem install cocoapods
+```
+
+To install Connectivity using Cocoapods, simply add the following line to your Podfile:
+
+```
 pod "Connectivity"
 ```
+
+Then run the command:
+
+```
+pod install
+```
+
+For more information [see here](https://cocoapods.org/#getstarted).
+
+### Carthage
+
+Carthage is a dependency manager which produces a binary for manual integration into your project. It can be installed via [Homebrew](https://brew.sh/) using the commands:
+
+```
+brew update
+brew install carthage
+```
+
+In order to integrate Connectivity into your project via Carthage, add the following line to your project's Cartfile:
+
+```
+github "rwbutler/Connectivity"
+```
+
+From the macOS Terminal run `carthage update --platform iOS` to build the framework then drag `Connectivity.framework` into your Xcode project.
+
+For more information [see here](https://github.com/Carthage/Carthage#quick-start).
 
 ## Author
 
