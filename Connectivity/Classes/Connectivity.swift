@@ -20,9 +20,9 @@ public class Connectivity {
             self.value = result
         }
     }
-    public typealias NetworkConnected = (Connectivity) -> ()
-    public typealias NetworkDisconnected = (Connectivity) -> ()
-    
+    public typealias NetworkConnected = (Connectivity) -> Void
+    public typealias NetworkDisconnected = (Connectivity) -> Void
+
     public private(set) var isConnected: Bool = false
     public static var connectivityThreshold: Connectivity.Percentage = Connectivity.Percentage(75.0)
     public static var connectivityURLs: [URL] = {
@@ -60,10 +60,11 @@ public class Connectivity {
         return sessionConfiguration
     }()
     public var notificationCenter: NotificationCenter = NotificationCenter.default
-    
+
     public enum ConnectivityStatus: CustomStringConvertible {
-        case notConnected, connectedViaWiFi, connectedViaWWAN, connectedViaWiFiWithoutInternet, connectedViaWWANWithoutInternet
-        
+        case notConnected, connectedViaWiFi, connectedViaWWAN,
+        connectedViaWiFiWithoutInternet, connectedViaWWANWithoutInternet
+
         public var description: String {
             switch self {
             case .connectedViaWWAN: return "Cellular"
@@ -76,66 +77,63 @@ public class Connectivity {
     }
     public var whenConnected: NetworkConnected?
     public var whenDisconnected: NetworkDisconnected?
-    
+
     public var currentConnectivityString: String {
         return "\(currentConnectivityStatus)"
     }
-    
+
     public var currentConnectivityStatus: ConnectivityStatus {
         if isConnectedViaWiFi {
             return .connectedViaWiFi
         }
-        if isConnectedViaWWAN
-        {
+        if isConnectedViaWWAN {
             return .connectedViaWWAN
         }
         if isConnectedViaWiFiWithoutInternet {
             return .connectedViaWiFiWithoutInternet
         }
-        if isConnectedViaWWANWithoutInternet
-        {
+        if isConnectedViaWWANWithoutInternet {
             return .connectedViaWWANWithoutInternet
         }
         return .notConnected
     }
     let reachability: Reachability
     private static let expectedResponse = "Success"
-    private var timer: Timer? = nil
+    private var timer: Timer?
     fileprivate var reachabilityPolling = false
     public var aggressivePolling: Bool = false {
         didSet {
             aggressivePolling(enabled: aggressivePolling)
         }
     }
-    
+
     public func aggressivePolling(enabled: Bool) {
         if #available(iOS 10.0, *) {
             timer?.invalidate()
             if aggressivePolling && reachabilityPolling {
-                timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { timer in
+                timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { _ in
                     self.performConnectivityChecks()
                 })
             }
         }
     }
-    
+
     public init() {
         reachability = Reachability.forInternetConnection()
         performConnectivityChecks()
     }
-    
+
     public func performConnectivityChecks() {
         let connectivityURLs = type(of: self).connectivityURLs
         let connectivityDomainCount: Double = Double(connectivityURLs.count)
         var successfulConnectivityChecks: Double = 0
         var failedConnectivityChecks: Double = 0
-        
+
         for connectivityURL in connectivityURLs {
             let urlSession = URLSession(configuration: type(of: self).urlSessionConfiguration)
-            let task = urlSession.dataTask(with: connectivityURL, completionHandler: { [weak self] (data, response, error) in
-                guard let strongSelf = self else {
-                    return
-                }
+            let task = urlSession.dataTask(with: connectivityURL,
+                                           completionHandler: { [weak self] (data, _, _) in
+                guard let strongSelf = self else { return }
                 if let data = data,
                     let responseString = String(data: data, encoding: .utf8),
                     responseString.contains(type(of: strongSelf).expectedResponse) {
@@ -143,7 +141,7 @@ public class Connectivity {
                 } else {
                     failedConnectivityChecks += 1
                 }
-                
+
                 if connectivityDomainCount == (successfulConnectivityChecks + failedConnectivityChecks) {
                     let percentageSuccessful = (successfulConnectivityChecks / connectivityDomainCount) * 100.0
                     strongSelf.isConnected = (percentageSuccessful >= type(of: strongSelf).connectivityThreshold.value)
@@ -159,11 +157,11 @@ public class Connectivity {
             task.resume()
         }
     }
-    
+
     @objc fileprivate func reachabilityDidChange(_ notification: NSNotification) {
         performConnectivityChecks()
     }
-    
+
     deinit {
         stopNotifier()
     }
@@ -173,23 +171,23 @@ public extension Connectivity {
     var isConnectedViaWWAN: Bool {
         return isConnected && reachability.currentReachabilityStatus() == ReachableViaWWAN
     }
-    
+
     var isConnectedViaWiFi: Bool {
         return isConnected && reachability.currentReachabilityStatus() == ReachableViaWiFi
     }
-    
+
     var isConnectedViaWWANWithoutInternet: Bool {
         return reachability.currentReachabilityStatus() == ReachableViaWWAN
     }
-    
+
     var isConnectedViaWiFiWithoutInternet: Bool {
         return reachability.currentReachabilityStatus() == ReachableViaWiFi
     }
-    
+
     var description: String {
         return "\(reachability.description)"
     }
-    
+
     func startNotifier() {
         reachability.startNotifier()
         reachabilityPolling = true
@@ -199,7 +197,7 @@ public extension Connectivity {
                                                name: NSNotification.Name.ReachabilityDidChange,
                                                object: nil)
     }
-    
+
     func stopNotifier() {
         reachability.stopNotifier()
         reachabilityPolling = false
