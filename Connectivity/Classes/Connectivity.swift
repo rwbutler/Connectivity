@@ -12,6 +12,32 @@ extension Notification.Name {
 }
 
 public class Connectivity {
+
+    // MARK: Type definitions
+    public enum ConnectivityStatus: CustomStringConvertible {
+        case notConnected,
+        connectedViaWiFi,
+        connectedViaWWAN,
+        connectedViaWiFiWithoutInternet,
+        connectedViaWWANWithoutInternet
+
+        public var description: String {
+            switch self {
+            case .connectedViaWWAN:
+                return "Cellular with Internet access"
+            case .connectedViaWWANWithoutInternet:
+                return "Cellular without Internet access"
+            case .connectedViaWiFi:
+                return "WiFi with Internet access"
+            case .connectedViaWiFiWithoutInternet:
+                return "WiFi without Internet access"
+            case .notConnected:
+                return "No Connection"
+            }
+        }
+    }
+    public typealias NetworkConnected = (Connectivity) -> Void
+    public typealias NetworkDisconnected = (Connectivity) -> Void
     public struct Percentage {
         let value: Double
         init(_ value: Double) {
@@ -20,32 +46,33 @@ public class Connectivity {
             self.value = result
         }
     }
-    public typealias NetworkConnected = (Connectivity) -> Void
-    public typealias NetworkDisconnected = (Connectivity) -> Void
 
-    public private(set) var isConnected: Bool = false
-    public static var connectivityThreshold: Connectivity.Percentage = Connectivity.Percentage(75.0)
-    public static var connectivityURLs: [URL] = {
-        var result: [URL] = []
-        var useHTTP = false
-        if let bundleInfo = Bundle.main.infoDictionary,
-            let appTransportSecurity = bundleInfo["NSAppTransportSecurity"] as? [String: Any],
-            let allowsArbitraryLoads = appTransportSecurity["NSAllowsArbitraryLoads"] as? Bool {
-            useHTTP = allowsArbitraryLoads
+    // MARK: State
+    // Whether connectivity checks should be performed without waiting for reachability changes
+    public var aggressivePolling: Bool = false {
+        didSet {
+            setAggressivePolling(enabled: aggressivePolling)
         }
-        let connectivityDomains: [String] = (useHTTP)
-            ? [
-                "www.apple.com",
+    }
+
+    /// % successful connections required to be deemed to have connectivity
+    public var connectivityThreshold: Connectivity.Percentage = Connectivity.Percentage(75.0)
+
+    /// URLs to contact in order to check connectivity
+    public var connectivityURLs: [URL] = {
+        var result: [URL] = []
+        let connectivityDomains: [String] = (isHTTPSOnly)
+            ? [ "www.apple.com" ] // Replace with custom URLs
+            : [ "www.apple.com",
                 "apple.com",
                 "www.appleiphonecell.com",
                 "www.itools.info",
                 "www.ibook.info",
                 "www.airport.us",
                 "www.thinkdifferent.us"
-                ]
-            : [ "www.apple.com" ] // Recommended supplementing with your own URLs
+        ]
         let connectivityPath = "/library/test/success.html"
-        let httpProtocol = (useHTTP) ? "http" : "https"
+        let httpProtocol = (isHTTPSOnly) ? "https" : "http"
         for domain in connectivityDomains {
             if let connectivityURL = URL(string: "\(httpProtocol)://\(domain)\(connectivityPath)") {
                 result.append(connectivityURL)
@@ -53,113 +80,67 @@ public class Connectivity {
         }
         return result
     }()
+
+    /// Status of the current connection
+    public var currentConnectivityStatus: ConnectivityStatus {
+        switch reachability.currentReachabilityStatus() {
+        case ReachableViaWWAN:
+            return (isConnected) ? .connectedViaWWAN : .connectedViaWWANWithoutInternet
+        case ReachableViaWiFi:
+            return (isConnected) ? .connectedViaWiFi : .connectedViaWiFiWithoutInternet
+        case NotReachable:
+            return .notConnected
+        default: // Satisfy compiler
+            return .notConnected
+        }
+    }
+
+    /// Response expected from connectivity URLs
+    private let expectedResponse = "Success"
+
+    /// Whether or not we are currently deemed to have connectivity
+    public private(set) var isConnected: Bool = false
+
+    /// Whether or not only HTTPS URLs should be used to check connectivity
+    public static var isHTTPSOnly: Bool = {
+        guard let bundleInfo = Bundle.main.infoDictionary,
+            let appTransportSecurity = bundleInfo["NSAppTransportSecurity"] as? [String: Any],
+            let allowsArbitraryLoads = appTransportSecurity["NSAllowsArbitraryLoads"] as? Bool else {
+                return true
+        }
+        return !allowsArbitraryLoads
+    }()
+
+    /// Whether we are listening for changes in reachability (otherwise performing a one-off connectivity check)
+    fileprivate var isObservingReachability = false
+
+    /// Queue to callback on
+    private var queue: DispatchQueue = DispatchQueue.main
+
+    /// Reachability instance for checking network adapter status
+    private let reachability: Reachability
+
+    /// Timer for polling connectivity endpoints when not awaiting changes in reachability
+    private var timer: Timer?
+
+    /// URL session configuration ignoring cache
     public static var urlSessionConfiguration: URLSessionConfiguration = {
         let sessionConfiguration = URLSessionConfiguration.default
+        sessionConfiguration.requestCachePolicy = .reloadIgnoringCacheData
         sessionConfiguration.timeoutIntervalForRequest = 5.0
         sessionConfiguration.timeoutIntervalForResource = 5.0
         return sessionConfiguration
     }()
-    public var notificationCenter: NotificationCenter = NotificationCenter.default
 
-    public enum ConnectivityStatus: CustomStringConvertible {
-        case notConnected, connectedViaWiFi, connectedViaWWAN,
-        connectedViaWiFiWithoutInternet, connectedViaWWANWithoutInternet
-
-        public var description: String {
-            switch self {
-            case .connectedViaWWAN: return "Cellular"
-            case .connectedViaWWANWithoutInternet: return "Cellular without Internet access"
-            case .connectedViaWiFi: return "WiFi"
-            case .connectedViaWiFiWithoutInternet: return "WiFi without Internet access"
-            case .notConnected: return "No Connection"
-            }
-        }
-    }
+    /// Callback to invoke when connected
     public var whenConnected: NetworkConnected?
+
+    /// Callback to invoke when disconnected
     public var whenDisconnected: NetworkDisconnected?
 
-    public var currentConnectivityString: String {
-        return "\(currentConnectivityStatus)"
-    }
-
-    public var currentConnectivityStatus: ConnectivityStatus {
-        if isConnectedViaWiFi {
-            return .connectedViaWiFi
-        }
-        if isConnectedViaWWAN {
-            return .connectedViaWWAN
-        }
-        if isConnectedViaWiFiWithoutInternet {
-            return .connectedViaWiFiWithoutInternet
-        }
-        if isConnectedViaWWANWithoutInternet {
-            return .connectedViaWWANWithoutInternet
-        }
-        return .notConnected
-    }
-    let reachability: Reachability
-    private static let expectedResponse = "Success"
-    private var timer: Timer?
-    fileprivate var reachabilityPolling = false
-    public var aggressivePolling: Bool = false {
-        didSet {
-            aggressivePolling(enabled: aggressivePolling)
-        }
-    }
-
-    public func aggressivePolling(enabled: Bool) {
-        if #available(iOS 10.0, *) {
-            timer?.invalidate()
-            if aggressivePolling && reachabilityPolling {
-                timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { _ in
-                    self.performConnectivityChecks()
-                })
-            }
-        }
-    }
-
+    // MARK: Life cycle
     public init() {
         reachability = Reachability.forInternetConnection()
-        performConnectivityChecks()
-    }
-
-    public func performConnectivityChecks() {
-        let connectivityURLs = type(of: self).connectivityURLs
-        let connectivityDomainCount: Double = Double(connectivityURLs.count)
-        var successfulConnectivityChecks: Double = 0
-        var failedConnectivityChecks: Double = 0
-
-        for connectivityURL in connectivityURLs {
-            let urlSession = URLSession(configuration: type(of: self).urlSessionConfiguration)
-            let task = urlSession.dataTask(with: connectivityURL,
-                                           completionHandler: { [weak self] (data, _, _) in
-                guard let strongSelf = self else { return }
-                if let data = data,
-                    let responseString = String(data: data, encoding: .utf8),
-                    responseString.contains(type(of: strongSelf).expectedResponse) {
-                    successfulConnectivityChecks += 1
-                } else {
-                    failedConnectivityChecks += 1
-                }
-
-                if connectivityDomainCount == (successfulConnectivityChecks + failedConnectivityChecks) {
-                    let percentageSuccessful = (successfulConnectivityChecks / connectivityDomainCount) * 100.0
-                    strongSelf.isConnected = (percentageSuccessful >= type(of: strongSelf).connectivityThreshold.value)
-                        ? true : false
-                    unowned let unownedSelf = strongSelf // Caller responsible for maintaining the reference
-                    strongSelf.notificationCenter.post(name: .ConnectivityDidChange, object: unownedSelf)
-                    DispatchQueue.main.async {
-                        let callback = strongSelf.isConnected ? strongSelf.whenConnected : strongSelf.whenDisconnected
-                        callback?(unownedSelf)
-                    }
-                }
-            })
-            task.resume()
-        }
-    }
-
-    @objc fileprivate func reachabilityDidChange(_ notification: NSNotification) {
-        performConnectivityChecks()
     }
 
     deinit {
@@ -167,40 +148,130 @@ public class Connectivity {
     }
 }
 
+// Public API
 public extension Connectivity {
+
+    /// Textual representation of connectivity state
+    var description: String {
+        return "\(currentConnectivityStatus)"
+    }
+
     var isConnectedViaWWAN: Bool {
+        if !isObservingReachability { checkConnectivity() } // Support one-off connectivity checks
         return isConnected && reachability.currentReachabilityStatus() == ReachableViaWWAN
     }
 
     var isConnectedViaWiFi: Bool {
+        if !isObservingReachability { checkConnectivity() } // Support one-off connectivity checks
         return isConnected && reachability.currentReachabilityStatus() == ReachableViaWiFi
     }
 
     var isConnectedViaWWANWithoutInternet: Bool {
+        if !isObservingReachability { checkConnectivity() } // Support one-off connectivity checks
         return reachability.currentReachabilityStatus() == ReachableViaWWAN
     }
 
     var isConnectedViaWiFiWithoutInternet: Bool {
+        if !isObservingReachability { checkConnectivity() } // Support one-off connectivity checks
         return reachability.currentReachabilityStatus() == ReachableViaWiFi
     }
 
-    var description: String {
-        return "\(reachability.description)"
-    }
-
-    func startNotifier() {
+    /// Listen for changes in Reachability
+    func startNotifier(queue: DispatchQueue = DispatchQueue.main) {
+        if isObservingReachability { stopNotifier() } // Perform cleanup in event this method called twice
+        self.queue = queue
+        checkConnectivity()
         reachability.startNotifier()
-        reachabilityPolling = true
-        aggressivePolling(enabled: aggressivePolling)
+        isObservingReachability = true
+        setAggressivePolling(enabled: aggressivePolling)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(reachabilityDidChange(_:)),
-                                               name: NSNotification.Name.ReachabilityDidChange,
-                                               object: nil)
+                                       selector: #selector(reachabilityDidChange(_:)),
+                                       name: NSNotification.Name.ReachabilityDidChange,
+                                       object: nil)
     }
 
+    /// Stop listening for Reachability changes
     func stopNotifier() {
-        reachability.stopNotifier()
-        reachabilityPolling = false
-        notificationCenter.removeObserver(self)
+        timer?.invalidate()
+        if isObservingReachability { reachability.stopNotifier() }
+        isObservingReachability = false
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+// Private API
+private extension Connectivity {
+
+    /// Checks specified URLs for the expected response to determine whether Internet connectivity exists
+    func checkConnectivity() {
+        let dispatchGroup: DispatchGroup = DispatchGroup()
+        var tasks: [URLSessionDataTask] = []
+        let urlSession = URLSession(configuration: type(of: self).urlSessionConfiguration)
+
+        // Count successful / unsuccessful connectivity checks
+        var successfulConnectivityChecks: Double = 0
+        var failedConnectivityChecks: Double = 0
+        let totalConnectivityChecks: Double = Double(connectivityURLs.count)
+        let percentageSuccessful = { (successfulConnectivityChecks / totalConnectivityChecks) * 100.0 }
+        let isConnected = { percentageSuccessful() >= self.connectivityThreshold.value }
+
+        // Check whether enough tasks have successfully completed to be considered connected
+        let earlyExit = {
+            guard isConnected() else { return }
+            for task in tasks {
+                switch task.state {
+                case .running, .suspended:
+                    task.cancel()
+                case .completed, .canceling:
+                    continue
+                }
+            }
+        }
+
+        // Connectivity check callback
+        let completionHandler: (Data?, URLResponse?, Error?) -> Void = {  [weak self] (data, _, _) in
+            if let data = data,
+                let expectedResponse = self?.expectedResponse,
+                let responseString = String(data: data, encoding: .utf8),
+                responseString.contains(expectedResponse) {
+                successfulConnectivityChecks += 1
+            } else {
+                failedConnectivityChecks += 1
+            }
+            dispatchGroup.leave()
+            earlyExit() // Abort early if enough tasks have completed successfully
+        }
+
+        // Check each of the specified URLs in turn
+        for connectivityURL in connectivityURLs {
+            let task = urlSession.dataTask(with: connectivityURL, completionHandler: completionHandler)
+            tasks.append(task)
+            dispatchGroup.enter()
+            task.resume()
+        }
+
+        dispatchGroup.notify(queue: queue) {
+            self.isConnected = isConnected()
+            unowned let unownedSelf = self // Caller responsible for maintaining the reference
+            NotificationCenter.default.post(name: .ConnectivityDidChange, object: unownedSelf)
+            let callback = self.isConnected ? self.whenConnected : self.whenDisconnected
+            callback?(unownedSelf)
+        }
+    }
+
+    /// Checks connectivity when change in reachability observed
+    @objc func reachabilityDidChange(_ notification: NSNotification) {
+        checkConnectivity()
+    }
+
+    /// Checks connectivity every 5 seconds rather than waiting for changes in Reachability status
+    func setAggressivePolling(enabled: Bool) {
+        if #available(iOS 10.0, *) {
+            timer?.invalidate()
+            guard enabled else { return }
+            timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { [weak self] _ in
+                self?.checkConnectivity()
+            })
+        }
     }
 }

@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = 'Connectivity'
-  s.version          = '0.0.2'
-  s.summary          = 'Wraps Reachability to help developers determine where Internet connectivity is available'
+  s.version          = '0.0.3'
+  s.summary          = 'Connectivity improves on Reachability for determining Internet connectivity in your iOS application'
   s.description      = <<-DESC
-Connectivity is a wrapper for Reachability which provides a true indication of whether Internet connectivity is available. Connectivity's objective is to solve the captive portal problem whereby a device running iOS is connected to a WiFi network lacking Internet connectivity. Connectivity can detect such situations enabling you to react accordingly.
+Connectivity wraps Apple's Reachability code to provide a reliable measure of whether Internet connectivity is available where Reachability alone can only indicate whether _an interface is available that might allow a connection_. Connectivity's objective is to solve the captive portal problem whereby an iOS device is connected to a WiFi network lacking Internet connectivity. Such situations are commonplace and may occur for example when connecting to a public WiFi network which requires the user to register before use. Connectivity can detect such situations enabling you to react accordingly.
                        DESC
 
   s.homepage         = 'https://github.com/rwbutler/Connectivity'

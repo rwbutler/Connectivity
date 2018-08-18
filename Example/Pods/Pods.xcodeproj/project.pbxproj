@@ -292,7 +292,7 @@
 				E99F69B01D6E302B7D556A9F64F3220C /* Sources */,
 				71AD20D1A6F97F124617D1142499E9B0 /* Frameworks */,
 				5ADD63F0E6497CAB27545417E9DB5B99 /* Headers */,
-				131E1F462119D4B0008012A1 /* ShellScript */,
+				131E1F462119D4B0008012A1 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -354,13 +354,14 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		131E1F462119D4B0008012A1 /* ShellScript */ = {
+		131E1F462119D4B0008012A1 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,7 +437,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -608,7 +608,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
