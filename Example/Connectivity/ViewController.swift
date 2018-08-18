@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let connectivityChanged: (Connectivity) -> Void = { [weak self] connectivity in
-            self?.updateConnectionStatus(connectivity.currentConnectivityStatus)
+            self?.updateConnectionStatus(connectivity.status)
         }
         connectivity.whenConnected = connectivityChanged
         connectivity.whenDisconnected = connectivityChanged

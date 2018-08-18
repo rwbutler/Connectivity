@@ -22,9 +22,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="iLk-Qe-AeN">
-                                <rect key="frame" x="177" y="396" width="20" height="20"/>
-                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking connectivity..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKn-mc-aB2">
+                                <rect key="frame" x="58.333333333333343" y="389.66666666666669" width="259.33333333333326" height="33"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMD-6B-x5l">
                                 <rect key="frame" x="136.66666666666666" y="721" width="101" height="37"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
@@ -35,20 +38,17 @@
                                     <action selector="notifierButtonTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="82J-KS-8nV"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking connectivity..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKn-mc-aB2">
-                                <rect key="frame" x="68.999999999999986" y="345.66666666666669" width="237.66666666666663" height="30.333333333333314"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="iLk-Qe-AeN">
+                                <rect key="frame" x="257.66666666666669" y="729.66666666666663" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="lKn-mc-aB2" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="1H0-ij-ZRD"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="lKn-mc-aB2" secondAttribute="trailing" constant="10" id="Hoz-yb-SZ9"/>
-                            <constraint firstItem="iLk-Qe-AeN" firstAttribute="top" secondItem="lKn-mc-aB2" secondAttribute="bottom" constant="20" id="IHo-Ff-wfe"/>
+                            <constraint firstItem="bMD-6B-x5l" firstAttribute="centerY" secondItem="iLk-Qe-AeN" secondAttribute="centerY" id="LTn-JP-2ev"/>
+                            <constraint firstItem="iLk-Qe-AeN" firstAttribute="leading" secondItem="bMD-6B-x5l" secondAttribute="trailing" constant="20" id="PXf-CL-G0D"/>
                             <constraint firstItem="lKn-mc-aB2" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="RjT-gp-N2h"/>
-                            <constraint firstItem="iLk-Qe-AeN" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="WzZ-zM-lf5"/>
-                            <constraint firstItem="iLk-Qe-AeN" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="X11-vG-rsp"/>
                             <constraint firstItem="lKn-mc-aB2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="XUl-e3-KKm"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="bMD-6B-x5l" secondAttribute="bottom" constant="20" id="qna-5t-nXG"/>
                             <constraint firstItem="bMD-6B-x5l" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="syv-7v-y2m"/>

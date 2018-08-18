@@ -81,20 +81,6 @@ public class Connectivity {
         return result
     }()
 
-    /// Status of the current connection
-    public var currentConnectivityStatus: ConnectivityStatus {
-        switch reachability.currentReachabilityStatus() {
-        case ReachableViaWWAN:
-            return (isConnected) ? .connectedViaWWAN : .connectedViaWWANWithoutInternet
-        case ReachableViaWiFi:
-            return (isConnected) ? .connectedViaWiFi : .connectedViaWiFiWithoutInternet
-        case NotReachable:
-            return .notConnected
-        default: // Satisfy compiler
-            return .notConnected
-        }
-    }
-
     /// Response expected from connectivity URLs
     private let expectedResponse = "Success"
 
@@ -117,8 +103,25 @@ public class Connectivity {
     /// Queue to callback on
     private var queue: DispatchQueue = DispatchQueue.main
 
+    /// Status last time a check was performed
+    private var previousStatus: ConnectivityStatus?
+
     /// Reachability instance for checking network adapter status
     private let reachability: Reachability
+
+    /// Status of the current connection
+    public var status: ConnectivityStatus {
+        switch reachability.currentReachabilityStatus() {
+        case ReachableViaWWAN:
+            return (isConnected) ? .connectedViaWWAN : .connectedViaWWANWithoutInternet
+        case ReachableViaWiFi:
+            return (isConnected) ? .connectedViaWiFi : .connectedViaWiFiWithoutInternet
+        case NotReachable:
+            return .notConnected
+        default: // Satisfy compiler
+            return .notConnected
+        }
+    }
 
     /// Timer for polling connectivity endpoints when not awaiting changes in reachability
     private var timer: Timer?
@@ -153,7 +156,7 @@ public extension Connectivity {
 
     /// Textual representation of connectivity state
     var description: String {
-        return "\(currentConnectivityStatus)"
+        return "\(status)"
     }
 
     var isConnectedViaWWAN: Bool {
@@ -252,16 +255,27 @@ private extension Connectivity {
 
         dispatchGroup.notify(queue: queue) {
             self.isConnected = isConnected()
-            unowned let unownedSelf = self // Caller responsible for maintaining the reference
-            NotificationCenter.default.post(name: .ConnectivityDidChange, object: unownedSelf)
             let callback = self.isConnected ? self.whenConnected : self.whenDisconnected
-            callback?(unownedSelf)
+            unowned let unownedSelf = self // Caller responsible for maintaining the reference
+            if self.statusHasChanged(previousStatus: self.previousStatus, currentStatus: self.status) {
+                NotificationCenter.default.post(name: .ConnectivityDidChange, object: unownedSelf)
+                callback?(unownedSelf)
+            }
+            self.previousStatus = self.status // Update for the next connectivity check
         }
     }
 
     /// Checks connectivity when change in reachability observed
     @objc func reachabilityDidChange(_ notification: NSNotification) {
         checkConnectivity()
+    }
+
+    /// Determines whether a change in connectivity has taken place
+    func statusHasChanged(previousStatus: ConnectivityStatus?, currentStatus: ConnectivityStatus) -> Bool {
+        guard let previousStatus = previousStatus else {
+            return true
+        }
+        return previousStatus != currentStatus
     }
 
     /// Checks connectivity every 5 seconds rather than waiting for changes in Reachability status

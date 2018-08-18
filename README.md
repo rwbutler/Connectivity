@@ -1,4 +1,4 @@
-![Connectivity](Connectivity.png)
+![Connectivity](https://github.com/rwbutler/Connectivity/raw/master/Connectivity.png)
 
 [![CI Status](http://img.shields.io/travis/rwbutler/Connectivity.svg?style=flat)](https://travis-ci.org/rwbutler/Connectivity)
 [![Version](https://img.shields.io/cocoapods/v/Connectivity.svg?style=flat)](http://cocoapods.org/pods/Connectivity)
