@@ -7,8 +7,8 @@
 //
 
 extension Notification.Name {
-    static let ReachabilityDidChange = Notification.Name("kNetworkReachabilityChangedNotification")
-    static let ConnectivityDidChange = Notification.Name("kNetworkConnectivityChangedNotification")
+    public static let ReachabilityDidChange = Notification.Name("kNetworkReachabilityChangedNotification")
+    public static let ConnectivityDidChange = Notification.Name("kNetworkConnectivityChangedNotification")
 }
 
 public class Connectivity {
@@ -48,38 +48,21 @@ public class Connectivity {
     }
 
     // MARK: State
-    // Whether connectivity checks should be performed without waiting for reachability changes
-    public var aggressivePolling: Bool = false {
-        didSet {
-            setAggressivePolling(enabled: aggressivePolling)
-        }
-    }
 
     /// % successful connections required to be deemed to have connectivity
-    public var connectivityThreshold: Connectivity.Percentage = Connectivity.Percentage(75.0)
+    public var successThreshold: Connectivity.Percentage = Connectivity.Percentage(75.0)
 
     /// URLs to contact in order to check connectivity
-    public var connectivityURLs: [URL] = {
-        var result: [URL] = []
-        let connectivityDomains: [String] = (isHTTPSOnly)
-            ? [ "www.apple.com" ] // Replace with custom URLs
-            : [ "www.apple.com",
-                "apple.com",
-                "www.appleiphonecell.com",
-                "www.itools.info",
-                "www.ibook.info",
-                "www.airport.us",
-                "www.thinkdifferent.us"
-        ]
-        let connectivityPath = "/library/test/success.html"
-        let httpProtocol = (isHTTPSOnly) ? "https" : "http"
-        for domain in connectivityDomains {
-            if let connectivityURL = URL(string: "\(httpProtocol)://\(domain)\(connectivityPath)") {
-                result.append(connectivityURL)
+    public var connectivityURLs: [URL] = Connectivity
+        .defaultConnectivityURLs(shouldUseHTTPS: Connectivity.isHTTPSOnly) {
+        didSet {
+            if Connectivity.isHTTPSOnly { // if HTTPS only set only allow HTTPS URLs
+                connectivityURLs = connectivityURLs.filter({ url in
+                    return url.absoluteString.lowercased().starts(with: "https")
+                })
             }
         }
-        return result
-    }()
+    }
 
     /// Response expected from connectivity URLs
     private let expectedResponse = "Success"
@@ -88,29 +71,46 @@ public class Connectivity {
     public private(set) var isConnected: Bool = false
 
     /// Whether or not only HTTPS URLs should be used to check connectivity
-    public static var isHTTPSOnly: Bool = {
-        guard let bundleInfo = Bundle.main.infoDictionary,
-            let appTransportSecurity = bundleInfo["NSAppTransportSecurity"] as? [String: Any],
-            let allowsArbitraryLoads = appTransportSecurity["NSAllowsArbitraryLoads"] as? Bool else {
-                return true
+    public static var isHTTPSOnly: Bool = true {
+        didSet {
+            // Only set true if `allow arbitrary loads` is set
+            guard let bundleInfo = Bundle.main.infoDictionary,
+                let appTransportSecurity = bundleInfo["NSAppTransportSecurity"] as? [String: Any],
+                let allowsArbitraryLoads = appTransportSecurity["NSAllowsArbitraryLoads"] as? Bool,
+                    allowsArbitraryLoads else {
+                    isHTTPSOnly = true
+                    return
+            }
         }
-        return !allowsArbitraryLoads
-    }()
+    }
 
     /// Whether we are listening for changes in reachability (otherwise performing a one-off connectivity check)
     fileprivate var isObservingReachability = false
 
-    /// Queue to callback on
-    private var queue: DispatchQueue = DispatchQueue.main
+    /// Whether connectivity checks should be performed without waiting for reachability changes
+    public var isPollingEnabled: Bool = false {
+        didSet {
+            if isObservingReachability, oldValue != isPollingEnabled {
+                setPollingEnabled(isPollingEnabled)
+            }
+        }
+    }
+
+    /// Where polling is enabled, the interval at which connectivity checks will be performed.
+    private var pollingInterval: Double = 10.0
 
     /// Status last time a check was performed
     private var previousStatus: ConnectivityStatus?
+
+    /// Queue to callback on
+    private var queue: DispatchQueue = DispatchQueue.main
 
     /// Reachability instance for checking network adapter status
     private let reachability: Reachability
 
     /// Status of the current connection
     public var status: ConnectivityStatus {
+        if !isObservingReachability { checkConnectivity() } // Support one-off connectivity checks
         switch reachability.currentReachabilityStatus() {
         case ReachableViaWWAN:
             return (isConnected) ? .connectedViaWWAN : .connectedViaWWANWithoutInternet
@@ -142,7 +142,8 @@ public class Connectivity {
     public var whenDisconnected: NetworkDisconnected?
 
     // MARK: Life cycle
-    public init() {
+    public init(shouldUseHTTPS: Bool = true) {
+        type(of: self).isHTTPSOnly = shouldUseHTTPS
         reachability = Reachability.forInternetConnection()
     }
 
@@ -186,7 +187,7 @@ public extension Connectivity {
         checkConnectivity()
         reachability.startNotifier()
         isObservingReachability = true
-        setAggressivePolling(enabled: aggressivePolling)
+        setPollingEnabled(isPollingEnabled)
         NotificationCenter.default.addObserver(self,
                                        selector: #selector(reachabilityDidChange(_:)),
                                        name: NSNotification.Name.ReachabilityDidChange,
@@ -216,7 +217,7 @@ private extension Connectivity {
         var failedConnectivityChecks: Double = 0
         let totalConnectivityChecks: Double = Double(connectivityURLs.count)
         let percentageSuccessful = { (successfulConnectivityChecks / totalConnectivityChecks) * 100.0 }
-        let isConnected = { percentageSuccessful() >= self.connectivityThreshold.value }
+        let isConnected = { percentageSuccessful() >= self.successThreshold.value }
 
         // Check whether enough tasks have successfully completed to be considered connected
         let earlyExit = {
@@ -265,6 +266,29 @@ private extension Connectivity {
         }
     }
 
+    /// Set of connectivity URLs used by default if none are otherwise specified.
+    static func defaultConnectivityURLs(shouldUseHTTPS: Bool) -> [URL] {
+        var result: [URL] = []
+        let connectivityDomains: [String] = (shouldUseHTTPS)
+            ? [ "www.apple.com" ] // Replace with custom URLs
+            : [ "www.apple.com",
+                "apple.com",
+                "www.appleiphonecell.com",
+                "www.itools.info",
+                "www.ibook.info",
+                "www.airport.us",
+                "www.thinkdifferent.us"
+        ]
+        let connectivityPath = "/library/test/success.html"
+        let httpProtocol = (isHTTPSOnly) ? "https" : "http"
+        for domain in connectivityDomains {
+            if let connectivityURL = URL(string: "\(httpProtocol)://\(domain)\(connectivityPath)") {
+                result.append(connectivityURL)
+            }
+        }
+        return result
+    }
+
     /// Checks connectivity when change in reachability observed
     @objc func reachabilityDidChange(_ notification: NSNotification) {
         checkConnectivity()
@@ -278,12 +302,12 @@ private extension Connectivity {
         return previousStatus != currentStatus
     }
 
-    /// Checks connectivity every 5 seconds rather than waiting for changes in Reachability status
-    func setAggressivePolling(enabled: Bool) {
+    /// Checks connectivity every <polling interval> seconds rather than waiting for changes in Reachability status
+    func setPollingEnabled(_ enabled: Bool) {
         if #available(iOS 10.0, *) {
             timer?.invalidate()
             guard enabled else { return }
-            timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { [weak self] _ in
+            timer = Timer.scheduledTimer(withTimeInterval: pollingInterval, repeats: true, block: { [weak self] _ in
                 self?.checkConnectivity()
             })
         }
