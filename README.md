@@ -88,6 +88,35 @@ For more information [see here](https://github.com/Carthage/Carthage#quick-start
 
 ## How It Works
 
+iOS adopts a protocol called Wireless Internet Service Provider roaming ([WISPr 2.0](https://www.wballiance.com/glossary/)) published by the [Wireless Broadband Alliance](https://www.wballiance.com/). This protocol defines the Smart Client to Access Gateway interface describing how to authenticate users accessing public IEEE 802.11 (Wi-Fi) networks using the [Universal Access Method](https://en.wikipedia.org/wiki/Universal_access_method) in which a captive portal presents a login page to the user. 
+
+The user must then register or provide login credentials via a web browser in order to be granted access to the network using [RADIUS](https://www.cisco.com/c/en/us/support/docs/security-vpn/remote-authentication-dial-user-service-radius/12433-32.html) or another protocol providing centralized Authentication, Authorization, and Accounting ([AAA](https://en.wikipedia.org/wiki/AAA_(computer_security))).
+
+In order to detect a that it has connected to a Wi-Fi network with a captive portal, iOS contacts a number of endpoints hosted by Apple - an example being [https://www.apple.com/library/test/success.html](https://www.apple.com/library/test/success.html). Each endpoint hosts a small HTML page of the form:
+
+```
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+	<TITLE>Success</TITLE>
+</HEAD>
+<BODY>
+	Success
+</BODY>
+</HTML>
+
+```
+
+If on downloading this small HTML page iOS finds that it contains the word `Success` as above then it knows that Internet connectivity is available. However, if a login page is presented by a captive portal then the word `Success` will not be present and iOS will realize that the network connection has been hijacked by a captive portal and will present a browser window allowing the user to login or register.
+
+Apple hosts a number of these pages such that should one of these pages go down, a number of fallbacks can be checked to determine whether connectivity is present or whether our connection is blocked by the presence of a captive portal. Unfortunately iOS exposes no framework to developers which allows us to make use of the operating system’s awareness of captive portals.
+
+Connectivity is an open-source framework which wraps Reachability and endeavours to replicate iOS’s means of detecting captive portals. When Reachability detects Wi-Fi or WWAN connectivity, Connectivity contacts a number of endpoints to determine whether true Internet connectivity is present or whether a captive portal is intercepting the connections. This approach can also be used to determine whether an iOS device is connected to a Wi-Fi router with no Internet access. 
+
+Connectivity provides an interface as close to Reachability as possible so that it is familiar to developers used to working with Reachability. This includes providing the methods `startNotifier()` and `stopNotifier()` to begin checking for changes in Internet connectivity. Once the notifier has been started, you may query for the current connectivity status synchronously using the `status` property (similar to Reachability’s `currentReachabilityStatus`) or asynchronously by registering as an observer with the default NotificationCenter for the notification `kNetworkConnectivityChangedNotification` (in Swift this is accessed through `Notification.Name.ConnectivityDidChange`) — similar to Reachability’s notification `kNetworkReachabilityChangedNotification`.
+
+By default, Connectivity contacts a number of endpoints already used by iOS but it recommended that these are supplemented by endpoints hosted by the developer by appending to the `connectivityURLs` property. Further customization is possible through setting the `successThreshold` property which determines the percentage of endpoints contacted which must result in a successful check in order to conclude that connectivity is present. The default value specifies that 75% of URLs contacted must result in a successful connectivity check.
 
 ## Usage
 
