@@ -1,6 +1,6 @@
 # OS X
 .DS_Store
-
+*.afdesign
 # Xcode
 build/
 *.pbxuser
