@@ -11,7 +11,7 @@ Connectivity is a wrapper for Apple's [Reachability](https://developer.apple.com
 
 Connectivity's objective is to solve the captive portal problem whereby an iOS device is connected to a WiFi network lacking Internet connectivity. Such situations are commonplace and may occur for example when connecting to a public WiFi network which requires the user to register before use. Connectivity can detect such situations enabling you to react accordingly.
 
-To learn more about how to use Connectivity, take a look at the [keynote presentation](https://github.com/rwbutler/Connectivity/blob/master/docs/presentations/connectivity.pdf), check out the [blog post](https://medium.com/@rwbutler/beyond-reachability-detecting-true-internet-connectivity-on-ios-928da1b60122), or make use of the table of contents below:
+To learn more about how to use Connectivity, take a look at the [keynote presentation](https://github.com/rwbutler/Connectivity/blob/master/docs/presentations/connectivity.pdf), check out the [blog post](https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e), or make use of the table of contents below:
 
 - [Features](#features)
 - [Installation](#installation)
