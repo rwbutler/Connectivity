@@ -3,7 +3,7 @@
 //  Connectivity
 //
 //  Created by Ross Butler on 7/12/17.
-//  Copyright © 2017 Ross Butler. All rights reserved.
+//  Copyright © 2017 - 2018 Ross Butler. All rights reserved.
 //
 
 extension Notification.Name {
@@ -38,12 +38,16 @@ public class Connectivity {
     }
     public typealias NetworkConnected = (Connectivity) -> Void
     public typealias NetworkDisconnected = (Connectivity) -> Void
-    public struct Percentage {
+    public struct Percentage: Comparable {
         let value: Double
         init(_ value: Double) {
             var result = value < 0.0 ? 0.0 : value
             result = value > 100.0 ? 100.0 : value
             self.value = result
+        }
+
+        public static func < (lhs: Connectivity.Percentage, rhs: Connectivity.Percentage) -> Bool {
+            return lhs.value < rhs.value
         }
     }
 
@@ -116,9 +120,7 @@ public class Connectivity {
             return (isConnected) ? .connectedViaWWAN : .connectedViaWWANWithoutInternet
         case ReachableViaWiFi:
             return (isConnected) ? .connectedViaWiFi : .connectedViaWiFiWithoutInternet
-        case NotReachable:
-            return .notConnected
-        default: // Satisfy compiler
+        default: // Needed as Obj-C Int-backed enum
             return .notConnected
         }
     }
@@ -161,23 +163,19 @@ public extension Connectivity {
     }
 
     var isConnectedViaWWAN: Bool {
-        if !isObservingReachability { checkConnectivity() } // Support one-off connectivity checks
-        return isConnected && reachability.currentReachabilityStatus() == ReachableViaWWAN
+        return isConnected(with: ReachableViaWWAN)
     }
 
     var isConnectedViaWiFi: Bool {
-        if !isObservingReachability { checkConnectivity() } // Support one-off connectivity checks
-        return isConnected && reachability.currentReachabilityStatus() == ReachableViaWiFi
+        return isConnected(with: ReachableViaWiFi)
     }
 
     var isConnectedViaWWANWithoutInternet: Bool {
-        if !isObservingReachability { checkConnectivity() } // Support one-off connectivity checks
-        return reachability.currentReachabilityStatus() == ReachableViaWWAN
+        return isDisconnected(with: ReachableViaWWAN)
     }
 
     var isConnectedViaWiFiWithoutInternet: Bool {
-        if !isObservingReachability { checkConnectivity() } // Support one-off connectivity checks
-        return reachability.currentReachabilityStatus() == ReachableViaWiFi
+        return isDisconnected(with: ReachableViaWiFi)
     }
 
     /// Listen for changes in Reachability
@@ -208,62 +206,53 @@ private extension Connectivity {
 
     /// Checks specified URLs for the expected response to determine whether Internet connectivity exists
     func checkConnectivity() {
-        let dispatchGroup: DispatchGroup = DispatchGroup()
+        let dispatchGroup = DispatchGroup()
         var tasks: [URLSessionDataTask] = []
-        let urlSession = URLSession(configuration: type(of: self).urlSessionConfiguration)
-
-        // Count successful / unsuccessful connectivity checks
-        var successfulConnectivityChecks: Double = 0
-        var failedConnectivityChecks: Double = 0
-        let totalConnectivityChecks: Double = Double(connectivityURLs.count)
-        let percentageSuccessful = { (successfulConnectivityChecks / totalConnectivityChecks) * 100.0 }
-        let isConnected = { percentageSuccessful() >= self.successThreshold.value }
+        let session: URLSession = urlSession()
+        var successfulChecks: Int = 0, failedChecks: Int = 0
+        let totalChecks: Int = connectivityURLs.count
 
         // Check whether enough tasks have successfully completed to be considered connected
-        let earlyExit = {
-            guard isConnected() else { return }
-            for task in tasks {
-                switch task.state {
-                case .running, .suspended:
-                    task.cancel()
-                case .completed, .canceling:
-                    continue
-                }
-            }
+        let exitEarly = { [weak self] in
+            let isConnected = self?.isThresholdMet(successfulChecks, outOf: totalChecks) ?? false
+            guard isConnected else { return }
+            self?.cancelPendingTasks(tasks)
         }
 
         // Connectivity check callback
         let completionHandler: (Data?, URLResponse?, Error?) -> Void = {  [weak self] (data, _, _) in
-            if let data = data,
-                let expectedResponse = self?.expectedResponse,
-                let responseString = String(data: data, encoding: .utf8),
-                responseString.contains(expectedResponse) {
-                successfulConnectivityChecks += 1
-            } else {
-                failedConnectivityChecks += 1
-            }
+            let connectivityCheckSuccess = self?.connectivityCheckSucceeded(data: data) ?? false
+            connectivityCheckSuccess ? (successfulChecks += 1) : (failedChecks += 1)
             dispatchGroup.leave()
-            earlyExit() // Abort early if enough tasks have completed successfully
+            exitEarly() // Abort early if enough tasks have completed successfully
         }
 
         // Check each of the specified URLs in turn
-        for connectivityURL in connectivityURLs {
-            let task = urlSession.dataTask(with: connectivityURL, completionHandler: completionHandler)
-            tasks.append(task)
+        tasks = connectivityURLs.map({ session.dataTask(with: $0, completionHandler: completionHandler) })
+        tasks.forEach({ task in
             dispatchGroup.enter()
             task.resume()
-        }
+        })
 
-        dispatchGroup.notify(queue: queue) {
-            self.isConnected = isConnected()
-            let callback = self.isConnected ? self.whenConnected : self.whenDisconnected
-            unowned let unownedSelf = self // Caller responsible for maintaining the reference
-            if self.statusHasChanged(previousStatus: self.previousStatus, currentStatus: self.status) {
-                NotificationCenter.default.post(name: .ConnectivityDidChange, object: unownedSelf)
-                callback?(unownedSelf)
-            }
-            self.previousStatus = self.status // Update for the next connectivity check
+        dispatchGroup.notify(queue: queue) { [weak self] in
+            self?.isConnected = self?.isThresholdMet(successfulChecks, outOf: totalChecks) ?? false
+            self?.notifyConnectivityDidChange()
         }
+    }
+
+    /// Cancels tasks in the specified array which haven't yet completed.
+    private func cancelPendingTasks(_ tasks: [URLSessionDataTask]) {
+        for task in tasks where [.running, .suspended].contains(task.state) {
+            task.cancel()
+        }
+    }
+
+    /// Determines whether or not the connectivity check was successful.
+    private func connectivityCheckSucceeded(data: Data?) -> Bool {
+        guard let data = data, let responseString = String(data: data, encoding: .utf8) else {
+            return false
+        }
+        return responseString.contains(expectedResponse)
     }
 
     /// Set of connectivity URLs used by default if none are otherwise specified.
@@ -289,13 +278,53 @@ private extension Connectivity {
         return result
     }
 
+    /// Determines whether connected based on percentage of successful connectivity checks
+    private func isThresholdMet(percentage: Percentage) -> Bool {
+        return percentage >= successThreshold
+    }
+
+    /// Determines whether connected with the given method.
+    func isConnected(with networkStatus: NetworkStatus) -> Bool {
+        if !isObservingReachability { checkConnectivity() } // Support one-off connectivity checks
+        return isConnected && reachability.currentReachabilityStatus() == networkStatus
+    }
+
+    /// Determines whether connected with the given method without Internet access (no connectivity).
+    func isDisconnected(with networkStatus: NetworkStatus) -> Bool {
+        if !isObservingReachability { checkConnectivity() } // Support one-off connectivity checks
+        return !isConnected && reachability.currentReachabilityStatus() == networkStatus
+    }
+
+    /// Determines whether enough connectivity checks have succeeded to be considered connected.
+    private func isThresholdMet(_ successfulChecks: Int, outOf totalChecks: Int) -> Bool {
+        let success: Percentage = percentageSuccessful(successfulChecks, outOf: totalChecks)
+        return isThresholdMet(percentage: success)
+    }
+
+    /// Posts notification and invokes the appropriate callback when a change in connectivity has occurred.
+    private func notifyConnectivityDidChange() {
+        let callback = self.isConnected ? self.whenConnected : self.whenDisconnected
+        unowned let unownedSelf = self // Caller responsible for maintaining the reference
+        if self.statusHasChanged(previousStatus: self.previousStatus, currentStatus: self.status) {
+            NotificationCenter.default.post(name: .ConnectivityDidChange, object: unownedSelf)
+            callback?(unownedSelf)
+        }
+        self.previousStatus = self.status // Update for the next connectivity check
+    }
+
+    /// Determines percentage successful connectivity checks.
+    private func percentageSuccessful(_ successfulChecks: Int, outOf totalChecks: Int) -> Percentage {
+        let percentageValue: Double = (Double(successfulChecks) / Double(totalChecks)) * 100.0
+        return Percentage(percentageValue)
+    }
+
     /// Checks connectivity when change in reachability observed
     @objc func reachabilityDidChange(_ notification: NSNotification) {
         checkConnectivity()
     }
 
     /// Determines whether a change in connectivity has taken place
-    func statusHasChanged(previousStatus: ConnectivityStatus?, currentStatus: ConnectivityStatus) -> Bool {
+    private func statusHasChanged(previousStatus: ConnectivityStatus?, currentStatus: ConnectivityStatus) -> Bool {
         guard let previousStatus = previousStatus else {
             return true
         }
@@ -311,5 +340,10 @@ private extension Connectivity {
                 self?.checkConnectivity()
             })
         }
+    }
+
+    /// Returns URLSession configured with the urlSessionConfiguration property.
+    func urlSession() -> URLSession {
+        return URLSession(configuration: type(of: self).urlSessionConfiguration)
     }
 }
