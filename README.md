@@ -15,7 +15,7 @@ Connectivity's objective is to solve the captive portal problem whereby an iOS d
 To learn more about how to use Connectivity, take a look at the [keynote presentation](https://github.com/rwbutler/Connectivity/blob/master/docs/presentations/connectivity.pdf), check out the [blog post](https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e), or make use of the table of contents below:
 
 - [Features](#features)
-- [What's New in Connectivity 2.0.0?](#whats-new-in-connectivity-2.0.0)
+- [What's New in Connectivity 2.0.0?](#whats-new-in-connectivity-200)
 - [Installation](#installation)
 	- [Cocoapods](#cocoapods)
 	- [Carthage](#carthage)
@@ -51,6 +51,8 @@ connectivity.framework = .network
 ```
 
 Below iOS 12, Connectivity will default to the traditional behaviour of using `Reachability` to determine the availability of network interfaces.
+
+For more information, refer to [CHANGELOG.md](CHANGELOG.md).
 
 ## Installation
 
