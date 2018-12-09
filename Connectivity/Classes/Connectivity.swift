@@ -182,19 +182,15 @@ public extension Connectivity {
         var successfulChecks: Int = 0, failedChecks: Int = 0
         let totalChecks: Int = connectivityURLs.count
         
-        // Check whether enough tasks have successfully completed to be considered connected
-        let exitEarly = { [weak self] in
-            let isConnected = self?.isThresholdMet(successfulChecks, outOf: totalChecks) ?? false
-            guard isConnected else { return }
-            self?.cancelPendingTasks(tasks)
-        }
-        
         // Connectivity check callback
         let completionHandler: (Data?, URLResponse?, Error?) -> Void = {  [weak self] (data, response, error) in
             let connectivityCheckSuccess = self?.connectivityCheckSucceeded(data: data) ?? false
             connectivityCheckSuccess ? (successfulChecks += 1) : (failedChecks += 1)
             dispatchGroup.leave()
-            exitEarly() // Abort early if enough tasks have completed successfully
+            // Abort early if enough tasks have completed successfully
+            self?.cancelConnectivityCheck(pendingTasks: tasks,
+                                          successfulChecks: successfulChecks,
+                                          totalChecks: totalChecks)
         }
         
         // Check each of the specified URLs in turn
@@ -204,22 +200,15 @@ public extension Connectivity {
             task.resume()
         })
         
-        if #available(iOS 12.0, *), self.isNetworkFramework(), !isObservingReachability {
-            let monitor = NWPathMonitor()
-            dispatchGroup.enter()
-            monitor.pathUpdateHandler = { [weak self] path in
-                self?.path = path
-                monitor.cancel()
-                dispatchGroup.leave()
-            }
-            monitor.start(queue: internalQueue)
+        if #available(iOS 12.0, *) { // Update reported network interface for successful connections.
+            updatePath(dispatchGroup: dispatchGroup)
         }
         
         dispatchGroup.notify(queue: externalQueue) { [weak self] in
             self?.isConnected = self?.isThresholdMet(successfulChecks, outOf: totalChecks) ?? false
             if let strongSelf = self {
                 unowned let unownedSelf = strongSelf
-                completion?(unownedSelf)
+                completion?(unownedSelf) // Caller responsible for retaining the reference.
             }
             if let isObserving = self?.isObservingReachability, isObserving {
                 self?.notifyConnectivityDidChange()
@@ -287,6 +276,13 @@ public extension Connectivity {
 
 // Private API
 private extension Connectivity {
+    
+    /// Check whether enough tasks have successfully completed to be considered connected
+    private func cancelConnectivityCheck(pendingTasks: [URLSessionDataTask], successfulChecks: Int, totalChecks: Int) {
+        let isConnected = isThresholdMet(successfulChecks, outOf: totalChecks)
+        guard isConnected else { return }
+        cancelPendingTasks(pendingTasks)
+    }
     
     /// Cancels tasks in the specified array which haven't yet completed.
     private func cancelPendingTasks(_ tasks: [URLSessionDataTask]) {
@@ -423,6 +419,20 @@ private extension Connectivity {
                 self?.checkConnectivity()
             })
         }
+    }
+    
+    /// Updates the network interface reported for connections.
+    @available(iOS 12.0, *)
+    func updatePath(dispatchGroup: DispatchGroup) {
+        guard isNetworkFramework(), !isObservingReachability else { return }
+        let monitor = NWPathMonitor()
+        dispatchGroup.enter()
+        monitor.pathUpdateHandler = { [weak self] path in
+            self?.path = path
+            monitor.cancel()
+            dispatchGroup.leave()
+        }
+        monitor.start(queue: internalQueue)
     }
     
     /// Returns URLSession configured with the urlSessionConfiguration property.
