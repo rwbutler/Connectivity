@@ -15,6 +15,7 @@ Connectivity's objective is to solve the captive portal problem whereby an iOS d
 To learn more about how to use Connectivity, take a look at the [keynote presentation](https://github.com/rwbutler/Connectivity/blob/master/docs/presentations/connectivity.pdf), check out the [blog post](https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e), or make use of the table of contents below:
 
 - [Features](#features)
+- [What's New in Connectivity 2.0.0?](#whats-new-in-connectivity-2.0.0)
 - [Installation](#installation)
 	- [Cocoapods](#cocoapods)
 	- [Carthage](#carthage)
@@ -39,6 +40,17 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 - [x] Detect when connected to a router that has no Internet access.
 - [x] Be notified of changes in Internet connectivity.
 - [x] Polling connectivity checks may be performed where a constant network connection is required (optional).
+
+## What's new in Connectivity 2.0.0?
+
+Connectivity 2.0.0 provides the option of using the new `Network` framework on iOS 12 and above. To make use of this functionality set the `framework` property to `.network` as follows:
+
+```
+let connectivity = Connectivity()
+connectivity.framework = .network
+```
+
+Below iOS 12, Connectivity will default to the traditional behaviour of using `Reachability` to determine the availability of network interfaces.
 
 ## Installation
 
@@ -140,6 +152,7 @@ connectivity.whenDisconnected = connectivityChanged
 func updateConnectionStatus(_ status: Connectivity.ConnectivityStatus) {
 
     switch status {
+      case .connected:
 	    case .connectedViaWiFi:
 	    case .connectedViaWiFiWithoutInternet:
 	    case .connectedViaWWAN:
@@ -165,29 +178,34 @@ Sometimes you only want to check the connectivity state as a one-off. To do so, 
 ```
 let connectivity = Connectivity()
 
-switch connectivity.status {
+connectivity.checkConnectivity { connectivity in
 
-	case .connectedViaWiFi:
-	
-	case .connectedViaWiFiWithoutInternet:
-	
-	case .connectedViaWWAN:
-	
-	case .connectedViaWWANWithoutInternet:
-	
-	case .notConnected:
-	
+	switch connectivity.status {
+		case .connected: 
+			break
+		case .connectedViaWiFi:
+			break
+		case .connectedViaWiFiWithoutInternet:
+			break
+		case .connectedViaWWAN:
+			break
+		case .connectedViaWWANWithoutInternet:
+			break
+		case .notConnected:
+			break
+	}
+
 }
 ```
 
 Alternatively, you may check the following properties of the `Connectivity` object directly if you are only interested in certain types of connections:
 
 ```
-var isConnectedViaWWAN: Bool
+var isConnectedViaCellular: Bool
 
 var isConnectedViaWiFi: Bool
     
-var isConnectedViaWWANWithoutInternet: Bool
+var isConnectedViaCellularWithoutInternet: Bool
 
 var isConnectedViaWiFiWithoutInternet: Bool
 ```
