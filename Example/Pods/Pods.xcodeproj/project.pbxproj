@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		134BCF0721BD1C72009403C8 /* NotificationNameAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF0621BD1C72009403C8 /* NotificationNameAdditions.swift */; };
+		134BCF0A21BD1CAA009403C8 /* ConnectivityFramework.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF0921BD1CAA009403C8 /* ConnectivityFramework.swift */; };
+		134BCF0C21BD1CDB009403C8 /* ConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF0B21BD1CDB009403C8 /* ConnectivityStatus.swift */; };
+		134BCF0E21BD1D40009403C8 /* ConnectivityPercentage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF0D21BD1D40009403C8 /* ConnectivityPercentage.swift */; };
 		134F2DB221BC4EFB00B9D484 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 134F2DB121BC4EFB00B9D484 /* Network.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1D7BDA0F4FA3F836E1F579CAB133B337 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		243485BE467B634C7876036C8E7F7DC1 /* Pods-Connectivity_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E26BBF67138E9BA9C0682AA47AD4F23 /* Pods-Connectivity_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,6 +40,10 @@
 		0ADE3A702474BD913F0757617E837472 /* Pods_Connectivity_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connectivity_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E26BBF67138E9BA9C0682AA47AD4F23 /* Pods-Connectivity_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Connectivity_Example-umbrella.h"; sourceTree = "<group>"; };
 		0F3C86DFE68666B2609FC68CB5107631 /* Pods-Connectivity_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Connectivity_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		134BCF0621BD1C72009403C8 /* NotificationNameAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameAdditions.swift; sourceTree = "<group>"; };
+		134BCF0921BD1CAA009403C8 /* ConnectivityFramework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityFramework.swift; sourceTree = "<group>"; };
+		134BCF0B21BD1CDB009403C8 /* ConnectivityStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityStatus.swift; sourceTree = "<group>"; };
+		134BCF0D21BD1D40009403C8 /* ConnectivityPercentage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityPercentage.swift; sourceTree = "<group>"; };
 		134F2DB121BC4EFB00B9D484 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/Network.framework; sourceTree = DEVELOPER_DIR; };
 		1619A1C3FFF4399451291807685FFA3C /* Connectivity.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Connectivity.xcconfig; sourceTree = "<group>"; };
 		19234B796AC167AA76B437CAB23D0CC7 /* Connectivity-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Connectivity-umbrella.h"; sourceTree = "<group>"; };
@@ -115,6 +123,24 @@
 			path = Connectivity;
 			sourceTree = "<group>";
 		};
+		134BCF0521BD1C4C009403C8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				134BCF0621BD1C72009403C8 /* NotificationNameAdditions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		134BCF0821BD1C8E009403C8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				134BCF0921BD1CAA009403C8 /* ConnectivityFramework.swift */,
+				134BCF0B21BD1CDB009403C8 /* ConnectivityStatus.swift */,
+				134BCF0D21BD1D40009403C8 /* ConnectivityPercentage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		1BF9640EE5B5AB866C3C4C111FFC22B8 /* Pods-Connectivity_Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +162,8 @@
 		6957B087A58EA9FD73C74A2AB2F1F162 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				134BCF0521BD1C4C009403C8 /* Extensions */,
+				134BCF0821BD1C8E009403C8 /* Model */,
 				E4B1FB071F1D25940010315E /* Reachability */,
 				E4B1FB011F1D229D0010315E /* Connectivity.swift */,
 			);
@@ -395,8 +423,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				134BCF0C21BD1CDB009403C8 /* ConnectivityStatus.swift in Sources */,
 				E4B1FB021F1D229D0010315E /* Connectivity.swift in Sources */,
+				134BCF0721BD1C72009403C8 /* NotificationNameAdditions.swift in Sources */,
+				134BCF0E21BD1D40009403C8 /* ConnectivityPercentage.swift in Sources */,
 				E4B1FB0B1F1D25B50010315E /* Reachability.m in Sources */,
+				134BCF0A21BD1CAA009403C8 /* ConnectivityFramework.swift in Sources */,
 				E920EFD118013230D8A39F988ED578B2 /* Connectivity-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

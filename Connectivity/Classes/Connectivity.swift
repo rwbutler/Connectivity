@@ -8,59 +8,13 @@
 
 import Network
 
-extension Notification.Name {
-    public static let ReachabilityDidChange = Notification.Name("kNetworkReachabilityChangedNotification")
-    public static let ConnectivityDidChange = Notification.Name("kNetworkConnectivityChangedNotification")
-}
-
 public class Connectivity {
     
-    // MARK: Type definitions
-    public enum Framework {
-        case network
-        case systemConfiguration
-    }
-    
-    public enum ConnectivityStatus: CustomStringConvertible {
-        case connected, // where a connection is present but the interface cannot be determined.
-        connectedViaWiFi,
-        connectedViaWWAN,
-        connectedViaWiFiWithoutInternet,
-        connectedViaWWANWithoutInternet,
-        notConnected
-        
-        public var description: String {
-            switch self {
-            case .connected:
-                return "Internet access"
-            case .connectedViaWWAN:
-                return "Cellular with Internet access"
-            case .connectedViaWWANWithoutInternet:
-                return "Cellular without Internet access"
-            case .connectedViaWiFi:
-                return "Wi-Fi with Internet access"
-            case .connectedViaWiFiWithoutInternet:
-                return "Wi-Fi without Internet access"
-            case .notConnected:
-                return "No Connection"
-            }
-        }
-    }
-    
+    public typealias Framework = ConnectivityFramework
     public typealias NetworkConnected = (Connectivity) -> Void
     public typealias NetworkDisconnected = (Connectivity) -> Void
-    public struct Percentage: Comparable {
-        let value: Double
-        init(_ value: Double) {
-            var result = value < 0.0 ? 0.0 : value
-            result = value > 100.0 ? 100.0 : value
-            self.value = result
-        }
-        
-        public static func < (lhs: Connectivity.Percentage, rhs: Connectivity.Percentage) -> Bool {
-            return lhs.value < rhs.value
-        }
-    }
+    public typealias Percentage = ConnectivityPercentage
+    public typealias Status = ConnectivityStatus
     
     // MARK: State
     
@@ -83,7 +37,7 @@ public class Connectivity {
     private let expectedResponse = "Success"
     
     /// Whether or not to use System Configuration or Network (on iOS 12+) framework.
-    public var framework: Framework = .systemConfiguration
+    public var framework: Connectivity.Framework = .systemConfiguration
     
     /// Used to for checks using NWPathMonitor
     private var internalQueue: DispatchQueue = DispatchQueue.global(qos: .background)
@@ -117,11 +71,13 @@ public class Connectivity {
         }
     }
     
+    #if canImport(Network)
     // Stores a NWPath reference - erase type information where Network framework unavailable.
     private var path: Any?
     
     // Stores a NWPathMonitor reference - erase type information where Network framework unavailable.
     private var pathMonitor: Any?
+    #endif
     
     /// Where polling is enabled, the interval at which connectivity checks will be performed.
     private var pollingInterval: Double = 10.0
@@ -146,7 +102,7 @@ public class Connectivity {
             if currentPath.usesInterfaceType(.wifi) {
                 currentStatus = (isConnected) ? .connectedViaWiFi : .connectedViaWiFiWithoutInternet
             } else if currentPath.usesInterfaceType(.cellular) {
-                currentStatus = (isConnected) ? .connectedViaWWAN : .connectedViaWWANWithoutInternet
+                currentStatus = (isConnected) ? .connectedViaCellular : .connectedViaCellularWithoutInternet
             } else {
                 currentStatus = (isConnected) ? .connected : .notConnected
             }
@@ -155,7 +111,7 @@ public class Connectivity {
             let currentStatus: ConnectivityStatus
             switch reachability.currentReachabilityStatus() {
             case ReachableViaWWAN:
-                currentStatus = (isConnected) ? .connectedViaWWAN : .connectedViaWWANWithoutInternet
+                currentStatus = (isConnected) ? .connectedViaCellular : .connectedViaCellularWithoutInternet
             case ReachableViaWiFi:
                 currentStatus = (isConnected) ? .connectedViaWiFi : .connectedViaWiFiWithoutInternet
             default: // Needed as Obj-C Int-backed enum
@@ -202,7 +158,7 @@ public extension Connectivity {
         return "\(status)"
     }
     
-    var isConnectedViaWWAN: Bool {
+    var isConnectedViaCellular: Bool {
         return isConnected(with: ReachableViaWWAN)
     }
     
@@ -210,7 +166,7 @@ public extension Connectivity {
         return isConnected(with: ReachableViaWiFi)
     }
     
-    var isConnectedViaWWANWithoutInternet: Bool {
+    var isConnectedViaCellularWithoutInternet: Bool {
         return isDisconnected(with: ReachableViaWWAN)
     }
     

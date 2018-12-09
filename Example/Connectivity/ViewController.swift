@@ -90,11 +90,11 @@ private extension ViewController {
         updateNotifierButton(isCheckingConnectivity: isCheckingConnectivity)
     }
 
-    func updateConnectionStatus(_ status: Connectivity.ConnectivityStatus) {
+    func updateConnectionStatus(_ status: Connectivity.Status) {
         switch status {
-        case .connectedViaWiFi, .connectedViaWWAN, .connected:
+        case .connectedViaWiFi, .connectedViaCellular, .connected:
             statusLabel.textColor = UIColor.darkGreen
-        case .connectedViaWiFiWithoutInternet, .connectedViaWWANWithoutInternet, .notConnected:
+        case .connectedViaWiFiWithoutInternet, .connectedViaCellularWithoutInternet, .notConnected:
             statusLabel.textColor = UIColor.red
         }
         statusLabel.text = status.description
