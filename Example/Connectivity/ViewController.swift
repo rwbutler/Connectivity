@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     // MARK: Outlets
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var notifierButton: UIButton!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var statusLabel: UILabel!
 
     // MARK: Status
@@ -24,12 +25,14 @@ class ViewController: UIViewController {
     // MARK: View controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        let connectivityChanged: (Connectivity) -> Void = { [weak self] connectivity in
-            self?.updateConnectionStatus(connectivity.status)
+        switch connectivity.framework {
+        case .network:
+            segmentedControl.selectedSegmentIndex = 1
+        case .systemConfiguration:
+            segmentedControl.selectedSegmentIndex = 0
         }
-        connectivity.whenConnected = connectivityChanged
-        connectivity.whenDisconnected = connectivityChanged
-        startConnectivityChecks()
+        performSingleConnectivityCheck()
+        configureConnectivityNotifier()
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,36 +45,62 @@ class ViewController: UIViewController {
     }
 }
 
-// Button actions
+// IB Actions
 extension ViewController {
     @IBAction func notifierButtonTapped(_ sender: UIButton) {
         isCheckingConnectivity ? stopConnectivityChecks() : startConnectivityChecks()
+    }
+
+    @IBAction func segmentedControlTapped(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            connectivity.framework = .systemConfiguration
+        } else {
+            connectivity.framework = .network
+        }
     }
 }
 
 // Private API
 private extension ViewController {
+    func configureConnectivityNotifier() {
+        let connectivityChanged: (Connectivity) -> Void = { [weak self] connectivity in
+            self?.updateConnectionStatus(connectivity.status)
+        }
+        connectivity.whenConnected = connectivityChanged
+        connectivity.whenDisconnected = connectivityChanged
+    }
+
+    func performSingleConnectivityCheck() {
+        connectivity.checkConnectivity { connectivity in
+            self.updateConnectionStatus(connectivity.status)
+        }
+    }
+
     func startConnectivityChecks() {
         activityIndicator.startAnimating()
         connectivity.startNotifier()
         isCheckingConnectivity = true
         updateNotifierButton(isCheckingConnectivity: isCheckingConnectivity)
     }
+
     func stopConnectivityChecks() {
         activityIndicator.stopAnimating()
         connectivity.stopNotifier()
         isCheckingConnectivity = false
         updateNotifierButton(isCheckingConnectivity: isCheckingConnectivity)
     }
+
     func updateConnectionStatus(_ status: Connectivity.ConnectivityStatus) {
         switch status {
-        case .connectedViaWiFi, .connectedViaWWAN:
+        case .connectedViaWiFi, .connectedViaWWAN, .connected:
             statusLabel.textColor = UIColor.darkGreen
         case .connectedViaWiFiWithoutInternet, .connectedViaWWANWithoutInternet, .notConnected:
             statusLabel.textColor = UIColor.red
         }
         statusLabel.text = status.description
+        segmentedControl.tintColor = statusLabel.textColor
     }
+
     func updateNotifierButton(isCheckingConnectivity: Bool) {
         let buttonText = isCheckingConnectivity ? "Stop notifier" : "Start notifier"
         let buttonTextColor = isCheckingConnectivity ? UIColor.red : UIColor.darkGreen
