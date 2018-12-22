@@ -45,7 +45,7 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 
 Connectivity 2.0.0 provides the option of using the new `Network` framework on iOS 12 and above. To make use of this functionality set the `framework` property to `.network` as follows:
 
-```
+```swift
 let connectivity = Connectivity()
 connectivity.framework = .network
 ```
@@ -64,19 +64,19 @@ Use of Apple's Reachability is subject to [licensing from Apple](./Connectivity/
 
 [CocoaPods](http://cocoapods.org) is a dependency manager which integrates dependencies into your Xcode workspace. To install it using [Ruby gems](https://rubygems.org/) run:
 
-```
+```bash
 gem install cocoapods
 ```
 
 To install Connectivity using Cocoapods, simply add the following line to your Podfile:
 
-```
+```ruby
 pod "Connectivity"
 ```
 
 Then run the command:
 
-```
+```ruby
 pod install
 ```
 
@@ -86,14 +86,14 @@ For more information [see here](https://cocoapods.org/#getstarted).
 
 Carthage is a dependency manager which produces a binary for manual integration into your project. It can be installed via [Homebrew](https://brew.sh/) using the commands:
 
-```
+```bash
 brew update
 brew install carthage
 ```
 
 In order to integrate Connectivity into your project via Carthage, add the following line to your project's Cartfile:
 
-```
+```ogdl
 github "rwbutler/Connectivity"
 ```
 
@@ -109,7 +109,7 @@ The user must then register or provide login credentials via a web browser in or
 
 In order to detect a that it has connected to a Wi-Fi network with a captive portal, iOS contacts a number of endpoints hosted by Apple - an example being [https://www.apple.com/library/test/success.html](https://www.apple.com/library/test/success.html). Each endpoint hosts a small HTML page of the form:
 
-```
+```html
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <HTML>
@@ -141,7 +141,7 @@ For an example of how to use Connectivity, see the sample app in the [Example](.
 
 To get started using Connectivity, simply instantiate an instance and assign a closure to be invoked when Connectivity detects that you are connected to the Internet, when disconnected, or in both cases as follows:
 
-```
+```swift
 let connectivity: Connectivity = Connectivity()
 
 let connectivityChanged: (Connectivity) -> Void = { [weak self] connectivity in
@@ -167,7 +167,7 @@ func updateConnectionStatus(_ status: Connectivity.ConnectivityStatus) {
 
 Then to start listening for changes in Connectivity call:
 
-```
+```swift
 connectivity.startNotifier()
 ```
 
@@ -177,7 +177,7 @@ Then remember to call `connectivity.stopNotifier()` when you are done.
 
 Sometimes you only want to check the connectivity state as a one-off. To do so, instantiate a Connectivity object then check the status property as follows:
 
-```
+```swift
 let connectivity = Connectivity()
 
 connectivity.checkConnectivity { connectivity in
@@ -202,7 +202,7 @@ connectivity.checkConnectivity { connectivity in
 
 Alternatively, you may check the following properties of the `Connectivity` object directly if you are only interested in certain types of connections:
 
-```
+```swift
 var isConnectedViaCellular: Bool
 
 var isConnectedViaWiFi: Bool
@@ -216,8 +216,8 @@ var isConnectedViaWiFiWithoutInternet: Bool
 
 It is possible to set the URLs which will be contacted to check connectivity via the `connectivityURLs` property of the `Connectivity` object before starting connectivity checks with `startNotifier()`.
 
-```
-connectivity.connectivityURLs = [URL(string: “https://www.apple.com/library/test/success.html")!]
+```swift
+connectivity.connectivityURLs = [URL(string: "https://www.apple.com/library/test/success.html")!]
 ```
 
 ### Notifications
@@ -234,7 +234,7 @@ In certain cases you may need to be kept constantly apprised of changes in conne
 
 To enable polling:
 
-```
+```swift
 connectivity.isPollingEnabled = true
 connectivity.startNotifier()
 ```
@@ -245,7 +245,7 @@ As always, remember to call `stopNotifier()` when you are done.
 
 As of Connectivity 1.1.0, using HTTPS for connectivity URLs is the default setting. If your app doesn't make use of [App Transport Security](https://developer.apple.com/security/) and you wish to make use of HTTP URLs as well as HTTPS ones then either set `isHTTPSOnly` to `false` or set `shouldUseHTTPS` to `false` when instantiating the Connectivity object as follows*:
 
-```
+```swift
 let connectivity = Connectivity(shouldUseHTTPS: false)
 ```
 
@@ -255,7 +255,7 @@ let connectivity = Connectivity(shouldUseHTTPS: false)
 
 To set the number of successful connections required in order to be deemed successfully connected, set the `successThreshold` property. The value is specified as a percentage indicating the percentage of successful connections i.e. if four connectivity URLs are set in the `connectivityURLs` property and a threshold of 75% is specified then three out of the four checks must succeed in order for our app to be deemed connected:
 
-```
+```swift
 connectivity.successThreshold = Connectivity.Percentage(75.0)
 ```
 
