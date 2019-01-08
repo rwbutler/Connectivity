@@ -412,13 +412,11 @@ private extension Connectivity {
     
     /// Checks connectivity every <polling interval> seconds rather than waiting for changes in Reachability status
     func setPollingEnabled(_ enabled: Bool) {
-        if #available(iOS 10.0, *) {
-            timer?.invalidate()
-            guard enabled else { return }
-            timer = Timer.scheduledTimer(withTimeInterval: pollingInterval, repeats: true, block: { [weak self] _ in
-                self?.checkConnectivity()
-            })
-        }
+        timer?.invalidate()
+        guard enabled else { return }
+        timer = Timer.scheduledTimer(timeInterval: pollingInterval, target: self,
+                                     selector: #selector(reachabilityDidChange(_:)),
+                                     userInfo: nil, repeats: true)
     }
     
     /// Updates the network interface reported for connections.

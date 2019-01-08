@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Connectivity'
-  s.version          = '2.0.1'
+  s.version          = '2.0.2'
   s.summary          = 'Makes Internet connectivity detection more robust by detecting Wi-Fi networks without Internet access.'
   s.description      = <<-DESC
 Connectivity wraps Apple's Reachability code to provide a reliable measure of whether Internet connectivity is available where Reachability alone can only indicate whether _an interface is available that might allow a connection_. Connectivity's objective is to solve the captive portal problem whereby an iOS device is connected to a Wi-Fi network lacking Internet connectivity. Such situations are commonplace and may occur for example when connecting to a public Wi-Fi network which requires the user to register before use. Connectivity can detect such situations enabling you to react accordingly.
