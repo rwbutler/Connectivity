@@ -291,3 +291,11 @@ Connectivity is available under the MIT license. See the [LICENSE](./LICENSE) fi
 |[Config Validator](https://github.com/rwbutler/ConfigValidator) | [IPA Uploader](https://github.com/rwbutler/IPAUploader) | [Palette](https://github.com/rwbutler/TypographyKitPalette)|
 |:-------------------------:|:-------------------------:|:-------------------------:|
 |[![Config Validator](https://raw.githubusercontent.com/rwbutler/ConfigValidator/master/docs/images/config-validator-logo.png)](https://github.com/rwbutler/ConfigValidator) | [![IPA Uploader](https://raw.githubusercontent.com/rwbutler/IPAUploader/master/docs/images/ipa-uploader-logo.png)](https://github.com/rwbutler/IPAUploader) | [![Palette](https://raw.githubusercontent.com/rwbutler/TypographyKitPalette/master/docs/images/typography-kit-palette-logo.png)](https://github.com/rwbutler/TypographyKitPalette)
+### Code Visualization:
+
+Here is a cool visualization of the code evolution
+
+ [![Watch the video](https://img.youtube.com/vi/bQUjMYqzph0/0.jpg)](https://www.youtube.com/watch?v=bQUjMYqzph0)
+
+ [https://www.youtube.com/watch?v=bQUjMYqzph0](https://www.youtube.com/watch?v=bQUjMYqzph0)
+
