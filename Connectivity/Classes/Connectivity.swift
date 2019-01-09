@@ -80,7 +80,7 @@ public class Connectivity {
     #endif
     
     /// Where polling is enabled, the interval at which connectivity checks will be performed.
-    private var pollingInterval: Double = 10.0
+    public var pollingInterval: Double = 10.0
     
     /// Status last time a check was performed
     private var previousStatus: ConnectivityStatus?
