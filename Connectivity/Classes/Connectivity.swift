@@ -93,7 +93,7 @@ public class Connectivity {
     
     /// Status of the current connection
     public var status: ConnectivityStatus {
-        if #available(iOS 12.0, *), isNetworkFramework() {
+        if #available(iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
             let currentStatus: ConnectivityStatus
             guard let currentPath = path as? NWPath else {
                 currentStatus =  (isConnected) ? .connected : .notConnected
@@ -200,7 +200,7 @@ public extension Connectivity {
             task.resume()
         })
         
-        if #available(iOS 12.0, *) { // Update reported network interface for successful connections.
+        if #available(iOS 12.0, tvOS 12.0, *) { // Update reported network interface for successful connections.
             updatePath(dispatchGroup: dispatchGroup)
         }
         
@@ -222,14 +222,14 @@ public extension Connectivity {
         self.externalQueue = queue
         isObservingReachability = true
         setPollingEnabled(isPollingEnabled)
-        if #available(iOS 12, *), isNetworkFramework() {
+        if #available(iOS 12, tvOS 12.0, *), isNetworkFramework() {
             startPathMonitorNotifier()
         } else {
             startReachabilityNotifier()
         }
     }
     
-    @available(iOS 12, *)
+    @available(iOS 12, tvOS 12.0, *)
     private func startPathMonitorNotifier() {
         let monitor = NWPathMonitor()
         self.pathMonitor = monitor
@@ -252,7 +252,7 @@ public extension Connectivity {
     /// Stop listening for Reachability changes
     func  stopNotifier() {
         timer?.invalidate()
-        if #available(iOS 12, *), isNetworkFramework() {
+        if #available(iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
             stopPathMonitorNotifier()
         } else {
             stopReachabilityNotifier()
@@ -260,7 +260,7 @@ public extension Connectivity {
         isObservingReachability = false
     }
     
-    @available(iOS 12.0, *)
+    @available(iOS 12.0, tvOS 12.0, *)
     private func stopPathMonitorNotifier() {
         if isObservingReachability, let monitor = self.pathMonitor as? NWPathMonitor {
             monitor.cancel()
@@ -329,7 +329,7 @@ private extension Connectivity {
     
     /// Determines whether connected with the given method.
     func isConnected(with networkStatus: NetworkStatus) -> Bool {
-        if #available(iOS 12, *), isNetworkFramework() {
+        if #available(iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
             var isNetworkInterfaceMatch: Bool = false
             if let monitor = self.pathMonitor as? NWPathMonitor, let interface = interfaceType(from: networkStatus) {
                 isNetworkInterfaceMatch = monitor.currentPath.availableInterfaces.map({ $0.type }).contains(interface)
@@ -343,7 +343,7 @@ private extension Connectivity {
     
     /// Determines whether connected with the given method without Internet access (no connectivity).
     func isDisconnected(with networkStatus: NetworkStatus) -> Bool {
-        if #available(iOS 12, *), isNetworkFramework() {
+        if #available(iOS 12, tvOS 12.0, *), isNetworkFramework() {
             var isNetworkInterfaceMatch: Bool = false
             if let monitor = self.pathMonitor as? NWPathMonitor, let interface = interfaceType(from: networkStatus) {
                 isNetworkInterfaceMatch = monitor.currentPath.availableInterfaces.map({ $0.type }).contains(interface)
@@ -356,7 +356,7 @@ private extension Connectivity {
     }
     
     /// Maps a NetworkStatus to a NWInterface.InterfaceType, if possible.
-    @available(iOS 12.0, *)
+    @available(iOS 12.0, tvOS 12.0, *)
     private func interfaceType(from networkStatus: NetworkStatus) -> NWInterface.InterfaceType? {
         switch networkStatus {
         case ReachableViaWiFi:
@@ -420,7 +420,7 @@ private extension Connectivity {
     }
     
     /// Updates the network interface reported for connections.
-    @available(iOS 12.0, *)
+    @available(iOS 12.0, tvOS 12.0, *)
     func updatePath(dispatchGroup: DispatchGroup) {
         guard isNetworkFramework(), !isObservingReachability else { return }
         let monitor = NWPathMonitor()
