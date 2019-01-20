@@ -8,6 +8,7 @@
 
 import Network
 
+@objcMembers
 public class Connectivity {
     
     public typealias Framework = ConnectivityFramework
@@ -15,6 +16,7 @@ public class Connectivity {
     public typealias NetworkDisconnected = (Connectivity) -> Void
     public typealias Percentage = ConnectivityPercentage
     public typealias Status = ConnectivityStatus
+    public typealias ValidationMode = ConnectivityResponseValidationMode
     
     // MARK: State
     
@@ -33,8 +35,11 @@ public class Connectivity {
         }
     }
     
+    /// Regex expected to match connectivity URL response
+    public var expectedResponseRegEx = ".*?<BODY>.*?Success.*?</BODY>.*"
+    
     /// Response expected from connectivity URLs
-    private let expectedResponse = "Success"
+    public var expectedResponseString = "Success"
     
     /// Whether or not to use System Configuration or Network (on iOS 12+) framework.
     public var framework: Connectivity.Framework = .systemConfiguration
@@ -132,6 +137,9 @@ public class Connectivity {
         sessionConfiguration.timeoutIntervalForResource = 5.0
         return sessionConfiguration
     }()
+    
+    /// Method used to determine whether response content is valid
+    public var validationMode: ValidationMode = .containsExpectedResponseString
     
     /// Callback to invoke when connected
     public var whenConnected: NetworkConnected?
@@ -296,7 +304,11 @@ private extension Connectivity {
         guard let data = data, let responseString = String(data: data, encoding: .utf8) else {
             return false
         }
-        return responseString.contains(expectedResponse)
+        let validator = ConnectivityResponseValidator(validationMode: validationMode)
+        let result = (validationMode == .matchesRegularExpression)
+            ? validator.isValid(expected: expectedResponseRegEx, responseString: responseString)
+            : validator.isValid(expected: expectedResponseString, responseString: responseString)
+        return result
     }
     
     /// Set of connectivity URLs used by default if none are otherwise specified.

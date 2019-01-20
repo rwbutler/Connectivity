@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130524D621F344DC008D992A /* ConnectivityResponseValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130524D521F344DC008D992A /* ConnectivityResponseValidator.swift */; };
+		130524D821F5085A008D992A /* ConnectivityResponseValidationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130524D721F5085A008D992A /* ConnectivityResponseValidationMode.swift */; };
 		134BCF0721BD1C72009403C8 /* NotificationNameAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF0621BD1C72009403C8 /* NotificationNameAdditions.swift */; };
 		134BCF0A21BD1CAA009403C8 /* ConnectivityFramework.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF0921BD1CAA009403C8 /* ConnectivityFramework.swift */; };
 		134BCF0C21BD1CDB009403C8 /* ConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF0B21BD1CDB009403C8 /* ConnectivityStatus.swift */; };
@@ -40,6 +42,8 @@
 		0ADE3A702474BD913F0757617E837472 /* Pods_Connectivity_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connectivity_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E26BBF67138E9BA9C0682AA47AD4F23 /* Pods-Connectivity_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Connectivity_Example-umbrella.h"; sourceTree = "<group>"; };
 		0F3C86DFE68666B2609FC68CB5107631 /* Pods-Connectivity_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Connectivity_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		130524D521F344DC008D992A /* ConnectivityResponseValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseValidator.swift; sourceTree = "<group>"; };
+		130524D721F5085A008D992A /* ConnectivityResponseValidationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseValidationMode.swift; sourceTree = "<group>"; };
 		134BCF0621BD1C72009403C8 /* NotificationNameAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNameAdditions.swift; sourceTree = "<group>"; };
 		134BCF0921BD1CAA009403C8 /* ConnectivityFramework.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityFramework.swift; sourceTree = "<group>"; };
 		134BCF0B21BD1CDB009403C8 /* ConnectivityStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityStatus.swift; sourceTree = "<group>"; };
@@ -137,6 +141,8 @@
 				134BCF0921BD1CAA009403C8 /* ConnectivityFramework.swift */,
 				134BCF0B21BD1CDB009403C8 /* ConnectivityStatus.swift */,
 				134BCF0D21BD1D40009403C8 /* ConnectivityPercentage.swift */,
+				130524D521F344DC008D992A /* ConnectivityResponseValidator.swift */,
+				130524D721F5085A008D992A /* ConnectivityResponseValidationMode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -423,6 +429,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				130524D621F344DC008D992A /* ConnectivityResponseValidator.swift in Sources */,
+				130524D821F5085A008D992A /* ConnectivityResponseValidationMode.swift in Sources */,
 				134BCF0C21BD1CDB009403C8 /* ConnectivityStatus.swift in Sources */,
 				E4B1FB021F1D229D0010315E /* Connectivity.swift in Sources */,
 				134BCF0721BD1C72009403C8 /* NotificationNameAdditions.swift in Sources */,
