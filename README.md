@@ -28,6 +28,7 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 	- [Polling](#polling)
 	- [SSL](#ssl)
 	- [Threshold](#threshold)
+	- [Response Validation](#response-validation)
 - [Author](#author)
 - [License](#license)
 - [Additional Software](#additional-software)
@@ -258,6 +259,14 @@ To set the number of successful connections required in order to be deemed succe
 ```swift
 connectivity.successThreshold = Connectivity.Percentage(75.0)
 ```
+
+### Response Validation
+
+There are three different validation modes available for checking response content these being:
+
+- `.containsExpectedResponseString` - Checks that the response *contains* the expected response as defined by the `expectedResponseString` property. 
+- `.equalsExpectedResponseString` - Checks that the response *equals* the expected response as defined by the `expectedResponseString` property. 
+- `.matchesRegularExpression` - Checks that the response matches the regular expression as defined by the `expectedResponseRegEx` property.
 
 ## Author
 
