@@ -35,6 +35,9 @@ public class Connectivity {
         }
     }
     
+    /// Optionally configure a bearer token to be sent as part of an Authorization header.
+    public var bearerToken: String?
+    
     /// Regex expected to match connectivity URL response
     public var expectedResponseRegEx = ".*?<BODY>.*?Success.*?</BODY>.*"
     
@@ -202,7 +205,12 @@ public extension Connectivity {
         }
         
         // Check each of the specified URLs in turn
-        tasks = connectivityURLs.map({ session.dataTask(with: $0, completionHandler: completionHandler) })
+        tasks = connectivityURLs.map({
+            if let urlRequest = authorizedURLRequest(with: $0) {
+                return session.dataTask(with: urlRequest, completionHandler: completionHandler)
+            }
+            return session.dataTask(with: $0, completionHandler: completionHandler)
+        })
         tasks.forEach({ task in
             dispatchGroup.enter()
             task.resume()
@@ -285,6 +293,15 @@ public extension Connectivity {
 // Private API
 private extension Connectivity {
     
+    /// Returns a URL request for an Authorization header if the `bearerToken` property is set,
+    /// otherwise `nil` is returned.
+    func authorizedURLRequest(with url: URL) -> URLRequest? {
+        guard let bearerToken = self.bearerToken else { return nil }
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
+        return request
+    }
+
     /// Check whether enough tasks have successfully completed to be considered connected
     private func cancelConnectivityCheck(pendingTasks: [URLSessionDataTask], successfulChecks: Int, totalChecks: Int) {
         let isConnected = isThresholdMet(successfulChecks, outOf: totalChecks)
