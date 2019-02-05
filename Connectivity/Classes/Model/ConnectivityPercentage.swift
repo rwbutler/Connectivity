@@ -1,5 +1,5 @@
 //
-//  Percentage.swift
+//  ConnectivityPercentage.swift
 //  Connectivity
 //
 //  Created by Ross Butler on 12/9/18.

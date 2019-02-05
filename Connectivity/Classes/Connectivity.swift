@@ -3,7 +3,7 @@
 //  Connectivity
 //
 //  Created by Ross Butler on 7/12/17.
-//  Copyright © 2017 - 2018 Ross Butler. All rights reserved.
+//  Copyright © 2017 - 2019 Ross Butler. All rights reserved.
 //
 
 import Network

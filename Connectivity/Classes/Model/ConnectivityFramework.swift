@@ -1,5 +1,5 @@
 //
-//  Framework.swift
+//  ConnectivityFramework.swift
 //  Connectivity
 //
 //  Created by Ross Butler on 12/9/18.
