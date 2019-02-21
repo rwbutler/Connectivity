@@ -279,6 +279,14 @@ Connectivity is available under the MIT license. See the [LICENSE file](./LICENS
 
 ## Additional Software
 
+### Controls
+
+* [AnimatedGradientView](https://github.com/rwbutler/AnimatedGradientView) - Powerful gradient animations made simple for iOS.
+
+|[AnimatedGradientView](https://github.com/rwbutler/AnimatedGradientView) |
+|:-------------------------:|
+|[![AnimatedGradientView](https://raw.githubusercontent.com/rwbutler/AnimatedGradientView/master/docs/images/animated-gradient-view-logo.png)](https://github.com/rwbutler/AnimatedGradientView) 
+
 ### Frameworks
 
 * [Cheats](https://github.com/rwbutler/Cheats) - Retro cheat codes for modern iOS apps.
