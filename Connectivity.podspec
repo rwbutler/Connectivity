@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Connectivity'
-  s.version          = '2.2.0'
+  s.version          = '2.2.1'
   s.swift_version = '4.2'
   s.summary          = 'Makes Internet connectivity detection more robust by detecting Wi-Fi networks without Internet access.'
   s.description      = <<-DESC
