@@ -16,6 +16,7 @@ Connectivity's objective is to solve the captive portal problem whereby an iOS d
 To learn more about how to use Connectivity, take a look at the [keynote presentation](https://github.com/rwbutler/Connectivity/blob/master/docs/presentations/connectivity.pdf), check out the [blog post](https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e), or make use of the table of contents below:
 
 - [Features](#features)
+- [What's New in Connectivity 3.0.0?](#whats-new-in-connectivity-300)
 - [What's New in Connectivity 2.0.0?](#whats-new-in-connectivity-200)
 - [Installation](#installation)
 	- [Cocoapods](#cocoapods)
@@ -42,6 +43,10 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 - [x] Detect when connected to a router that has no Internet access.
 - [x] Be notified of changes in Internet connectivity.
 - [x] Polling connectivity checks may be performed where a constant network connection is required (optional).
+
+## What's new in Connectivity 3.0.0?
+
+Connectivity 3.0.0 brings support for Swift 5.0. The previous version supporting Swift 4.2 is version 2.2.1.
 
 ## What's new in Connectivity 2.0.0?
 
