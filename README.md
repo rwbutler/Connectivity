@@ -48,6 +48,18 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 
 Connectivity 3.0.0 brings support for Swift 5.0. The previous version supporting Swift 4.2 is version 2.2.1.
 
+If you require the Swift 4.2 version then in your `Podfile`:
+
+```ruby
+pod "Connectivity" "~> 2.0" 
+```
+
+Or if you are using Carthage add the following to your `Cartfile`:
+
+```ogdl
+github "rwbutler/Connectivity" ~> 2.2.1
+```
+
 ## What's new in Connectivity 2.0.0?
 
 Connectivity 2.0.0 provides the option of using the new `Network` framework on iOS 12 and above. To make use of this functionality set the `framework` property to `.network` as follows:
