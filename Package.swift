@@ -8,10 +8,24 @@ let package = Package(
         .tvOS(.v9)
     ],
     products: [
-        .library(name: "Connectivity", targets: ["Connectivity"]),
+        .library(
+            name: "Connectivity",
+            targets: ["Connectivity"]
+        )
     ],
     targets: [
-        .target(name: "Connectivity", dependencies: ["Reachability"], path: "Connectivity/Classes", exclude: ["Reachability"]),
-        .target(name: "Reachability", dependencies: [], path: "Connectivity/Classes/Reachability", publicHeadersPath: ""),
+        .target(
+            name: "Connectivity",
+            dependencies: ["Reachability"],
+            path: "Connectivity/Classes",
+            exclude: ["Reachability"],
+            swiftSettings: [.define("IMPORT_REACHABILITY")]
+        ),
+        .target(
+            name: "Reachability",
+            dependencies: [],
+            path: "Connectivity/Classes/Reachability",
+            publicHeadersPath: ""
+        )
     ]
 )
