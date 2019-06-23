@@ -8,6 +8,7 @@
 
 import Foundation
 import Network
+import Reachability
 
 @objcMembers
 public class Connectivity: NSObject {

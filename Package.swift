@@ -1,0 +1,17 @@
+// swift-tools-version:5.0
+import PackageDescription
+
+let package = Package(
+    name: "Connectivity",
+    platforms: [
+        .iOS("8.3"),
+        .tvOS(.v9)
+    ],
+    products: [
+        .library(name: "Connectivity", targets: ["Connectivity"]),
+    ],
+    targets: [
+        .target(name: "Connectivity", dependencies: ["Reachability"], path: "Connectivity/Classes", exclude: ["Reachability"]),
+        .target(name: "Reachability", dependencies: [], path: "Connectivity/Classes/Reachability", publicHeadersPath: ""),
+    ]
+)
