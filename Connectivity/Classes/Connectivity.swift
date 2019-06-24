@@ -8,6 +8,9 @@
 
 import Foundation
 import Network
+#if IMPORT_REACHABILITY
+import Reachability
+#endif
 
 @objcMembers
 public class Connectivity: NSObject {
