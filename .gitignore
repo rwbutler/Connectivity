@@ -19,3 +19,4 @@ DerivedData
 *.key
 .bundle
 Carthage
+**/.build/**
