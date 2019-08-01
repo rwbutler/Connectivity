@@ -84,7 +84,17 @@ public class Connectivity: NSObject {
     }
     
     // Stores a NWPath reference - erase type information where Network framework unavailable.
-    private var path: Any?
+    private var _path: Any?
+    private var path: Any? {
+        get {
+            return internalQueue.sync { _path }
+        }
+        set {
+            internalQueue.sync { [weak self] in
+                self?._path = newValue
+            }
+        }
+    }
     
     // Stores a NWPathMonitor reference - erase type information where Network framework unavailable.
     private var pathMonitor: Any?
