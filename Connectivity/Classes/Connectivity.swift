@@ -83,13 +83,11 @@ public class Connectivity: NSObject {
         }
     }
     
-    #if canImport(Network)
     // Stores a NWPath reference - erase type information where Network framework unavailable.
     private var path: Any?
     
     // Stores a NWPathMonitor reference - erase type information where Network framework unavailable.
     private var pathMonitor: Any?
-    #endif
     
     /// Where polling is enabled, the interval at which connectivity checks will be performed.
     public var pollingInterval: Double = 10.0
