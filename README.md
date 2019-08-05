@@ -21,6 +21,7 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 - [Installation](#installation)
 	- [Cocoapods](#cocoapods)
 	- [Carthage](#carthage)
+	- [Swift Package Manager](#swift-package-manager)
 - [How It Works](#how-it-works)
 - [Usage](#usage)
 	- [Callbacks](#callbacks)
@@ -119,6 +120,28 @@ github "rwbutler/Connectivity"
 From the macOS Terminal run `carthage update --platform iOS` to build the framework then drag `Connectivity.framework` into your Xcode project.
 
 For more information [see here](https://github.com/Carthage/Carthage#quick-start).
+
+### Swift Package Manager
+
+Xcode 11 includes support for [Swift Package Manager](https://swift.org/package-manager/). In order to add Connectivity to to your project in Xcode 11, from the `File` menu select `Swift Packages` and then select `Add Package Dependency`.
+
+A dialogue will request the package repository URL which is:
+
+```
+https://github.com/rwbutler/connectivity
+```
+
+After verifying the URL, Xcode will prompt you to select whether to pull a specific branch, commit or versioned release into your project. 
+
+<div align="center">
+    <img src="https://github.com/rwbutler/Connectivity/raw/master/docs/images/package-options.png" alt="Xcode 11 Package Options">
+</div>
+
+Proceed to the next step by where you will be asked to select the package product to integrate into a target. There will be a single package product named `Connectivity` which should be pre-selected. Ensure that your main app target is selected from the rightmost column of the dialog then click Finish to complete the integration.
+
+<div align="center">
+    <img src="https://github.com/rwbutler/Connectivity/raw/master/docs/images/add-package.png" alt="Xcode 11 Add Package">
+</div>
 
 ## How It Works
 
