@@ -123,7 +123,7 @@ For more information [see here](https://github.com/Carthage/Carthage#quick-start
 
 ### Swift Package Manager
 
-Xcode 11 includes support for [Swift Package Manager](https://swift.org/package-manager/). In order to add Connectivity to to your project in Xcode 11, from the `File` menu select `Swift Packages` and then select `Add Package Dependency`.
+Xcode 11 includes support for [Swift Package Manager](https://swift.org/package-manager/). In order to add Connectivity to your project in Xcode 11, from the `File` menu select `Swift Packages` and then select `Add Package Dependency`.
 
 A dialogue will request the package repository URL which is:
 
