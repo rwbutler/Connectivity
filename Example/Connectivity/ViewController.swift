@@ -80,6 +80,7 @@ private extension ViewController {
         activityIndicator.startAnimating()
         connectivity.startNotifier()
         isCheckingConnectivity = true
+        segmentedControl.isEnabled = false
         updateNotifierButton(isCheckingConnectivity: isCheckingConnectivity)
     }
 
@@ -87,6 +88,7 @@ private extension ViewController {
         activityIndicator.stopAnimating()
         connectivity.stopNotifier()
         isCheckingConnectivity = false
+        segmentedControl.isEnabled = true
         updateNotifierButton(isCheckingConnectivity: isCheckingConnectivity)
     }
 
@@ -96,6 +98,8 @@ private extension ViewController {
             statusLabel.textColor = UIColor.darkGreen
         case .connectedViaWiFiWithoutInternet, .connectedViaCellularWithoutInternet, .notConnected:
             statusLabel.textColor = UIColor.red
+        case .determining:
+            statusLabel.textColor = UIColor.black
         }
         statusLabel.text = status.description
         segmentedControl.tintColor = statusLabel.textColor

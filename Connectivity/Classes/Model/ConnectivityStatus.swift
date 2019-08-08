@@ -13,6 +13,7 @@ public enum ConnectivityStatus: CustomStringConvertible {
     connectedViaCellularWithoutInternet,
     connectedViaWiFi,
     connectedViaWiFiWithoutInternet,
+    determining,
     notConnected
     
     public var description: String {
@@ -27,6 +28,8 @@ public enum ConnectivityStatus: CustomStringConvertible {
             return "Wi-Fi with Internet access"
         case .connectedViaWiFiWithoutInternet:
             return "Wi-Fi without Internet access"
+        case .determining:
+            return "Connectivity checks pending"
         case .notConnected:
             return "No Connection"
         }

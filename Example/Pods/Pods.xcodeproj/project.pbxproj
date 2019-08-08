@@ -14,6 +14,7 @@
 		134BCF0C21BD1CDB009403C8 /* ConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF0B21BD1CDB009403C8 /* ConnectivityStatus.swift */; };
 		134BCF0E21BD1D40009403C8 /* ConnectivityPercentage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134BCF0D21BD1D40009403C8 /* ConnectivityPercentage.swift */; };
 		134F2DB221BC4EFB00B9D484 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 134F2DB121BC4EFB00B9D484 /* Network.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		138018F422FC9083008FC6D4 /* ConnectivityInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138018F322FC9083008FC6D4 /* ConnectivityInterface.swift */; };
 		1D7BDA0F4FA3F836E1F579CAB133B337 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		243485BE467B634C7876036C8E7F7DC1 /* Pods-Connectivity_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E26BBF67138E9BA9C0682AA47AD4F23 /* Pods-Connectivity_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3B47FADB850258F00978AEAF84B37EB7 /* Pods-Connectivity_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A1132FB3546756E999EC05C7B81BC97C /* Pods-Connectivity_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -49,6 +50,7 @@
 		134BCF0B21BD1CDB009403C8 /* ConnectivityStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityStatus.swift; sourceTree = "<group>"; };
 		134BCF0D21BD1D40009403C8 /* ConnectivityPercentage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityPercentage.swift; sourceTree = "<group>"; };
 		134F2DB121BC4EFB00B9D484 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/Network.framework; sourceTree = DEVELOPER_DIR; };
+		138018F322FC9083008FC6D4 /* ConnectivityInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityInterface.swift; sourceTree = "<group>"; };
 		1619A1C3FFF4399451291807685FFA3C /* Connectivity.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Connectivity.xcconfig; sourceTree = "<group>"; };
 		19234B796AC167AA76B437CAB23D0CC7 /* Connectivity-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Connectivity-umbrella.h"; sourceTree = "<group>"; };
 		1E609636CA10792AE64DF24CFCD88AA8 /* Pods-Connectivity_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Connectivity_Example.modulemap"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				134BCF0D21BD1D40009403C8 /* ConnectivityPercentage.swift */,
 				130524D521F344DC008D992A /* ConnectivityResponseValidator.swift */,
 				130524D721F5085A008D992A /* ConnectivityResponseValidationMode.swift */,
+				138018F322FC9083008FC6D4 /* ConnectivityInterface.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				138018F422FC9083008FC6D4 /* ConnectivityInterface.swift in Sources */,
 				130524D621F344DC008D992A /* ConnectivityResponseValidator.swift in Sources */,
 				130524D821F5085A008D992A /* ConnectivityResponseValidationMode.swift in Sources */,
 				134BCF0C21BD1CDB009403C8 /* ConnectivityStatus.swift in Sources */,
@@ -480,6 +484,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Connectivity/Connectivity.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rwbutler.Connectivity;
 				PRODUCT_NAME = Connectivity;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos";
@@ -659,6 +664,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Connectivity/Connectivity.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rwbutler.Connectivity;
 				PRODUCT_NAME = Connectivity;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos";

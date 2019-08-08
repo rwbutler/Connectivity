@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2019-08-08
+### Added
+- Properties `availableInterfaces` and `currentInterface` indicate the network interfaces used in the most recent connectivity check.
+- New `Connectivity.Status` case `.determining` will be returned prior to a connectivity check having completed.
+### Changed
+- Refactor of `status` property which is now set on most recent connectivity check rather than computed on read.
+
 ## [3.0.4] - 2019-08-01
 ### Changed
 - Ensure reading from and writing to the `path` property occurs in a thread-safe manner.
