@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Connectivity'
-  s.version          = '3.1.0'
+  s.version          = '3.1.1'
   s.swift_version    = '5.0'
   s.summary          = 'Makes Internet connectivity detection more robust by detecting Wi-Fi networks without Internet access.'
   s.description      = <<-DESC
@@ -13,6 +13,7 @@ Connectivity wraps Apple's Reachability code to provide a reliable measure of wh
   s.source           = { :git => 'https://github.com/rwbutler/Connectivity.git', :tag => s.version.to_s }
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'
+  s.frameworks      = 'Network', 'SystemConfiguration'
   s.source_files = 'Connectivity/Classes/**/*'
   s.exclude_files = [
     'Connectivity/Classes/Reachability/LICENSE.txt'
