@@ -58,6 +58,9 @@ public class Connectivity: NSObject {
     
     /// Response expected from connectivity URLs
     public var expectedResponseString = "Success"
+
+    /// A custom validator conforming to `ConnectivityResponeValidator`
+    public var customValidator: ConnectivityResponseValidator? = nil
     
     /// Whether or not to use System Configuration or Network (on iOS 12+) framework.
     public var framework: Connectivity.Framework = .systemConfiguration
@@ -177,21 +180,23 @@ public extension Connectivity {
         let totalChecks: Int = connectivityURLs.count
         
         // Connectivity check callback
-        let completionHandler: (Data?, URLResponse?, Error?) -> Void = {  [weak self] (data, response, error) in
-            let connectivityCheckSuccess = self?.connectivityCheckSucceeded(data: data) ?? false
-            connectivityCheckSuccess ? (successfulChecks += 1) : (failedChecks += 1)
-            dispatchGroup.leave()
-            // Abort early if enough tasks have completed successfully
-            self?.cancelConnectivityCheck(pendingTasks: tasks, successfulChecks: successfulChecks,
-                                          totalChecks: totalChecks)
+        let completionHandlerForUrl: (URL) -> ((Data?, URLResponse?, Error?) -> Void) = { url in
+            return {  [weak self] (data, response, error) in
+                let connectivityCheckSuccess = self?.connectivityCheckSucceeded(for: url, response: response, data: data) ?? false
+                connectivityCheckSuccess ? (successfulChecks += 1) : (failedChecks += 1)
+                dispatchGroup.leave()
+                // Abort early if enough tasks have completed successfully
+                self?.cancelConnectivityCheck(pendingTasks: tasks, successfulChecks: successfulChecks,
+                                              totalChecks: totalChecks)
+            }
         }
         
         // Check each of the specified URLs in turn
         tasks = connectivityURLs.map({
             if let urlRequest = authorizedURLRequest(with: $0) {
-                return session.dataTask(with: urlRequest, completionHandler: completionHandler)
+                return session.dataTask(with: urlRequest, completionHandler: completionHandlerForUrl($0))
             }
-            return session.dataTask(with: $0, completionHandler: completionHandler)
+            return session.dataTask(with: $0, completionHandler: completionHandlerForUrl($0))
         })
         
         tasks.forEach({ task in
@@ -300,15 +305,31 @@ private extension Connectivity {
     }
     
     /// Determines whether or not the connectivity check was successful.
-    private func connectivityCheckSucceeded(data: Data?) -> Bool {
-        guard let data = data, let responseString = String(data: data, encoding: .utf8) else {
-            return false
+    private func connectivityCheckSucceeded(for url: URL, response: URLResponse?, data: Data?) -> Bool {
+        let validator: ConnectivityResponseValidator
+        switch validationMode {
+        case .containsExpectedResponseString:
+            validator = ConnectivityResponseStringTestValidator(
+                validationMode: .containsExpectedResponseString,
+                expected: expectedResponseString
+            )
+        case .matchesRegularExpression:
+            validator = ConnectivityResponseStringTestValidator(
+                validationMode: .matchesRegularExpression,
+                expected: expectedResponseRegEx
+            )
+        case .equalsExpectedResponseString:
+            validator = ConnectivityResponseStringTestValidator(
+                validationMode: .equalsExpectedResponseString,
+                expected: expectedResponseString
+            )
+        case .custom:
+            guard let customValidator = customValidator else {
+                fatalError("customValidator is nil; please set customValidator")
+            }
+            validator = customValidator
         }
-        let validator = ConnectivityResponseValidator(validationMode: validationMode)
-        let result = (validationMode == .matchesRegularExpression)
-            ? validator.isValid(expected: expectedResponseRegEx, responseString: responseString)
-            : validator.isValid(expected: expectedResponseString, responseString: responseString)
-        return result
+        return validator.isResponseValid(url: url, response: response, data: data)
     }
     
     /// Set of connectivity URLs used by default if none are otherwise specified.

@@ -11,5 +11,6 @@ import Foundation
 public enum ConnectivityResponseValidationMode: Int {
     case containsExpectedResponseString,
     equalsExpectedResponseString,
-    matchesRegularExpression
+    matchesRegularExpression,
+    custom
 }
