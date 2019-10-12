@@ -1,16 +1,16 @@
 PODS:
-  - Connectivity (0.1.0)
+  - Connectivity (3.1.2)
 
 DEPENDENCIES:
   - Connectivity (from `../`)
 
 EXTERNAL SOURCES:
   Connectivity:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  Connectivity: e66d30988538605ad58745b71ff574d0545b02e9
+  Connectivity: 115905e721e93401f7bf5d2922ff2dae08c58f98
 
 PODFILE CHECKSUM: 894f6b333c14128fd4e8f3c9af2e006edc0dbedb
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.8.3
