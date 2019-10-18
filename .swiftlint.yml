@@ -4,4 +4,5 @@ disabled_rules:
 opt_in_rules:
   - empty_count
 excluded:
+  - Example/Pods/OHHTTPStubs
 reporter: "xcode"

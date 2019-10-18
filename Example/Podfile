@@ -5,7 +5,7 @@ target 'Connectivity_Example' do
 
   target 'Connectivity_Tests' do
     inherit! :search_paths
-
+    pod 'OHHTTPStubs/Swift'
     
   end
 end

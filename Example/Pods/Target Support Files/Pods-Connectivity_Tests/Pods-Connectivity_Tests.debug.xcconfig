@@ -1,7 +1,10 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Connectivity"
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Connectivity" "${PODS_CONFIGURATION_BUILD_DIR}/OHHTTPStubs"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Connectivity/Connectivity.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "Connectivity" -framework "SystemConfiguration" -weak_framework "Network"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Connectivity/Connectivity.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/OHHTTPStubs/OHHTTPStubs.framework/Headers"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_LDFLAGS = $(inherited) -framework "CFNetwork" -framework "Connectivity" -framework "Foundation" -framework "OHHTTPStubs" -framework "SystemConfiguration" -weak_framework "Network"
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

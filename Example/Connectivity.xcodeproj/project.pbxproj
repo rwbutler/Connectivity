@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		135760F321283C8600AB6301 /* UIColorAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135760F221283C8600AB6301 /* UIColorAdditions.swift */; };
+		13F603C12359D2A30012F230 /* success-response.html in Resources */ = {isa = PBXBuildFile; fileRef = 13F603BF2359D2880012F230 /* success-response.html */; };
+		13F603C32359ED000012F230 /* failure-response.html in Resources */ = {isa = PBXBuildFile; fileRef = 13F603C22359ED000012F230 /* failure-response.html */; };
+		13F603C42359EE290012F230 /* failure-response.html in Resources */ = {isa = PBXBuildFile; fileRef = 13F603C22359ED000012F230 /* failure-response.html */; };
 		4992400D384F73130F10F078 /* Pods_Connectivity_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9101FE1CB42B71A47A459A9 /* Pods_Connectivity_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -30,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		135760F221283C8600AB6301 /* UIColorAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorAdditions.swift; sourceTree = "<group>"; };
+		13F603BF2359D2880012F230 /* success-response.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "success-response.html"; sourceTree = "<group>"; };
+		13F603C22359ED000012F230 /* failure-response.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "failure-response.html"; sourceTree = "<group>"; };
 		15F577975F24E6EC59A4D7E2 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		1A67A15C226AE5041C7BBBBC /* Pods-Connectivity_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Tests/Pods-Connectivity_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		59AC20C4169D5C969777DC33 /* Pods-Connectivity_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example/Pods-Connectivity_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				607FACEA1AFB9204008FA782 /* Info.plist */,
+				13F603BF2359D2880012F230 /* success-response.html */,
+				13F603C22359ED000012F230 /* failure-response.html */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -193,6 +200,7 @@
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
+				3511C667F00570A014824B88 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -249,6 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13F603C32359ED000012F230 /* failure-response.html in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -259,6 +268,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13F603C12359D2A30012F230 /* success-response.html in Resources */,
+				13F603C42359EE290012F230 /* failure-response.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +288,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "echo $(pwd)\nif which swiftlint >/dev/null; then\ncd ..\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		3511C667F00570A014824B88 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Connectivity_Tests/Pods-Connectivity_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs/OHHTTPStubs.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Connectivity_Tests/Pods-Connectivity_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		47431E572076189799EF7970 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -532,6 +561,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Connectivity_Example.app/Connectivity_Example";
 			};
 			name = Debug;
 		};
@@ -544,6 +574,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Connectivity_Example.app/Connectivity_Example";
 			};
 			name = Release;
 		};
