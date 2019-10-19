@@ -60,7 +60,7 @@ public class Connectivity: NSObject {
     public var expectedResponseString = "Success"
 
     /// A custom validator conforming to `ConnectivityResponeValidator`
-    public var customValidator: ConnectivityResponseValidator? = nil
+    public var customValidator: ConnectivityResponseValidator?
     
     /// Whether or not to use System Configuration or Network (on iOS 12+) framework.
     public var framework: Connectivity.Framework = .systemConfiguration
@@ -182,7 +182,11 @@ public extension Connectivity {
         // Connectivity check callback
         let completionHandlerForUrl: (URL) -> ((Data?, URLResponse?, Error?) -> Void) = { url in
             return {  [weak self] (data, response, error) in
-                let connectivityCheckSuccess = self?.connectivityCheckSucceeded(for: url, response: response, data: data) ?? false
+                let connectivityCheckSuccess = self?.connectivityCheckSucceeded(
+                    for: url,
+                    response: response,
+                    data: data
+                ) ?? false
                 connectivityCheckSuccess ? (successfulChecks += 1) : (failedChecks += 1)
                 dispatchGroup.leave()
                 // Abort early if enough tasks have completed successfully

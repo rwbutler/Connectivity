@@ -8,7 +8,7 @@
 import Foundation
 
 @objc
-public enum ConnectivityResponseStringTestValidationMode: Int {
+public enum ConnectivityResponseStringValidationMode: Int {
     case containsExpectedResponseString,
     equalsExpectedResponseString,
     matchesRegularExpression
@@ -16,8 +16,8 @@ public enum ConnectivityResponseStringTestValidationMode: Int {
 
 public class ConnectivityResponseStringTestValidator: ConnectivityResponseValidator {
 
-    public typealias ValidationMode = ConnectivityResponseStringTestValidationMode
-    
+    public typealias ValidationMode = ConnectivityResponseStringValidationMode
+
     /// The method used to validate the response from the connectivity endpoints.
     public let responseValidationMode: ValidationMode
 
@@ -56,5 +56,4 @@ public class ConnectivityResponseStringTestValidator: ConnectivityResponseValida
             return !matches.isEmpty
         }
     }
-    
 }
