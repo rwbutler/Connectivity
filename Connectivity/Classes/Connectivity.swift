@@ -58,9 +58,6 @@ public class Connectivity: NSObject {
     
     /// Response expected from connectivity URLs
     public var expectedResponseString = "Success"
-
-    /// A custom validator conforming to `ConnectivityResponeValidator`
-    public var customValidator: ConnectivityResponseValidator?
     
     /// Whether or not to use System Configuration or Network (on iOS 12+) framework.
     public var framework: Connectivity.Framework = .systemConfiguration
@@ -111,6 +108,9 @@ public class Connectivity: NSObject {
     
     /// Reachability instance for checking network adapter status
     private let reachability: Reachability
+    
+    /// A custom validator conforming to `ConnectivityResponseValidator`
+    public var responseValidator: ConnectivityResponseValidator?
     
     /// Status of the current connection
     public var status: ConnectivityStatus = .determining
@@ -313,25 +313,25 @@ private extension Connectivity {
         let validator: ConnectivityResponseValidator
         switch validationMode {
         case .containsExpectedResponseString:
-            validator = ConnectivityResponseStringTestValidator(
+            validator = ConnectivityResponseStringValidator(
                 validationMode: .containsExpectedResponseString,
                 expected: expectedResponseString
             )
         case .matchesRegularExpression:
-            validator = ConnectivityResponseStringTestValidator(
+            validator = ConnectivityResponseStringValidator(
                 validationMode: .matchesRegularExpression,
                 expected: expectedResponseRegEx
             )
         case .equalsExpectedResponseString:
-            validator = ConnectivityResponseStringTestValidator(
+            validator = ConnectivityResponseStringValidator(
                 validationMode: .equalsExpectedResponseString,
                 expected: expectedResponseString
             )
         case .custom:
-            guard let customValidator = customValidator else {
-                fatalError("customValidator is nil; please set customValidator")
+            guard let responseValidator = responseValidator else {
+                fatalError("responseValidator is nil; please set responseValidator")
             }
-            validator = customValidator
+            validator = responseValidator
         }
         return validator.isResponseValid(url: url, response: response, data: data)
     }

@@ -309,6 +309,7 @@ There are three different validation modes available for checking response conte
 - `.containsExpectedResponseString` - Checks that the response *contains* the expected response as defined by the `expectedResponseString` property. 
 - `.equalsExpectedResponseString` - Checks that the response *equals* the expected response as defined by the `expectedResponseString` property. 
 - `.matchesRegularExpression` - Checks that the response matches the regular expression as defined by the `expectedResponseRegEx` property.
+- `.custom` - Allows a custom response validator to be set. If this validation mode is specified, then an implementation of `ConnectivityResponseValidator` protocol must be supplied as the value of the `responseValidator` property on the `Connectivity` object, or else an error will be thrown.
 
 ## Author
 

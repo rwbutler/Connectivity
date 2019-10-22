@@ -1,5 +1,5 @@
 //
-//  ConnectivityResponseValidation.swift
+//  ConnectivityResponseStringValidator.swift
 //  Connectivity
 //
 //  Created by Ross Butler on 1/19/19.
@@ -14,7 +14,7 @@ public enum ConnectivityResponseStringValidationMode: Int {
     matchesRegularExpression
 }
 
-public class ConnectivityResponseStringTestValidator: ConnectivityResponseValidator {
+public class ConnectivityResponseStringValidator: ConnectivityResponseValidator {
 
     public typealias ValidationMode = ConnectivityResponseStringValidationMode
 

@@ -176,7 +176,7 @@ fileprivate extension XCTestCase {
         file: StaticString = #file,
         line: UInt = #line
     ) {
-        let validator = ConnectivityResponseStringTestValidator(
+        let validator = ConnectivityResponseStringValidator(
             validationMode: mode,
             expected: matchStr
         )
