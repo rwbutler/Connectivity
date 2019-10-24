@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C78BF11377F17C8F5B8CD7604269361 /* OHHTTPStubsMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D89F1A458C0B429647995B45C2160D7 /* OHHTTPStubsMethodSwizzling.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		13861A2E236073CB005512BE /* ConnectivityResponseRegExValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13861A2D236073CB005512BE /* ConnectivityResponseRegExValidator.swift */; };
 		165F2A6DF189151CDBCA366DD275ABEA /* OHHTTPStubs-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EF024EE220EAFFBE7E70C8D163A3637F /* OHHTTPStubs-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		25FD8D81F56B99631EB2B121645CFB74 /* ConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075E049FDB4C0940A8D3CCB0FA0B4D2 /* ConnectivityStatus.swift */; };
 		276071E9DBAAA08BBBD569288E026156 /* OHHTTPStubsResponse+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CFB4D92631D85ACADF68FC8B94FD41A /* OHHTTPStubsResponse+JSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -81,6 +82,7 @@
 		0FBA49C9EB994652962C52CF541B481D /* OHHTTPStubsSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OHHTTPStubsSwift.swift; path = OHHTTPStubs/Sources/Swift/OHHTTPStubsSwift.swift; sourceTree = "<group>"; };
 		10A58D31BA5F39B4EBE7287A5A813A48 /* OHHTTPStubs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubs.h; path = OHHTTPStubs/Sources/OHHTTPStubs.h; sourceTree = "<group>"; };
 		12C25A06F5A4ADA771FE575328AA67C0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		13861A2D236073CB005512BE /* ConnectivityResponseRegExValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseRegExValidator.swift; sourceTree = "<group>"; };
 		17E33041B314FA837A3CAEB9DF3CDE9F /* OHHTTPStubs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABDCA5C2D3B03B7FAE8F17B49C77BF2 /* Pods-Connectivity_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Connectivity_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		1EB8054A0025C92380DA80B0709A0F17 /* OHHTTPStubsResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubsResponse.m; path = OHHTTPStubs/Sources/OHHTTPStubsResponse.m; sourceTree = "<group>"; };
@@ -217,6 +219,17 @@
 			name = OHPathHelpers;
 			sourceTree = "<group>";
 		};
+		13861A2C23607353005512BE /* Response Validation */ = {
+			isa = PBXGroup;
+			children = (
+				13861A2D236073CB005512BE /* ConnectivityResponseRegExValidator.swift */,
+				3EBE8B85E9ADEB605CE6F26709174B3B /* ConnectivityResponseStringValidator.swift */,
+				E211114BE6BD72A0922C0B6F233D1EFF /* ConnectivityResponseValidationMode.swift */,
+				77017271F2AE9397A2BA0FF54541A20E /* ConnectivityResponseValidator.swift */,
+			);
+			path = "Response Validation";
+			sourceTree = "<group>";
+		};
 		157C280336B7C95274B475E690B78D73 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,12 +318,10 @@
 		8034DB07A68F753B102ABC7A93E7E054 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				13861A2C23607353005512BE /* Response Validation */,
 				EF98CA967942E202F689F0ECDDFD7E07 /* ConnectivityFramework.swift */,
 				7FFDEE0452F7BF3CEF57FEA5EA68CD0D /* ConnectivityInterface.swift */,
 				3173DF8296BA6BA229A9EE2D00C6237F /* ConnectivityPercentage.swift */,
-				3EBE8B85E9ADEB605CE6F26709174B3B /* ConnectivityResponseStringValidator.swift */,
-				E211114BE6BD72A0922C0B6F233D1EFF /* ConnectivityResponseValidationMode.swift */,
-				77017271F2AE9397A2BA0FF54541A20E /* ConnectivityResponseValidator.swift */,
 				C075E049FDB4C0940A8D3CCB0FA0B4D2 /* ConnectivityStatus.swift */,
 			);
 			name = Model;
@@ -634,6 +645,7 @@
 				6AAB0517082457B2FC994672379E5EEC /* ConnectivityInterface.swift in Sources */,
 				60AC3C3598BD1305AB36C62FF6840217 /* ConnectivityPercentage.swift in Sources */,
 				8291D26A0822F2BD1BE70D01FDCD00DF /* ConnectivityResponseStringValidator.swift in Sources */,
+				13861A2E236073CB005512BE /* ConnectivityResponseRegExValidator.swift in Sources */,
 				D36DB3E05FCCA4A99E0BE0351CE3AD80 /* ConnectivityResponseValidationMode.swift in Sources */,
 				C9AF45E79D9D09A39A987C22B8ED9A34 /* ConnectivityResponseValidator.swift in Sources */,
 				25FD8D81F56B99631EB2B121645CFB74 /* ConnectivityStatus.swift in Sources */,

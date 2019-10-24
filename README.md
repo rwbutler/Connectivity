@@ -18,7 +18,6 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 
 - [Features](#features)
 - [What's New in Connectivity 3.0.0?](#whats-new-in-connectivity-300)
-- [What's New in Connectivity 2.0.0?](#whats-new-in-connectivity-200)
 - [Installation](#installation)
 	- [Cocoapods](#cocoapods)
 	- [Carthage](#carthage)
@@ -28,6 +27,7 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 	- [Callbacks](#callbacks)
 	- [One-Off Checks](#one-off-checks)
 	- [Connectivity URLs](#connectivity-urls)
+	- [Network Framework](#network-framework)
 	- [Notifications](#notifications)
 	- [Polling](#polling)
 	- [SSL](#ssl)
@@ -62,18 +62,7 @@ Or if you are using Carthage add the following to your `Cartfile`:
 github "rwbutler/Connectivity" ~> 2.2.1
 ```
 
-## What's new in Connectivity 2.0.0?
-
-Connectivity 2.0.0 provides the option of using the new `Network` framework on iOS 12 and above. To make use of this functionality set the `framework` property to `.network` as follows:
-
-```swift
-let connectivity = Connectivity()
-connectivity.framework = .network
-```
-
-Below iOS 12, Connectivity will default to the traditional behaviour of using `Reachability` to determine the availability of network interfaces.
-
-For more information, refer to [CHANGELOG.md](CHANGELOG.md).
+Connectivity 3.2.0
 
 ## Installation
 
@@ -263,6 +252,19 @@ It is possible to set the URLs which will be contacted to check connectivity via
 connectivity.connectivityURLs = [URL(string: "https://www.apple.com/library/test/success.html")!]
 ```
 
+### Network Framework
+
+From version 2.0.0, Connectivity provides the option of using the new `Network` framework where a device is running iOS 12 or above. To make use of this functionality set the `framework` property to `.network` (the default value is `.systemConfiguration`) as follows:
+
+```swift
+let connectivity = Connectivity()
+connectivity.framework = .network
+```
+
+Below iOS 12, Connectivity will default to the traditional behaviour of using `Reachability` (SystemConfiguration.framework) to determine the availability of network interfaces.
+
+For more information, refer to [CHANGELOG.md](CHANGELOG.md).
+
 ### Notifications
 
 If you prefer using notifications to observe changes in connectivity, you may add an observer on the default NotificationCenter:
@@ -310,6 +312,8 @@ There are three different validation modes available for checking response conte
 - `.equalsExpectedResponseString` - Checks that the response *equals* the expected response as defined by the `expectedResponseString` property. 
 - `.matchesRegularExpression` - Checks that the response matches the regular expression as defined by the `expectedResponseRegEx` property.
 - `.custom` - Allows a custom response validator to be set. If this validation mode is specified, then an implementation of `ConnectivityResponseValidator` protocol must be supplied as the value of the `responseValidator` property on the `Connectivity` object, or else an error will be thrown.
+
+Supplied validators include `ConnectivityResponseStringValidator` and `ConnectivityResponseRegExValidator`.
 
 ## Author
 

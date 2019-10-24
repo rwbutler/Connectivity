@@ -46,14 +46,8 @@ public class ConnectivityResponseStringValidator: ConnectivityResponseValidator 
         case .equalsExpectedResponseString:
             return expected == responseString
         case .matchesRegularExpression:
-            let responseStrRange = NSRange(location: 0, length: responseString.count)
-            let options: NSRegularExpression.Options =
-                [.caseInsensitive, .allowCommentsAndWhitespace, .dotMatchesLineSeparators]
-            guard let regEx = try? NSRegularExpression(pattern: expected, options: options) else {
-                return false
-            }
-            let matches = regEx.matches(in: responseString, options: [], range: responseStrRange)
-            return !matches.isEmpty
+            let validator = ConnectivityResponseRegExValidator(regEx: expected)
+            return validator.isResponseValid(url: url, response: response, data: data)
         }
     }
 }

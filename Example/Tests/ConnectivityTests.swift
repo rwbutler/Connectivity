@@ -3,7 +3,7 @@ import XCTest
 import OHHTTPStubs
 @testable import Connectivity
 
-class Tests: XCTestCase {
+class ConnectivityTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
