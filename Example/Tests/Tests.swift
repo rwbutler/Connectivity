@@ -14,11 +14,15 @@ class Tests: XCTestCase {
         OHHTTPStubs.removeAllStubs()
     }
     
-    func testSuccessfulConnectivityCheckUsingSysConfig() {
-        stub(condition: isHost("www.apple.com")) { _ in
-            let stubPath = OHPathForFile("success-response.html", type(of: self))
+    private func stubHost(_ host: String, withHTMLFrom fileName: String) {
+        stub(condition: isHost(host)) { _ in
+            let stubPath = OHPathForFile(fileName, type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type": "text/html"])
         }
+    }
+    
+    func testSuccessfulConnectivityCheckUsingSysConfig() {
+        stubHost("www.apple.com", withHTMLFrom: "success-response.html")
         let expectation = XCTestExpectation(description: "Connectivity check succeeds")
         let connectivity = Connectivity()
         connectivity.framework = .systemConfiguration
@@ -34,10 +38,7 @@ class Tests: XCTestCase {
     }
     
     func testSuccessfulConnectivityCheckUsingNetwork() {
-        stub(condition: isHost("www.apple.com")) { _ in
-            let stubPath = OHPathForFile("success-response.html", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "text/html"])
-        }
+        stubHost("www.apple.com", withHTMLFrom: "success-response.html")
         let expectation = XCTestExpectation(description: "Connectivity check succeeds")
         let connectivity = Connectivity()
         connectivity.framework = .systemConfiguration
@@ -53,10 +54,7 @@ class Tests: XCTestCase {
     }
     
     func testFailedConnectivityCheckUsingSysConfig() {
-        stub(condition: isHost("www.apple.com")) { _ in
-            let stubPath = OHPathForFile("failure-response.html", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "text/html"])
-        }
+        stubHost("www.apple.com", withHTMLFrom: "failure-response.html")
         let expectation = XCTestExpectation(description: "Connectivity checks fails")
         let connectivity = Connectivity()
         connectivity.framework = .network
@@ -72,10 +70,7 @@ class Tests: XCTestCase {
     }
     
     func testFailedConnectivityCheckUsingNetwork() {
-        stub(condition: isHost("www.apple.com")) { _ in
-            let stubPath = OHPathForFile("failure-response.html", type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "text/html"])
-        }
+        stubHost("www.apple.com", withHTMLFrom: "failure-response.html")
         let expectation = XCTestExpectation(description: "Connectivity checks fails")
         let connectivity = Connectivity()
         connectivity.framework = .network
@@ -167,7 +162,7 @@ class Tests: XCTestCase {
 }
 
 fileprivate extension XCTestCase {
-    // Test helper for ConnectivityResponseStringTestValidator
+    // Test helper for ConnectivityResponseStringValidator
     func checkValidation(
         string: String,
         matchedBy matchStr: String,
