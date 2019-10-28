@@ -54,10 +54,18 @@ public class Connectivity: NSObject {
     public private(set) var currentInterface: Interface = .other
     
     /// Regex expected to match connectivity URL response
-    public var expectedResponseRegEx = ".*?<BODY>.*?Success.*?</BODY>.*"
+    public var expectedResponseRegEx = ".*?<BODY>.*?Success.*?</BODY>.*" {
+        didSet {
+            updateValidator(for: validationMode)
+        }
+    }
     
     /// Response expected from connectivity URLs
-    public var expectedResponseString = "Success"
+    public var expectedResponseString = "Success" {
+        didSet {
+            updateValidator(for: validationMode)
+        }
+    }
     
     /// Whether or not to use System Configuration or Network (on iOS 12+) framework.
     public var framework: Connectivity.Framework = .systemConfiguration
@@ -109,8 +117,19 @@ public class Connectivity: NSObject {
     /// Reachability instance for checking network adapter status
     private let reachability: Reachability
     
-    /// A custom validator conforming to `ConnectivityResponseValidator`
-    public var responseValidator: ConnectivityResponseValidator?
+    /// Can be used to set a custom validator conforming to `ConnectivityResponseValidator`
+    public var responseValidator: ConnectivityResponseValidator =
+        ConnectivityResponseContainsStringValidator()
+    
+    /// Returns the appropriate validator for the current validation mode.
+    private var responseValidatorFactory: ResponseValidatorFactory {
+        return ResponseValidatorFactory(
+            validationMode: validationMode,
+            expectedResponse: expectedResponseString,
+            regEx: expectedResponseRegEx,
+            customValidator: responseValidator
+        )
+    }
     
     /// Status of the current connection
     public var status: ConnectivityStatus = .determining
@@ -128,7 +147,11 @@ public class Connectivity: NSObject {
     }()
     
     /// Method used to determine whether response content is valid
-    public var validationMode: ValidationMode = .containsExpectedResponseString
+    public var validationMode: ValidationMode = .containsExpectedResponseString {
+        didSet {
+            updateValidator(for: validationMode)
+        }
+    }
     
     /// Callback to invoke when connected
     public var whenConnected: NetworkConnected?
@@ -186,7 +209,7 @@ public extension Connectivity {
                     for: url,
                     response: response,
                     data: data
-                ) ?? false
+                    ) ?? false
                 connectivityCheckSuccess ? (successfulChecks += 1) : (failedChecks += 1)
                 dispatchGroup.leave()
                 // Abort early if enough tasks have completed successfully
@@ -310,29 +333,7 @@ private extension Connectivity {
     
     /// Determines whether or not the connectivity check was successful.
     private func connectivityCheckSucceeded(for url: URL, response: URLResponse?, data: Data?) -> Bool {
-        let validator: ConnectivityResponseValidator
-        switch validationMode {
-        case .containsExpectedResponseString:
-            validator = ConnectivityResponseStringValidator(
-                validationMode: .containsExpectedResponseString,
-                expected: expectedResponseString
-            )
-        case .matchesRegularExpression:
-            validator = ConnectivityResponseStringValidator(
-                validationMode: .matchesRegularExpression,
-                expected: expectedResponseRegEx
-            )
-        case .equalsExpectedResponseString:
-            validator = ConnectivityResponseStringValidator(
-                validationMode: .equalsExpectedResponseString,
-                expected: expectedResponseString
-            )
-        case .custom:
-            guard let responseValidator = responseValidator else {
-                fatalError("responseValidator is nil; please set responseValidator")
-            }
-            validator = responseValidator
-        }
+        let validator = responseValidatorFactory.manufacture()
         return validator.isResponseValid(url: url, response: response, data: data)
     }
     
@@ -560,6 +561,12 @@ private extension Connectivity {
             let networkStatus = reachability.currentReachabilityStatus()
             updateStatus(from: networkStatus, isConnected: isConnected)
         }
+    }
+    
+    /// Updates the validator when the validation mode changes.
+    func updateValidator(for validationMode: ValidationMode) {
+        let validator = responseValidatorFactory.manufacture()
+        self.responseValidator = validator
     }
     
     /// Returns URLSession configured with the urlSessionConfiguration property.

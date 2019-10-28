@@ -8,7 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0C78BF11377F17C8F5B8CD7604269361 /* OHHTTPStubsMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D89F1A458C0B429647995B45C2160D7 /* OHHTTPStubsMethodSwizzling.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		13861A2E236073CB005512BE /* ConnectivityResponseRegExValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13861A2D236073CB005512BE /* ConnectivityResponseRegExValidator.swift */; };
+		1302B55223674E76002E4C58 /* ConnectivityResponseValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B54823674E76002E4C58 /* ConnectivityResponseValidator.swift */; };
+		1302B55323674E76002E4C58 /* ConnectivityResponseValidationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B54923674E76002E4C58 /* ConnectivityResponseValidationMode.swift */; };
+		1302B55423674E76002E4C58 /* ConnectivityResponseStringEqualityValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B54B23674E76002E4C58 /* ConnectivityResponseStringEqualityValidator.swift */; };
+		1302B55523674E76002E4C58 /* ConnectivityResponseStringValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B54C23674E76002E4C58 /* ConnectivityResponseStringValidator.swift */; };
+		1302B55623674E76002E4C58 /* ConnectivityResponseContainsStringValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B54D23674E76002E4C58 /* ConnectivityResponseContainsStringValidator.swift */; };
+		1302B55723674E76002E4C58 /* ConnectivityResponseRegExValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B54E23674E76002E4C58 /* ConnectivityResponseRegExValidator.swift */; };
+		1302B55823674E76002E4C58 /* ResponseValidatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B55023674E76002E4C58 /* ResponseValidatorFactory.swift */; };
+		1302B55923674E76002E4C58 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B55123674E76002E4C58 /* Factory.swift */; };
 		165F2A6DF189151CDBCA366DD275ABEA /* OHHTTPStubs-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EF024EE220EAFFBE7E70C8D163A3637F /* OHHTTPStubs-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		25FD8D81F56B99631EB2B121645CFB74 /* ConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075E049FDB4C0940A8D3CCB0FA0B4D2 /* ConnectivityStatus.swift */; };
 		276071E9DBAAA08BBBD569288E026156 /* OHHTTPStubsResponse+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CFB4D92631D85ACADF68FC8B94FD41A /* OHHTTPStubsResponse+JSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,7 +31,6 @@
 		76DA6F7A2B04F52F9330382B8010FFD6 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 9606F8CA5D7D89E9D28CC31D0E243D48 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F7C4C9A4BE3A22087F992806F1C90E0 /* OHHTTPStubs-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0600033FC719AB9F0294B500B275B996 /* OHHTTPStubs-dummy.m */; };
 		81D983B9013D8525DC5858313298D992 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7233CD6705299AFF20F363E7E3F861F /* Foundation.framework */; };
-		8291D26A0822F2BD1BE70D01FDCD00DF /* ConnectivityResponseStringValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBE8B85E9ADEB605CE6F26709174B3B /* ConnectivityResponseStringValidator.swift */; };
 		94DB5C9CB6ECE9A8436D169433F2F3CB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0C5FC16032F0891A23D059829FA15D /* SystemConfiguration.framework */; };
 		9BB78DC33523C76095B1D95D5CEF44CA /* OHHTTPStubs.h in Headers */ = {isa = PBXBuildFile; fileRef = 10A58D31BA5F39B4EBE7287A5A813A48 /* OHHTTPStubs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A084AB95CE9F51EEEF82A1A1E9B5E741 /* ConnectivityFramework.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF98CA967942E202F689F0ECDDFD7E07 /* ConnectivityFramework.swift */; };
@@ -34,12 +40,10 @@
 		BCC838993C29682C5BAEBAEEE8374714 /* OHHTTPStubsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBA49C9EB994652962C52CF541B481D /* OHHTTPStubsSwift.swift */; };
 		C60C3ED1EDC2A1F16FFBE40563712276 /* NSURLRequest+HTTPBodyTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = E9B645FACD7143838F46FFE7ACE0EB6A /* NSURLRequest+HTTPBodyTesting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C68DA62AB00392DBC0FE73A503371298 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7233CD6705299AFF20F363E7E3F861F /* Foundation.framework */; };
-		C9AF45E79D9D09A39A987C22B8ED9A34 /* ConnectivityResponseValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77017271F2AE9397A2BA0FF54541A20E /* ConnectivityResponseValidator.swift */; };
 		CA27256DC58202C86D5DE65F56FB4F19 /* OHPathHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = AACAADF976CCE79003B5688C06B0AB1B /* OHPathHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB246FB5354EC44BBBFA0F52D6487874 /* Connectivity-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F63956157277EA3A0C93940B2A2B7619 /* Connectivity-dummy.m */; };
 		CE99E140575AAB866D7653F69E38F0A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7233CD6705299AFF20F363E7E3F861F /* Foundation.framework */; };
 		CFC5C195999DC98F40E50580D9424968 /* Pods-Connectivity_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E39EA006D56DF586457DA6F89E319D /* Pods-Connectivity_Example-dummy.m */; };
-		D36DB3E05FCCA4A99E0BE0351CE3AD80 /* ConnectivityResponseValidationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E211114BE6BD72A0922C0B6F233D1EFF /* ConnectivityResponseValidationMode.swift */; };
 		E38D9406165E9D17852A941C4189914F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7233CD6705299AFF20F363E7E3F861F /* Foundation.framework */; };
 		E6FB3E5C9B3B8C3FC24616F2D0CC0184 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12C25A06F5A4ADA771FE575328AA67C0 /* CFNetwork.framework */; };
 		EDEF5A29FC23E122EDF168E3160D630B /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478E6DB5ADB44CF07C0673E5EC86D331 /* Connectivity.swift */; };
@@ -82,7 +86,14 @@
 		0FBA49C9EB994652962C52CF541B481D /* OHHTTPStubsSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OHHTTPStubsSwift.swift; path = OHHTTPStubs/Sources/Swift/OHHTTPStubsSwift.swift; sourceTree = "<group>"; };
 		10A58D31BA5F39B4EBE7287A5A813A48 /* OHHTTPStubs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubs.h; path = OHHTTPStubs/Sources/OHHTTPStubs.h; sourceTree = "<group>"; };
 		12C25A06F5A4ADA771FE575328AA67C0 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
-		13861A2D236073CB005512BE /* ConnectivityResponseRegExValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseRegExValidator.swift; sourceTree = "<group>"; };
+		1302B54823674E76002E4C58 /* ConnectivityResponseValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseValidator.swift; sourceTree = "<group>"; };
+		1302B54923674E76002E4C58 /* ConnectivityResponseValidationMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseValidationMode.swift; sourceTree = "<group>"; };
+		1302B54B23674E76002E4C58 /* ConnectivityResponseStringEqualityValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseStringEqualityValidator.swift; sourceTree = "<group>"; };
+		1302B54C23674E76002E4C58 /* ConnectivityResponseStringValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseStringValidator.swift; sourceTree = "<group>"; };
+		1302B54D23674E76002E4C58 /* ConnectivityResponseContainsStringValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseContainsStringValidator.swift; sourceTree = "<group>"; };
+		1302B54E23674E76002E4C58 /* ConnectivityResponseRegExValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseRegExValidator.swift; sourceTree = "<group>"; };
+		1302B55023674E76002E4C58 /* ResponseValidatorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseValidatorFactory.swift; sourceTree = "<group>"; };
+		1302B55123674E76002E4C58 /* Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		17E33041B314FA837A3CAEB9DF3CDE9F /* OHHTTPStubs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABDCA5C2D3B03B7FAE8F17B49C77BF2 /* Pods-Connectivity_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Connectivity_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		1EB8054A0025C92380DA80B0709A0F17 /* OHHTTPStubsResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubsResponse.m; path = OHHTTPStubs/Sources/OHHTTPStubsResponse.m; sourceTree = "<group>"; };
@@ -96,7 +107,6 @@
 		35EAE58ADD70373DF69830191A349F12 /* NotificationNameAdditions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationNameAdditions.swift; sourceTree = "<group>"; };
 		364291900F34DD780E8E34B85B047D93 /* Pods-Connectivity_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Connectivity_Example-Info.plist"; sourceTree = "<group>"; };
 		3C444139CC8C2181A43303372D24F719 /* connectivity-banner.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "connectivity-banner.png"; path = "docs/images/connectivity-banner.png"; sourceTree = "<group>"; };
-		3EBE8B85E9ADEB605CE6F26709174B3B /* ConnectivityResponseStringValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseStringValidator.swift; sourceTree = "<group>"; };
 		4078A59FEA5E76B63A5C54036C3C2044 /* Pods-Connectivity_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Connectivity_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		4334BBC50FDB12D0DB538E4CFE38065A /* NSURLRequest+HTTPBodyTesting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSURLRequest+HTTPBodyTesting.m"; path = "OHHTTPStubs/Sources/NSURLSession/NSURLRequest+HTTPBodyTesting.m"; sourceTree = "<group>"; };
 		478E6DB5ADB44CF07C0673E5EC86D331 /* Connectivity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Connectivity.swift; path = Connectivity/Classes/Connectivity.swift; sourceTree = "<group>"; };
@@ -110,7 +120,6 @@
 		72E39EA006D56DF586457DA6F89E319D /* Pods-Connectivity_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Connectivity_Example-dummy.m"; sourceTree = "<group>"; };
 		735BB212BDB13D53C80E8BC4EFF2AAC9 /* connectivity-logo.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "connectivity-logo.png"; path = "docs/images/connectivity-logo.png"; sourceTree = "<group>"; };
 		7645369FED77C9F0F3F77ACBD533CE87 /* Connectivity-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Connectivity-prefix.pch"; sourceTree = "<group>"; };
-		77017271F2AE9397A2BA0FF54541A20E /* ConnectivityResponseValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseValidator.swift; sourceTree = "<group>"; };
 		797D71FC1E889AFF33C194F29A8C07CB /* OHHTTPStubs.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = OHHTTPStubs.modulemap; sourceTree = "<group>"; };
 		7A081EC048C2893D1B9F8A6EC627A812 /* Pods-Connectivity_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Connectivity_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		7B954C6481BA63A6FEB5BBC4D08C6B06 /* package-options.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "package-options.png"; path = "docs/images/package-options.png"; sourceTree = "<group>"; };
@@ -139,7 +148,6 @@
 		CFBC3D8F6510FCA40731C31E8E7D2506 /* Pods-Connectivity_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Connectivity_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D6AC5BD56820DA1DE93DA25BF743E5DE /* OHHTTPStubs-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs-prefix.pch"; sourceTree = "<group>"; };
 		E1C5BCAE293385B3163FC433360533D0 /* OHPathHelpers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHPathHelpers.m; path = OHHTTPStubs/Sources/OHPathHelpers/OHPathHelpers.m; sourceTree = "<group>"; };
-		E211114BE6BD72A0922C0B6F233D1EFF /* ConnectivityResponseValidationMode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseValidationMode.swift; sourceTree = "<group>"; };
 		E4E6E01F42ECF7AEE8D4B0A8B02FFCE3 /* Pods-Connectivity_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Connectivity_Tests-dummy.m"; sourceTree = "<group>"; };
 		E52FFE691C398597A5525D6BD5AC470D /* OHHTTPStubs+NSURLSessionConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubs+NSURLSessionConfiguration.m"; path = "OHHTTPStubs/Sources/NSURLSession/OHHTTPStubs+NSURLSessionConfiguration.m"; sourceTree = "<group>"; };
 		E7233CD6705299AFF20F363E7E3F861F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -219,15 +227,36 @@
 			name = OHPathHelpers;
 			sourceTree = "<group>";
 		};
-		13861A2C23607353005512BE /* Response Validation */ = {
+		1302B54723674E76002E4C58 /* Response Validation */ = {
 			isa = PBXGroup;
 			children = (
-				13861A2D236073CB005512BE /* ConnectivityResponseRegExValidator.swift */,
-				3EBE8B85E9ADEB605CE6F26709174B3B /* ConnectivityResponseStringValidator.swift */,
-				E211114BE6BD72A0922C0B6F233D1EFF /* ConnectivityResponseValidationMode.swift */,
-				77017271F2AE9397A2BA0FF54541A20E /* ConnectivityResponseValidator.swift */,
+				1302B54823674E76002E4C58 /* ConnectivityResponseValidator.swift */,
+				1302B54923674E76002E4C58 /* ConnectivityResponseValidationMode.swift */,
+				1302B54A23674E76002E4C58 /* Validators */,
+				1302B54F23674E76002E4C58 /* Factory */,
 			);
-			path = "Response Validation";
+			name = "Response Validation";
+			path = "Connectivity/Classes/Response Validation";
+			sourceTree = "<group>";
+		};
+		1302B54A23674E76002E4C58 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				1302B54B23674E76002E4C58 /* ConnectivityResponseStringEqualityValidator.swift */,
+				1302B54C23674E76002E4C58 /* ConnectivityResponseStringValidator.swift */,
+				1302B54D23674E76002E4C58 /* ConnectivityResponseContainsStringValidator.swift */,
+				1302B54E23674E76002E4C58 /* ConnectivityResponseRegExValidator.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
+		1302B54F23674E76002E4C58 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				1302B55023674E76002E4C58 /* ResponseValidatorFactory.swift */,
+				1302B55123674E76002E4C58 /* Factory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		157C280336B7C95274B475E690B78D73 /* Support Files */ = {
@@ -272,6 +301,7 @@
 				8034DB07A68F753B102ABC7A93E7E054 /* Model */,
 				9B7AA9298B2FD412415568A3B58252A6 /* Pod */,
 				835FE89475D6C64AE0212EF52FAE2E1B /* Reachability */,
+				1302B54723674E76002E4C58 /* Response Validation */,
 				FC7DD99A5C349E099434E03C259BC42A /* Support Files */,
 			);
 			name = Connectivity;
@@ -318,7 +348,6 @@
 		8034DB07A68F753B102ABC7A93E7E054 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				13861A2C23607353005512BE /* Response Validation */,
 				EF98CA967942E202F689F0ECDDFD7E07 /* ConnectivityFramework.swift */,
 				7FFDEE0452F7BF3CEF57FEA5EA68CD0D /* ConnectivityInterface.swift */,
 				3173DF8296BA6BA229A9EE2D00C6237F /* ConnectivityPercentage.swift */,
@@ -640,16 +669,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1302B55923674E76002E4C58 /* Factory.swift in Sources */,
 				CB246FB5354EC44BBBFA0F52D6487874 /* Connectivity-dummy.m in Sources */,
 				EDEF5A29FC23E122EDF168E3160D630B /* Connectivity.swift in Sources */,
 				A084AB95CE9F51EEEF82A1A1E9B5E741 /* ConnectivityFramework.swift in Sources */,
+				1302B55823674E76002E4C58 /* ResponseValidatorFactory.swift in Sources */,
+				1302B55523674E76002E4C58 /* ConnectivityResponseStringValidator.swift in Sources */,
+				1302B55423674E76002E4C58 /* ConnectivityResponseStringEqualityValidator.swift in Sources */,
 				6AAB0517082457B2FC994672379E5EEC /* ConnectivityInterface.swift in Sources */,
+				1302B55723674E76002E4C58 /* ConnectivityResponseRegExValidator.swift in Sources */,
+				1302B55623674E76002E4C58 /* ConnectivityResponseContainsStringValidator.swift in Sources */,
 				60AC3C3598BD1305AB36C62FF6840217 /* ConnectivityPercentage.swift in Sources */,
-				8291D26A0822F2BD1BE70D01FDCD00DF /* ConnectivityResponseStringValidator.swift in Sources */,
-				13861A2E236073CB005512BE /* ConnectivityResponseRegExValidator.swift in Sources */,
-				D36DB3E05FCCA4A99E0BE0351CE3AD80 /* ConnectivityResponseValidationMode.swift in Sources */,
-				C9AF45E79D9D09A39A987C22B8ED9A34 /* ConnectivityResponseValidator.swift in Sources */,
 				25FD8D81F56B99631EB2B121645CFB74 /* ConnectivityStatus.swift in Sources */,
+				1302B55223674E76002E4C58 /* ConnectivityResponseValidator.swift in Sources */,
+				1302B55323674E76002E4C58 /* ConnectivityResponseValidationMode.swift in Sources */,
 				5DF7AF2B351254DDDB02A79D59682EC5 /* NotificationNameAdditions.swift in Sources */,
 				FB42AB021E15E59D8AB72121C2448D88 /* Reachability.m in Sources */,
 			);

@@ -6,3 +6,9 @@ opt_in_rules:
 excluded:
   - Example/Pods/OHHTTPStubs
 reporter: "xcode"
+type_name:
+    excluded:
+        - T
+    max_length:
+        warning: 45
+        error: 50

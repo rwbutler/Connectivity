@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import Connectivity
 
-class ConnectivityResponseRegExValidatorTests: XCTestCase {
+class RegularExpressionResponseValidatorTests: XCTestCase {
     
     func testRegexStringValidation() {
         checkValid(string: "test1234", matchedBy: "test[0-9]+", expectedResult: true)

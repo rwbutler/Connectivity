@@ -173,7 +173,7 @@ fileprivate extension XCTestCase {
     ) {
         let validator = ConnectivityResponseStringValidator(
             validationMode: mode,
-            expected: matchStr
+            expectedResponse: matchStr
         )
         let result = validator.isResponseValid(
             url: URL(string: "https://example.com")!,

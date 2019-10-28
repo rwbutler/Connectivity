@@ -7,7 +7,10 @@
 
 import Foundation
 
+@objcMembers
 public class ConnectivityResponseRegExValidator: ConnectivityResponseValidator {
+    
+    public static let defaultRegularExpression = ".*?<BODY>.*?Success.*?</BODY>.*"
     
     /// Matching options for determining how the response is matched against the regular expression.
     private let options: NSRegularExpression.Options
@@ -21,7 +24,8 @@ public class ConnectivityResponseRegExValidator: ConnectivityResponseValidator {
     ///     matching the provided regular expression.
     ///     - regEx: Regular expression used to validate the response. If the response
     ///     `String` matches the regular expression then the response is deemed to be valid.
-    public init(regEx: String, options: NSRegularExpression.Options? = nil) {
+    public init(regEx: String = ConnectivityResponseRegExValidator.defaultRegularExpression,
+                options: NSRegularExpression.Options? = nil) {
         self.options = options ?? [.caseInsensitive, .allowCommentsAndWhitespace, .dotMatchesLineSeparators]
         self.regularExpression = regEx
     }

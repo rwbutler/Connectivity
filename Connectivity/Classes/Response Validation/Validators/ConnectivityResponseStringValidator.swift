@@ -14,6 +14,7 @@ public enum ConnectivityResponseStringValidationMode: Int {
     matchesRegularExpression
 }
 
+@objcMembers
 public class ConnectivityResponseStringValidator: ConnectivityResponseValidator {
 
     public typealias ValidationMode = ConnectivityResponseStringValidationMode
@@ -22,32 +23,33 @@ public class ConnectivityResponseStringValidator: ConnectivityResponseValidator 
     public let responseValidationMode: ValidationMode
 
     /// The `String` expected in the response, which is tested based on the validationMode
-    public let expected: String
+    public let expectedResponse: String
 
     /// Initializes the receiver to validate response `String`s
     /// using the given validation mode
     ///
-    /// - Parameter validationMode: The mode to use for validating the
-    ///                             response `String`
-    /// - Parameter expected: The `String` expected in the response, which is
-    ///                       tested based on the validationMode
-    public init(validationMode: ValidationMode, expected: String) {
+    /// - Parameter validationMode:   The mode to use for validating the response `String`.
+    /// - Parameter expectedResponse: The `String` expected in the response, which is
+    ///                               tested based on the validationMode
+    public init(validationMode: ValidationMode, expectedResponse: String) {
         self.responseValidationMode = validationMode
-        self.expected = expected
+        self.expectedResponse = expectedResponse
     }
 
     public func isResponseValid(url: URL, response: URLResponse?, data: Data?) -> Bool {
-        guard let data = data, let responseString = String(data: data, encoding: .utf8) else {
-            return false
-        }
+        let validator: ConnectivityResponseValidator
         switch responseValidationMode {
         case .containsExpectedResponseString:
-            return responseString.contains(expected)
+            validator = ConnectivityResponseContainsStringValidator(
+                expectedResponse: expectedResponse
+            )
         case .equalsExpectedResponseString:
-            return expected == responseString
+            validator = ConnectivityResponseStringEqualityValidator(
+                expectedResponse: expectedResponse
+            )
         case .matchesRegularExpression:
-            let validator = ConnectivityResponseRegExValidator(regEx: expected)
-            return validator.isResponseValid(url: url, response: response, data: data)
+            validator = ConnectivityResponseRegExValidator(regEx: expectedResponse)
         }
+        return validator.isResponseValid(url: url, response: response, data: data)
     }
 }
