@@ -24,6 +24,6 @@ public class ConnectivityResponseStringEqualityValidator: ConnectivityResponseVa
         guard let data = data, let responseString = String(data: data, encoding: .utf8) else {
             return false
         }
-        return expectedResponse == responseString
+        return expectedResponse == responseString.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
