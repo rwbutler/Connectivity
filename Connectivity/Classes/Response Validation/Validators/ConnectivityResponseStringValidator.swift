@@ -2,7 +2,7 @@
 //  ConnectivityResponseStringValidator.swift
 //  Connectivity
 //
-//  Created by Ross Butler on 1/19/19.
+//  Created by Ross Butler on 19/01/2019.
 //
 
 import Foundation
