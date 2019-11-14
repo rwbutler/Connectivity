@@ -14,6 +14,7 @@
 		1302B56623676ED0002E4C58 /* string-equality-response.html in Resources */ = {isa = PBXBuildFile; fileRef = 1302B56423676EAF002E4C58 /* string-equality-response.html */; };
 		135760F321283C8600AB6301 /* UIColorAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135760F221283C8600AB6301 /* UIColorAdditions.swift */; };
 		13861A4A2361CBE0005512BE /* RegularExpressionResponseValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13861A482361CBD9005512BE /* RegularExpressionResponseValidatorTests.swift */; };
+		13E5FE86237DB5CF004979A6 /* ObjCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E5FE85237DB5CF004979A6 /* ObjCViewController.m */; };
 		13EF54F223637BBF00E467DF /* ResponseValidatorFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF54F123637BBF00E467DF /* ResponseValidatorFactoryTests.swift */; };
 		13F603C12359D2A30012F230 /* success-response.html in Resources */ = {isa = PBXBuildFile; fileRef = 13F603BF2359D2880012F230 /* success-response.html */; };
 		13F603C32359ED000012F230 /* failure-response.html in Resources */ = {isa = PBXBuildFile; fileRef = 13F603C22359ED000012F230 /* failure-response.html */; };
@@ -44,6 +45,9 @@
 		1302B56423676EAF002E4C58 /* string-equality-response.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "string-equality-response.html"; sourceTree = "<group>"; };
 		135760F221283C8600AB6301 /* UIColorAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorAdditions.swift; sourceTree = "<group>"; };
 		13861A482361CBD9005512BE /* RegularExpressionResponseValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionResponseValidatorTests.swift; sourceTree = "<group>"; };
+		13E5FE83237DB5CE004979A6 /* Connectivity_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Connectivity_Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		13E5FE84237DB5CF004979A6 /* ObjCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCViewController.h; sourceTree = "<group>"; };
+		13E5FE85237DB5CF004979A6 /* ObjCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCViewController.m; sourceTree = "<group>"; };
 		13EF54F123637BBF00E467DF /* ResponseValidatorFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseValidatorFactoryTests.swift; sourceTree = "<group>"; };
 		13F603BF2359D2880012F230 /* success-response.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "success-response.html"; sourceTree = "<group>"; };
 		13F603C22359ED000012F230 /* failure-response.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "failure-response.html"; sourceTree = "<group>"; };
@@ -140,6 +144,9 @@
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				135760F221283C8600AB6301 /* UIColorAdditions.swift */,
+				13E5FE84237DB5CF004979A6 /* ObjCViewController.h */,
+				13E5FE85237DB5CF004979A6 /* ObjCViewController.m */,
+				13E5FE83237DB5CE004979A6 /* Connectivity_Example-Bridging-Header.h */,
 			);
 			name = "Example for Connectivity";
 			path = Connectivity;
@@ -249,7 +256,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 1020;
+						LastSwiftMigration = 1110;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -398,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13E5FE86237DB5CF004979A6 /* ObjCViewController.m in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				135760F321283C8600AB6301 /* UIColorAdditions.swift in Sources */,
@@ -555,12 +563,15 @@
 			baseConfigurationReference = 7834EB795119690B628EF770 /* Pods-Connectivity_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Connectivity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rwbutler.demo.Connectivity-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Connectivity/Connectivity_Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -570,12 +581,14 @@
 			baseConfigurationReference = 59AC20C4169D5C969777DC33 /* Pods-Connectivity_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Connectivity/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rwbutler.demo.Connectivity-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Connectivity/Connectivity_Example-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
