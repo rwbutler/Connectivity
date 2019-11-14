@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ConnectivityStatus: CustomStringConvertible {
+@objc public enum ConnectivityStatus: Int, CustomStringConvertible {
     case connected, // where a connection is present but the interface cannot be determined.
     connectedViaCellular,
     connectedViaCellularWithoutInternet,
