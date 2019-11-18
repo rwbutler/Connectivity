@@ -340,20 +340,19 @@ private extension Connectivity {
     /// Set of connectivity URLs used by default if none are otherwise specified.
     static func defaultConnectivityURLs(shouldUseHTTPS: Bool) -> [URL] {
         var result: [URL] = []
-        let connectivityDomains: [String] = (shouldUseHTTPS)
-            ? [ "www.apple.com" ] // Replace with custom URLs
-            : [ "www.apple.com",
-                "apple.com",
-                "www.appleiphonecell.com",
-                "www.itools.info",
-                "www.ibook.info",
-                "www.airport.us",
-                "www.thinkdifferent.us"
-        ]
-        let connectivityPath = "/library/test/success.html"
-        let httpProtocol = (isHTTPSOnly) ? "https" : "http"
-        for domain in connectivityDomains {
-            if let connectivityURL = URL(string: "\(httpProtocol)://\(domain)\(connectivityPath)") {
+        let connectivityURLs: [String] = (shouldUseHTTPS)
+            ? [ "https://www.apple.com/library/test/success.html",
+                "https://captive.apple.com/hotspot-detect.html" ] // Replace with custom URLs
+            : [ "http://www.apple.com/library/test/success.html",
+                "http://apple.com/library/test/success.html",
+                "http://www.appleiphonecell.com/library/test/success.html",
+                "http://www.itools.info/library/test/success.html",
+                "http://www.ibook.info/library/test/success.html",
+                "http://www.airport.us/library/test/success.html",
+                "http://www.thinkdifferent.us/library/test/success.html",
+                "http://captive.apple.com/hotspot-detect.html" ]
+        for connectivityURLStr in connectivityURLs {
+            if let connectivityURL = URL(string: connectivityURLStr) {
                 result.append(connectivityURL)
             }
         }
