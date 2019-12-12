@@ -10,13 +10,12 @@ import Foundation
 @objc
 public enum ConnectivityResponseStringValidationMode: Int {
     case containsExpectedResponseString,
-    equalsExpectedResponseString,
-    matchesRegularExpression
+        equalsExpectedResponseString,
+        matchesRegularExpression
 }
 
 @objcMembers
 public class ConnectivityResponseStringValidator: ConnectivityResponseValidator {
-
     public typealias ValidationMode = ConnectivityResponseStringValidationMode
 
     /// The method used to validate the response from the connectivity endpoints.

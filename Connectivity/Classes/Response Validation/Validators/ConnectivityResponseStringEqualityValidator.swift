@@ -9,7 +9,6 @@ import Foundation
 
 @objcMembers
 public class ConnectivityResponseStringEqualityValidator: ConnectivityResponseValidator {
-
     /// The `String` expected as the response
     public let expectedResponse: String
 
@@ -20,7 +19,7 @@ public class ConnectivityResponseStringEqualityValidator: ConnectivityResponseVa
         self.expectedResponse = expectedResponse
     }
 
-    public func isResponseValid(url: URL, response: URLResponse?, data: Data?) -> Bool {
+    public func isResponseValid(url _: URL, response _: URLResponse?, data: Data?) -> Bool {
         guard let data = data, let responseString = String(data: data, encoding: .utf8) else {
             return false
         }

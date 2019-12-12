@@ -6,12 +6,11 @@
 //  Copyright © 2019 CocoaPods. All rights reserved.
 //
 
+@testable import Connectivity
 import Foundation
 import XCTest
-@testable import Connectivity
 
 class ResponseValidatorFactoryTests: XCTestCase {
-
     /// Test correct validator is returned for validation mode `.equalsExpectedResponseString`.
     func testEqualsExpectedResponseString() {
         let responseValidator = ConnectivityResponseContainsStringValidator()
@@ -24,7 +23,7 @@ class ResponseValidatorFactoryTests: XCTestCase {
         let validator = factory.manufacture()
         XCTAssert(validator is ConnectivityResponseStringEqualityValidator)
     }
-    
+
     /// Test correct validator is returned for validation mode `.containsExpectedResponseString`.
     func testContainsExpectedResponseString() {
         let responseValidator = ConnectivityResponseContainsStringValidator()
@@ -37,7 +36,7 @@ class ResponseValidatorFactoryTests: XCTestCase {
         let validator = factory.manufacture()
         XCTAssert(validator is ConnectivityResponseContainsStringValidator)
     }
-    
+
     /// Test correct validator is returned for validation mode `.matchesRegularExpression`.
     func testMatchesRegularExpression() {
         let responseValidator = ConnectivityResponseContainsStringValidator()
@@ -50,7 +49,7 @@ class ResponseValidatorFactoryTests: XCTestCase {
         let validator = factory.manufacture()
         XCTAssert(validator is ConnectivityResponseRegExValidator)
     }
-    
+
     /// Test correct validator is returned for validation mode `.custom`.
     func testCustomValidatorReturnedForCustomValidationMode() {
         let responseValidator = ConnectivityResponseRegExValidator()
@@ -63,5 +62,4 @@ class ResponseValidatorFactoryTests: XCTestCase {
         let validator = factory.manufacture()
         XCTAssert(validator === responseValidator)
     }
-    
 }

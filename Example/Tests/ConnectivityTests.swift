@@ -1,26 +1,25 @@
+@testable import Connectivity
+import OHHTTPStubs
 import UIKit
 import XCTest
-import OHHTTPStubs
-@testable import Connectivity
 
 class ConnectivityTests: XCTestCase {
-    
     override func setUp() {
         super.setUp()
     }
-    
+
     override func tearDown() {
         super.tearDown()
         OHHTTPStubs.removeAllStubs()
     }
-    
+
     private func stubHost(_ host: String, withHTMLFrom fileName: String) {
         stub(condition: isHost(host)) { _ in
             let stubPath = OHPathForFile(fileName, type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type": "text/html"])
         }
     }
-    
+
     func testSuccessfulConnectivityCheckUsingSysConfig() {
         stubHost("www.apple.com", withHTMLFrom: "success-response.html")
         let expectation = XCTestExpectation(description: "Connectivity check succeeds")
@@ -36,7 +35,7 @@ class ConnectivityTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         connectivity.stopNotifier()
     }
-    
+
     func testSuccessfulConnectivityCheckUsingNetwork() {
         stubHost("www.apple.com", withHTMLFrom: "success-response.html")
         let expectation = XCTestExpectation(description: "Connectivity check succeeds")
@@ -52,7 +51,7 @@ class ConnectivityTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         connectivity.stopNotifier()
     }
-    
+
     func testFailedConnectivityCheckUsingSysConfig() {
         stubHost("www.apple.com", withHTMLFrom: "failure-response.html")
         let expectation = XCTestExpectation(description: "Connectivity checks fails")
@@ -68,7 +67,7 @@ class ConnectivityTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         connectivity.stopNotifier()
     }
-    
+
     func testFailedConnectivityCheckUsingNetwork() {
         stubHost("www.apple.com", withHTMLFrom: "failure-response.html")
         let expectation = XCTestExpectation(description: "Connectivity checks fails")
@@ -131,9 +130,9 @@ class ConnectivityTests: XCTestCase {
     }
 
     func testCustomValidation() {
-        //swiftlint:disable:next nesting
+        // swiftlint:disable:next nesting
         final class Validator: ConnectivityResponseValidator {
-            func isResponseValid(url: URL, response: URLResponse?, data: Data?) -> Bool {
+            func isResponseValid(url: URL, response _: URLResponse?, data: Data?) -> Bool {
                 let str = data.flatMap { String(data: $0, encoding: .utf8) } ?? ""
                 return url.host == "example.com" &&
                     str.hasPrefix("1") &&
@@ -161,7 +160,7 @@ class ConnectivityTests: XCTestCase {
     }
 }
 
-fileprivate extension XCTestCase {
+private extension XCTestCase {
     // Test helper for ConnectivityResponseStringValidator
     func checkValidation(
         string: String,

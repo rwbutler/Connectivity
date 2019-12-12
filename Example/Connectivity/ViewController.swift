@@ -6,23 +6,27 @@
 //  Copyright (c) 2017 Ross Butler. All rights reserved.
 //
 
-import UIKit
 import Connectivity
+import UIKit
 
 class ViewController: UIViewController {
     // MARK: Dependencies
+
     fileprivate let connectivity: Connectivity = Connectivity()
 
     // MARK: Outlets
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var notifierButton: UIButton!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    @IBOutlet weak var statusLabel: UILabel!
+
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var notifierButton: UIButton!
+    @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBOutlet var statusLabel: UILabel!
 
     // MARK: Status
+
     fileprivate var isCheckingConnectivity: Bool = false
 
     // MARK: View controller life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         switch connectivity.framework {
@@ -47,7 +51,7 @@ class ViewController: UIViewController {
 
 // IB Actions
 extension ViewController {
-    @IBAction func notifierButtonTapped(_ sender: UIButton) {
+    @IBAction func notifierButtonTapped(_: UIButton) {
         isCheckingConnectivity ? stopConnectivityChecks() : startConnectivityChecks()
     }
 

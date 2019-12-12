@@ -10,7 +10,6 @@ import Foundation
 /// The contract for a response validator used to determine
 /// connectivity based on a network response
 @objc public protocol ConnectivityResponseValidator {
-
     /// Determines whether or not the response is valid
     /// and expected for a given `URL`
     ///

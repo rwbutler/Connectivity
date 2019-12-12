@@ -555,6 +555,8 @@
 				455602473CCAEE37813FD05FB90CA337 /* Sources */,
 				872ECEF718E177DD537E54C1B363A5A3 /* Frameworks */,
 				722AD45E610362804563D83F5FECA7D6 /* Resources */,
+				132AFCA923A2959300BAEAB0 /* SwiftFormat */,
+				132AFCAA23A295AC00BAEAB0 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -663,6 +665,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		132AFCA923A2959300BAEAB0 /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftformat >/dev/null; then\ncd ../..\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
+		132AFCAA23A295AC00BAEAB0 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo $(pwd)\nif which swiftlint >/dev/null; then\ncd ../..\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		455602473CCAEE37813FD05FB90CA337 /* Sources */ = {

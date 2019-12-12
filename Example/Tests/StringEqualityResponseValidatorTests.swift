@@ -6,25 +6,24 @@
 //  Copyright © 2019 Ross Butler. All rights reserved.
 //
 
-import Foundation
-import XCTest
-import OHHTTPStubs
 @testable import Connectivity
+import Foundation
+import OHHTTPStubs
+import XCTest
 
 class StringEqualityResponseValidatorTests: XCTestCase {
-    
     override func tearDown() {
         super.tearDown()
         OHHTTPStubs.removeAllStubs()
     }
-    
+
     private func stubHost(_ host: String, withHTMLFrom fileName: String) {
         stub(condition: isHost(host)) { _ in
             let stubPath = OHPathForFile(fileName, type(of: self))
             return fixture(filePath: stubPath!, headers: ["Content-Type": "text/html"])
         }
     }
-    
+
     /// Test response is valid when the response string is equal to the expected response.
     func testEqualsExpectedResponseString() {
         stubHost("www.apple.com", withHTMLFrom: "string-equality-response.html")
@@ -42,7 +41,7 @@ class StringEqualityResponseValidatorTests: XCTestCase {
         wait(for: [expectation], timeout: 2.0)
         connectivity.stopNotifier()
     }
-    
+
     /// Test response is invalid when the response string is not equal to the expected response.
     func testNotEqualsExpectedResponseString() {
         stubHost("www.apple.com", withHTMLFrom: "string-contains-response.html")
@@ -60,5 +59,4 @@ class StringEqualityResponseValidatorTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         connectivity.stopNotifier()
     }
-    
 }
