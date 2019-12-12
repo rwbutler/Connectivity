@@ -9,13 +9,13 @@ import Foundation
 
 @objc public enum ConnectivityStatus: Int, CustomStringConvertible {
     case connected, // where a connection is present but the interface cannot be determined.
-    connectedViaCellular,
-    connectedViaCellularWithoutInternet,
-    connectedViaWiFi,
-    connectedViaWiFiWithoutInternet,
-    determining,
-    notConnected
-    
+        connectedViaCellular,
+        connectedViaCellularWithoutInternet,
+        connectedViaWiFi,
+        connectedViaWiFiWithoutInternet,
+        determining,
+        notConnected
+
     public var description: String {
         switch self {
         case .connected:

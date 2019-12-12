@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: Type definitions
+
 @objc public enum ConnectivityFramework: Int {
     case network
     case systemConfiguration
