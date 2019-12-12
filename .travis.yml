@@ -3,10 +3,12 @@ osx_image: xcode11.1
 before_install:
   - gem install cocoapods -v '1.8.3'
 install:
+  - brew install swiftformat
   - ./install_swiftlint.sh
 script:
   - gem install travis
   - travis lint .travis.yml --no-interactive
+  - swiftformat .
   - swiftlint
   - xcodebuild clean build test -workspace Example/Connectivity.xcworkspace -scheme Connectivity-Example -destination "platform=iOS Simulator,name=iPhone X" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   - pod lib lint
