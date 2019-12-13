@@ -4,7 +4,7 @@ before_install:
   - gem install cocoapods -v '1.8.3'
 install:
   - brew install swiftformat
-  - ./install_swiftlint.sh
+  - brew install swiftlint
 script:
   - gem install travis
   - travis lint .travis.yml --no-interactive
