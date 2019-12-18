@@ -33,6 +33,7 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 	- [SSL](#ssl)
 	- [Threshold](#threshold)
 	- [Response Validation](#response-validation)
+- [Known Issues](#known-issues)
 - [Author](#author)
 - [License](#license)
 - [Additional Software](#additional-software)
@@ -318,6 +319,16 @@ Supplied validators include:
 - `ConnectivityResponseStringEqualityValidator`: Determines whether the response string is equal to an expected string.
 - `ConnectivityResponseContainsStringValidator`: Determines whether the response string contains an expected string.
 - `ConnectivityResponseRegExValidator`: Determines whether the response string matches a given regular expression.
+
+## Known Issues
+
+### Caller responsible for retaining the `Connectivity` object
+
+Please ensure that any implementation making use of this framework holds a strong reference to the `Connectivity` object for the duration of its use (as an instance variable or otherwise). If the object is deallocated before the callback is invoked, the result will be non-deterministic.
+
+### Simulator issues
+
+Before reporting a bug please ensure that you have tested on a physical device as on simulator changes in network adapter state are not reported correctly by iOS frameworks particularly when transitioning from a disconnected -> connected state. This behaviour functions correctly on a physical device. Setting `isPollingEnabled` and specifying an appropriate `pollingInterval` when running on simulator will resolve this issue.
 
 ## Author
 
