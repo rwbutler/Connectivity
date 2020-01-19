@@ -7,6 +7,9 @@ assignees: rwbutler
 
 ---
 
+**Have read the known issues? **
+[ ] Yes, I have read and am familiar with the list of [known issues](https://github.com/rwbutler/Connectivity#known-issues).
+
 **Have tested on a physical device? **
 [ ] Yes, I have tested on physical iOS device and the reported issue is still present.
 
