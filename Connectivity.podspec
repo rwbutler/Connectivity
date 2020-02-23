@@ -14,6 +14,7 @@ Connectivity wraps Apple's Reachability code to provide a reliable measure of wh
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'
   s.frameworks      = 'SystemConfiguration'
+  s.dependency "ReachabilitySwift"
   s.weak_frameworks = 'Network'
   s.source_files = 'Connectivity/Classes/**/*'
   s.exclude_files = [

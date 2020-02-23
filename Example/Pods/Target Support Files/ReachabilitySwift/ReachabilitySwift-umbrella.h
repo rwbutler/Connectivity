@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double ConnectivityVersionNumber;
-FOUNDATION_EXPORT const unsigned char ConnectivityVersionString[];
+FOUNDATION_EXPORT double ReachabilityVersionNumber;
+FOUNDATION_EXPORT const unsigned char ReachabilityVersionString[];
 

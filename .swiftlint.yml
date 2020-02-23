@@ -5,6 +5,7 @@ opt_in_rules:
   - empty_count
 excluded:
   - Example/Pods/OHHTTPStubs
+  - Example/Pods/ReachabilitySwift
 reporter: "xcode"
 type_name:
     excluded:

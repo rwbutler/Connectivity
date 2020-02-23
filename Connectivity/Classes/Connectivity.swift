@@ -8,9 +8,7 @@
 
 import Foundation
 import Network
-#if IMPORT_REACHABILITY
 import Reachability
-#endif
 
 @objcMembers
 public class Connectivity: NSObject {
@@ -30,14 +28,14 @@ public class Connectivity: NSObject {
     /// URLs to contact in order to check connectivity
     public var connectivityURLs: [URL] = Connectivity
         .defaultConnectivityURLs(shouldUseHTTPS: Connectivity.isHTTPSOnly) {
-            didSet {
-                if Connectivity.isHTTPSOnly { // if HTTPS only set only allow HTTPS URLs
-                    connectivityURLs = connectivityURLs.filter { url in
-                        return url.absoluteString.lowercased().starts(with: "https")
-                    }
+        didSet {
+            if Connectivity.isHTTPSOnly { // if HTTPS only set only allow HTTPS URLs
+                connectivityURLs = connectivityURLs.filter { url in
+                    return url.absoluteString.lowercased().starts(with: "https")
                 }
             }
         }
+    }
 
     /// Optionally configure a bearer token to be sent as part of an Authorization header.
     public var bearerToken: String?
@@ -162,7 +160,11 @@ public class Connectivity: NSObject {
 
     public init(shouldUseHTTPS: Bool = true) {
         type(of: self).isHTTPSOnly = shouldUseHTTPS
-        self.reachability = Reachability.forInternetConnection()
+        do {
+            self.reachability = try Reachability(hostname: "www.apple.com")
+        } catch {
+            fatalError("Could not initialise Reachability")
+        }
     }
 
     deinit {
@@ -178,19 +180,19 @@ public extension Connectivity {
     }
 
     var isConnectedViaCellular: Bool {
-        return isConnected(with: ReachableViaWWAN)
+        return isConnected(with: .cellular)
     }
 
     var isConnectedViaWiFi: Bool {
-        return isConnected(with: ReachableViaWiFi)
+        return isConnected(with: .wifi)
     }
 
     var isConnectedViaCellularWithoutInternet: Bool {
-        return isDisconnected(with: ReachableViaWWAN)
+        return isDisconnected(with: .cellular)
     }
 
     var isConnectedViaWiFiWithoutInternet: Bool {
-        return isDisconnected(with: ReachableViaWiFi)
+        return isDisconnected(with: .wifi)
     }
 
     /// Checks specified URLs for the expected response to determine whether Internet connectivity exists
@@ -275,13 +277,18 @@ public extension Connectivity {
 
     private func startReachabilityNotifier() {
         checkConnectivity()
-        reachability.startNotifier()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(reachabilityDidChange(_:)),
-            name: NSNotification.Name.ReachabilityDidChange,
-            object: nil
-        )
+        reachability.whenReachable = { _ in
+            self.reachabilityDidChange()
+        }
+        reachability.whenUnreachable = { _ in
+            self.reachabilityDidChange()
+        }
+
+        do {
+            try reachability.startNotifier()
+        } catch {
+            fatalError("Could not start Reachability's notifier")
+        }
     }
 
     /// Stop listening for Reachability changes
@@ -297,7 +304,7 @@ public extension Connectivity {
 
     @available(iOS 12.0, tvOS 12.0, *)
     private func stopPathMonitorNotifier() {
-        if isObservingInterfaceChanges, let monitor = self.pathMonitor as? NWPathMonitor {
+        if isObservingInterfaceChanges, let monitor = pathMonitor as? NWPathMonitor {
             monitor.cancel()
             pathMonitor = nil
         }
@@ -362,11 +369,11 @@ private extension Connectivity {
         return result
     }
 
-    func interface(with networkStatus: NetworkStatus) -> ConnectivityInterface {
+    func interface(with networkStatus: Reachability.Connection) -> ConnectivityInterface {
         switch networkStatus {
-        case ReachableViaWiFi:
+        case .wifi:
             return .wifi
-        case ReachableViaWWAN:
+        case .cellular:
             return .cellular
         default:
             return .other
@@ -410,7 +417,7 @@ private extension Connectivity {
     }
 
     /// Determines whether connected with the given method.
-    func isConnected(with networkStatus: NetworkStatus) -> Bool {
+    func isConnected(with networkStatus: Reachability.Connection) -> Bool {
         if #available(iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
             var isNetworkInterfaceMatch: Bool = false
             if let monitor = self.pathMonitor as? NWPathMonitor, let interface = interfaceType(from: networkStatus) {
@@ -419,12 +426,12 @@ private extension Connectivity {
             }
             return false
         } else {
-            return isConnected && reachability.currentReachabilityStatus() == networkStatus
+            return isConnected && reachability.connection == networkStatus
         }
     }
 
     /// Determines whether connected with the given method without Internet access (no connectivity).
-    func isDisconnected(with networkStatus: NetworkStatus) -> Bool {
+    func isDisconnected(with networkStatus: Reachability.Connection) -> Bool {
         if #available(iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
             var isNetworkInterfaceMatch: Bool = false
             if let monitor = self.pathMonitor as? NWPathMonitor, let interface = interfaceType(from: networkStatus) {
@@ -433,17 +440,17 @@ private extension Connectivity {
             }
             return false
         } else {
-            return !isConnected && reachability.currentReachabilityStatus() == networkStatus
+            return !isConnected && reachability.connection == networkStatus
         }
     }
 
     /// Maps a NetworkStatus to a NWInterface.InterfaceType, if possible.
     @available(iOS 12.0, tvOS 12.0, *)
-    private func interfaceType(from networkStatus: NetworkStatus) -> NWInterface.InterfaceType? {
+    private func interfaceType(from networkStatus: Reachability.Connection) -> NWInterface.InterfaceType? {
         switch networkStatus {
-        case ReachableViaWiFi:
+        case .wifi:
             return .wifi
-        case ReachableViaWWAN:
+        case .cellular:
             return .cellular
         default:
             return nil
@@ -480,7 +487,7 @@ private extension Connectivity {
     }
 
     /// Checks connectivity when change in reachability observed
-    @objc func reachabilityDidChange(_: NSNotification) {
+    @objc func reachabilityDidChange() {
         checkConnectivity()
     }
 
@@ -491,19 +498,19 @@ private extension Connectivity {
         timer = Timer.scheduledTimer(
             timeInterval: pollingInterval,
             target: self,
-            selector: #selector(reachabilityDidChange(_:)),
+            selector: #selector(reachabilityDidChange),
             userInfo: nil,
             repeats: true
         )
     }
 
     /// Determines the connectivity status using info provided by `NetworkStatus`.
-    func status(from networkStatus: NetworkStatus, isConnected: Bool) -> ConnectivityStatus {
+    func status(from networkStatus: Reachability.Connection, isConnected: Bool) -> ConnectivityStatus {
         let currentStatus: ConnectivityStatus
         switch networkStatus {
-        case ReachableViaWWAN:
+        case .cellular:
             currentStatus = isConnected ? .connectedViaCellular : .connectedViaCellularWithoutInternet
-        case ReachableViaWiFi:
+        case .wifi:
             currentStatus = isConnected ? .connectedViaWiFi : .connectedViaWiFiWithoutInternet
         default: // Needed as Obj-C Int-backed enum
             currentStatus = isConnected ? .connected : .notConnected
@@ -544,7 +551,7 @@ private extension Connectivity {
     }
 
     /// Updates the connectivity status using info provided by `NetworkStatus`.
-    func updateStatus(from networkStatus: NetworkStatus, isConnected: Bool) {
+    func updateStatus(from networkStatus: Reachability.Connection, isConnected: Bool) {
         let currentInterface = interface(with: networkStatus)
         availableInterfaces = [currentInterface]
         self.currentInterface = currentInterface
@@ -560,11 +567,11 @@ private extension Connectivity {
                 let monitor = (pathMonitor as? NWPathMonitor) ?? NWPathMonitor()
                 updateStatus(from: monitor.currentPath, isConnected: isConnected)
             } else { // Fallback to SystemConfiguration framework.
-                let networkStatus = reachability.currentReachabilityStatus()
+                let networkStatus = reachability.connection
                 updateStatus(from: networkStatus, isConnected: isConnected)
             }
         case .systemConfiguration:
-            let networkStatus = reachability.currentReachabilityStatus()
+            let networkStatus = reachability.connection
             updateStatus(from: networkStatus, isConnected: isConnected)
         }
     }

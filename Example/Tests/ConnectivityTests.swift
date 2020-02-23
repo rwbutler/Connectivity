@@ -10,7 +10,7 @@ class ConnectivityTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
-        OHHTTPStubs.removeAllStubs()
+        OHHTTPStubs.HTTPStubs.removeAllStubs()
     }
 
     private func stubHost(_ host: String, withHTMLFrom fileName: String) {

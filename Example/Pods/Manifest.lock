@@ -1,35 +1,39 @@
 PODS:
-  - Connectivity (3.1.2)
-  - OHHTTPStubs/Core (8.0.0)
-  - OHHTTPStubs/Default (8.0.0):
+  - Connectivity (3.3.3):
+    - ReachabilitySwift
+  - OHHTTPStubs/Core (9.0.0)
+  - OHHTTPStubs/Default (9.0.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (8.0.0):
+  - OHHTTPStubs/JSON (9.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (8.0.0):
+  - OHHTTPStubs/NSURLSession (9.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (8.0.0)
-  - OHHTTPStubs/Swift (8.0.0):
+  - OHHTTPStubs/OHPathHelpers (9.0.0)
+  - OHHTTPStubs/Swift (9.0.0):
     - OHHTTPStubs/Default
+  - ReachabilitySwift (5.0.0)
 
 DEPENDENCIES:
   - Connectivity (from `../`)
   - OHHTTPStubs/Swift
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - OHHTTPStubs
+    - ReachabilitySwift
 
 EXTERNAL SOURCES:
   Connectivity:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Connectivity: 115905e721e93401f7bf5d2922ff2dae08c58f98
-  OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
+  Connectivity: d10b6b0dae5aaf0525f2739040db1d919f149c9c
+  OHHTTPStubs: cb29d2a9d09a828ecb93349a2b0c64f99e0db89f
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
 
-PODFILE CHECKSUM: be09c229336ca8bf9216d34bee3c5b0509f383f9
+PODFILE CHECKSUM: a0763074032590934d379c06cda59df30362ebbb
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4

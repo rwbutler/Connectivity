@@ -13,19 +13,14 @@ let package = Package(
             targets: ["Connectivity"]
         )
     ],
+    dependencies: [
+    .package(url: "https://github.com/ashleymills/Reachability.swift", .branch("master"))
+  ],
     targets: [
         .target(
             name: "Connectivity",
-            dependencies: ["Reachability"],
             path: "Connectivity/Classes",
-            exclude: ["Reachability"],
             swiftSettings: [.define("IMPORT_REACHABILITY")]
-        ),
-        .target(
-            name: "Reachability",
-            dependencies: [],
-            path: "Connectivity/Classes/Reachability",
-            publicHeadersPath: ""
         )
     ]
 )

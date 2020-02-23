@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Reachability",
+        "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
+        "state": {
+          "branch": "master",
+          "revision": "934a1b30804616ee8f812bf0bcbe0371bcb38a50",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

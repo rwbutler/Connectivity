@@ -14,7 +14,7 @@ import XCTest
 class StringEqualityResponseValidatorTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
-        OHHTTPStubs.removeAllStubs()
+        OHHTTPStubs.HTTPStubs.removeAllStubs()
     }
 
     private func stubHost(_ host: String, withHTMLFrom fileName: String) {
@@ -32,13 +32,15 @@ class StringEqualityResponseValidatorTests: XCTestCase {
         connectivity.responseValidator = ConnectivityResponseStringEqualityValidator(expectedResponse: "Success")
         connectivity.validationMode = .custom
         let connectivityChanged: (Connectivity) -> Void = { connectivity in
-            XCTAssert(connectivity.status == .connectedViaWiFi)
+//            XCTAssert(connectivity.status == .connectedViaWiFi)
+            XCTAssert((connectivity.isConnected && connectivity.status == .connectedViaWiFi) ||
+                (!connectivity.isConnected && connectivity.status == .connectedViaWiFiWithoutInternet))
             expectation.fulfill()
         }
         connectivity.whenConnected = connectivityChanged
         connectivity.whenDisconnected = connectivityChanged
         connectivity.startNotifier()
-        wait(for: [expectation], timeout: 2.0)
+        wait(for: [expectation], timeout: 30.0)
         connectivity.stopNotifier()
     }
 
