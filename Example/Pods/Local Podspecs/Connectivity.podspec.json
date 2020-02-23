@@ -26,6 +26,9 @@
 
     ]
   },
+  "pod_target_xcconfig": {
+    "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "IMPORT_REACHABILITY"
+  },
   "weak_frameworks": "Network",
   "source_files": "Connectivity/Classes/**/*",
   "exclude_files": [

@@ -69,7 +69,7 @@
 		7834EB795119690B628EF770 /* Pods-Connectivity_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example/Pods-Connectivity_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AE8026CB81F7E1D74EB3EEDF /* Pods-Connectivity_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Tests/Pods-Connectivity_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C9101FE1CB42B71A47A459A9 /* Pods_Connectivity_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connectivity_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4A64AA190C10F19094EC842 /* Connectivity.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Connectivity.podspec; path = ../Connectivity.podspec; sourceTree = "<group>"; };
+		D4A64AA190C10F19094EC842 /* Connectivity.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Connectivity.podspec; path = ../Connectivity.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

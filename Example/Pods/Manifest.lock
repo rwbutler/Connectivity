@@ -30,7 +30,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Connectivity: d10b6b0dae5aaf0525f2739040db1d919f149c9c
+  Connectivity: cc35352533e7b86caef673517d899be7c2e76533
   OHHTTPStubs: cb29d2a9d09a828ecb93349a2b0c64f99e0db89f
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
 
