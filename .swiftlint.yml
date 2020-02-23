@@ -6,6 +6,8 @@ opt_in_rules:
 excluded:
   - Example/Pods/OHHTTPStubs
   - Example/Pods/ReachabilitySwift
+  - Example/Pods
+  - _Pods.xcodeproj
 reporter: "xcode"
 type_name:
     excluded:
