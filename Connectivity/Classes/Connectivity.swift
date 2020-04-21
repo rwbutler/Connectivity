@@ -25,7 +25,7 @@ public class Connectivity: NSObject {
     // MARK: State
 
     /// % successful connections required to be deemed to have connectivity
-    public var successThreshold: Connectivity.Percentage = Connectivity.Percentage(75.0)
+    public var successThreshold = Connectivity.Percentage(50.0)
 
     /// URLs to contact in order to check connectivity
     public var connectivityURLs: [URL] = Connectivity
