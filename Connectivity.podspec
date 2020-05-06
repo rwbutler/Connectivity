@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Connectivity'
-  s.version          = '3.3.4'
+  s.version          = '4.0.0'
   s.swift_version    = '5.0'
   s.summary          = 'Makes Internet connectivity detection more robust by detecting Wi-Fi networks without Internet access.'
   s.description      = <<-DESC
@@ -14,7 +14,7 @@ Connectivity wraps Apple's Reachability code to provide a reliable measure of wh
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'
   s.frameworks      = 'SystemConfiguration'
-  s.weak_frameworks = 'Network'
+  s.weak_frameworks = 'Network', 'Combine'
   s.source_files = 'Connectivity/Classes/**/*'
   s.exclude_files = [
     'Connectivity/Classes/Reachability/LICENSE.txt'

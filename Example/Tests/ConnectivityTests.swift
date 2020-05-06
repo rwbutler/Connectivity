@@ -4,6 +4,8 @@ import UIKit
 import XCTest
 
 class ConnectivityTests: XCTestCase {
+    private let timeout: TimeInterval = 5.0
+
     override func setUp() {
         super.setUp()
     }
@@ -26,13 +28,13 @@ class ConnectivityTests: XCTestCase {
         let connectivity = Connectivity()
         connectivity.framework = .systemConfiguration
         let connectivityChanged: (Connectivity) -> Void = { connectivity in
-            XCTAssert(connectivity.status == .connectedViaWiFi)
+            XCTAssertEqual(connectivity.status, .connectedViaWiFi)
             expectation.fulfill()
         }
         connectivity.whenConnected = connectivityChanged
         connectivity.whenDisconnected = connectivityChanged
         connectivity.startNotifier()
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: timeout)
         connectivity.stopNotifier()
     }
 
@@ -40,47 +42,49 @@ class ConnectivityTests: XCTestCase {
         stubHost("www.apple.com", withHTMLFrom: "success-response.html")
         let expectation = XCTestExpectation(description: "Connectivity check succeeds")
         let connectivity = Connectivity()
-        connectivity.framework = .systemConfiguration
+        connectivity.framework = .network
         let connectivityChanged: (Connectivity) -> Void = { connectivity in
-            XCTAssert(connectivity.status == .connectedViaWiFi)
+            XCTAssertTrue(connectivity.isConnected)
             expectation.fulfill()
         }
         connectivity.whenConnected = connectivityChanged
         connectivity.whenDisconnected = connectivityChanged
         connectivity.startNotifier()
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: timeout)
         connectivity.stopNotifier()
     }
 
     func testFailedConnectivityCheckUsingSysConfig() {
+        stubHost("captive.apple.com", withHTMLFrom: "failure-response.html")
         stubHost("www.apple.com", withHTMLFrom: "failure-response.html")
         let expectation = XCTestExpectation(description: "Connectivity checks fails")
         let connectivity = Connectivity()
-        connectivity.framework = .network
+        connectivity.framework = .systemConfiguration
         let connectivityChanged: (Connectivity) -> Void = { connectivity in
-            XCTAssert(connectivity.status == .connectedViaWiFiWithoutInternet)
+            XCTAssertEqual(connectivity.status, .connectedViaWiFiWithoutInternet)
             expectation.fulfill()
         }
         connectivity.whenConnected = connectivityChanged
         connectivity.whenDisconnected = connectivityChanged
         connectivity.startNotifier()
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: timeout)
         connectivity.stopNotifier()
     }
 
     func testFailedConnectivityCheckUsingNetwork() {
+        stubHost("captive.apple.com", withHTMLFrom: "failure-response.html")
         stubHost("www.apple.com", withHTMLFrom: "failure-response.html")
         let expectation = XCTestExpectation(description: "Connectivity checks fails")
         let connectivity = Connectivity()
         connectivity.framework = .network
         let connectivityChanged: (Connectivity) -> Void = { connectivity in
-            XCTAssert(connectivity.status == .connectedViaWiFiWithoutInternet)
+            XCTAssertFalse(connectivity.isConnected)
             expectation.fulfill()
         }
         connectivity.whenConnected = connectivityChanged
         connectivity.whenDisconnected = connectivityChanged
         connectivity.startNotifier()
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: timeout)
         connectivity.stopNotifier()
     }
 

@@ -21,6 +21,10 @@ public class Connectivity: NSObject {
     public typealias Percentage = ConnectivityPercentage
     public typealias Status = ConnectivityStatus
     public typealias ValidationMode = ConnectivityResponseValidationMode
+#if canImport(Combine)
+    @available(iOS 13.0, tvOS 13.0, *)
+    public typealias Publisher = ConnectivityPublisher
+#endif
 
     // MARK: State
 
@@ -30,14 +34,14 @@ public class Connectivity: NSObject {
     /// URLs to contact in order to check connectivity
     public var connectivityURLs: [URL] = Connectivity
         .defaultConnectivityURLs(shouldUseHTTPS: Connectivity.isHTTPSOnly) {
-            didSet {
-                if Connectivity.isHTTPSOnly { // if HTTPS only set only allow HTTPS URLs
-                    connectivityURLs = connectivityURLs.filter { url in
-                        return url.absoluteString.lowercased().starts(with: "https")
-                    }
+        didSet {
+            if Connectivity.isHTTPSOnly { // if HTTPS only set only allow HTTPS URLs
+                connectivityURLs = connectivityURLs.filter { url in
+                    return url.absoluteString.lowercased().starts(with: "https")
                 }
             }
         }
+    }
 
     /// Optionally configure a bearer token to be sent as part of an Authorization header.
     public var bearerToken: String?
@@ -297,7 +301,7 @@ public extension Connectivity {
 
     @available(iOS 12.0, tvOS 12.0, *)
     private func stopPathMonitorNotifier() {
-        if isObservingInterfaceChanges, let monitor = self.pathMonitor as? NWPathMonitor {
+        if isObservingInterfaceChanges, let monitor = pathMonitor as? NWPathMonitor {
             monitor.cancel()
             pathMonitor = nil
         }

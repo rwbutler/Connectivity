@@ -9,7 +9,7 @@
 import Connectivity
 import UIKit
 
-class ViewController: UIViewController {
+class OriginalExampleViewController: UIViewController {
     // MARK: Dependencies
 
     fileprivate let connectivity: Connectivity = Connectivity()
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
 }
 
 // IB Actions
-extension ViewController {
+extension OriginalExampleViewController {
     @IBAction func notifierButtonTapped(_: UIButton) {
         isCheckingConnectivity ? stopConnectivityChecks() : startConnectivityChecks()
     }
@@ -65,7 +65,7 @@ extension ViewController {
 }
 
 // Private API
-private extension ViewController {
+private extension OriginalExampleViewController {
     func configureConnectivityNotifier() {
         let connectivityChanged: (Connectivity) -> Void = { [weak self] connectivity in
             self?.updateConnectionStatus(connectivity.status)

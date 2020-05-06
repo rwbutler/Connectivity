@@ -12,6 +12,8 @@ import OHHTTPStubs
 import XCTest
 
 class StringEqualityResponseValidatorTests: XCTestCase {
+    private let timeout: TimeInterval = 5.0
+
     override func tearDown() {
         super.tearDown()
         OHHTTPStubs.removeAllStubs()
@@ -38,7 +40,7 @@ class StringEqualityResponseValidatorTests: XCTestCase {
         connectivity.whenConnected = connectivityChanged
         connectivity.whenDisconnected = connectivityChanged
         connectivity.startNotifier()
-        wait(for: [expectation], timeout: 2.0)
+        wait(for: [expectation], timeout: timeout)
         connectivity.stopNotifier()
     }
 
@@ -56,7 +58,7 @@ class StringEqualityResponseValidatorTests: XCTestCase {
         connectivity.whenConnected = connectivityChanged
         connectivity.whenDisconnected = connectivityChanged
         connectivity.startNotifier()
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: timeout)
         connectivity.stopNotifier()
     }
 }

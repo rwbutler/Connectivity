@@ -17,6 +17,7 @@ Connectivity's objective is to solve the captive portal problem whereby an iOS d
 To learn more about how to use Connectivity, take a look at the [keynote presentation](https://github.com/rwbutler/Connectivity/blob/master/docs/presentations/connectivity.pdf), check out the [blog post](https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e), or make use of the table of contents below:
 
 - [Features](#features)
+- [What's New in Connectivity 4.0.0?](#whats-new-in-connectivity-400)
 - [What's New in Connectivity 3.0.0?](#whats-new-in-connectivity-300)
 - [Installation](#installation)
 	- [Cocoapods](#cocoapods)
@@ -47,6 +48,10 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 - [x] Be notified of changes in Internet connectivity.
 - [x] Polling connectivity checks may be performed where a constant network connection is required (optional).
 
+## What's new in Connectivity 4.0.0?
+
+Connectivity 4.0.0 adds [`Connectivity.Publisher`](https://github.com/rwbutler/Connectivity/blob/master/Connectivity/Classes/Combine/ConnectivityPublisher.swift) enabling Connectivity to be used with Apple's [Combine](https://developer.apple.com/documentation/combine) framework. For more information see the example using Combine in the sample app.
+
 ## What's new in Connectivity 3.0.0?
 
 Connectivity 3.0.0 brings support for Swift 5.0. The previous version supporting Swift 4.2 is version 2.2.1.
@@ -62,8 +67,6 @@ Or if you are using Carthage add the following to your `Cartfile`:
 ```ogdl
 github "rwbutler/Connectivity" ~> 2.2.1
 ```
-
-Connectivity 3.2.0
 
 ## Installation
 

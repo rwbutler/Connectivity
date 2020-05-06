@@ -16,6 +16,9 @@
 		1302B55723674E76002E4C58 /* ConnectivityResponseRegExValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B54E23674E76002E4C58 /* ConnectivityResponseRegExValidator.swift */; };
 		1302B55823674E76002E4C58 /* ResponseValidatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B55023674E76002E4C58 /* ResponseValidatorFactory.swift */; };
 		1302B55923674E76002E4C58 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B55123674E76002E4C58 /* Factory.swift */; };
+		13EDCA6324621B85006FAE75 /* ConnectivitySubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EDCA6124621B85006FAE75 /* ConnectivitySubscription.swift */; };
+		13EDCA6424621B85006FAE75 /* ConnectivityPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EDCA6224621B85006FAE75 /* ConnectivityPublisher.swift */; };
+		13FD6DF12461F6E20009E28E /* PublishersAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FD6DF02461F6E20009E28E /* PublishersAdditions.swift */; };
 		165F2A6DF189151CDBCA366DD275ABEA /* OHHTTPStubs-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EF024EE220EAFFBE7E70C8D163A3637F /* OHHTTPStubs-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		25FD8D81F56B99631EB2B121645CFB74 /* ConnectivityStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075E049FDB4C0940A8D3CCB0FA0B4D2 /* ConnectivityStatus.swift */; };
 		276071E9DBAAA08BBBD569288E026156 /* OHHTTPStubsResponse+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CFB4D92631D85ACADF68FC8B94FD41A /* OHHTTPStubsResponse+JSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -94,6 +97,9 @@
 		1302B54E23674E76002E4C58 /* ConnectivityResponseRegExValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseRegExValidator.swift; sourceTree = "<group>"; };
 		1302B55023674E76002E4C58 /* ResponseValidatorFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseValidatorFactory.swift; sourceTree = "<group>"; };
 		1302B55123674E76002E4C58 /* Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		13EDCA6124621B85006FAE75 /* ConnectivitySubscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivitySubscription.swift; sourceTree = "<group>"; };
+		13EDCA6224621B85006FAE75 /* ConnectivityPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectivityPublisher.swift; sourceTree = "<group>"; };
+		13FD6DF02461F6E20009E28E /* PublishersAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishersAdditions.swift; sourceTree = "<group>"; };
 		17E33041B314FA837A3CAEB9DF3CDE9F /* OHHTTPStubs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ABDCA5C2D3B03B7FAE8F17B49C77BF2 /* Pods-Connectivity_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Connectivity_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		1EB8054A0025C92380DA80B0709A0F17 /* OHHTTPStubsResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubsResponse.m; path = OHHTTPStubs/Sources/OHHTTPStubsResponse.m; sourceTree = "<group>"; };
@@ -259,6 +265,16 @@
 			path = Factory;
 			sourceTree = "<group>";
 		};
+		13EDCA6024621B85006FAE75 /* Combine */ = {
+			isa = PBXGroup;
+			children = (
+				13EDCA6124621B85006FAE75 /* ConnectivitySubscription.swift */,
+				13EDCA6224621B85006FAE75 /* ConnectivityPublisher.swift */,
+			);
+			name = Combine;
+			path = Connectivity/Classes/Combine;
+			sourceTree = "<group>";
+		};
 		157C280336B7C95274B475E690B78D73 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				478E6DB5ADB44CF07C0673E5EC86D331 /* Connectivity.swift */,
+				13EDCA6024621B85006FAE75 /* Combine */,
 				756F33CD011DFB07A7C006B2C652B08D /* Extensions */,
 				8034DB07A68F753B102ABC7A93E7E054 /* Model */,
 				9B7AA9298B2FD412415568A3B58252A6 /* Pod */,
@@ -339,6 +356,7 @@
 		756F33CD011DFB07A7C006B2C652B08D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				13FD6DF02461F6E20009E28E /* PublishersAdditions.swift */,
 				35EAE58ADD70373DF69830191A349F12 /* NotificationNameAdditions.swift */,
 			);
 			name = Extensions;
@@ -719,12 +737,15 @@
 				1302B55423674E76002E4C58 /* ConnectivityResponseStringEqualityValidator.swift in Sources */,
 				6AAB0517082457B2FC994672379E5EEC /* ConnectivityInterface.swift in Sources */,
 				1302B55723674E76002E4C58 /* ConnectivityResponseRegExValidator.swift in Sources */,
+				13EDCA6324621B85006FAE75 /* ConnectivitySubscription.swift in Sources */,
 				1302B55623674E76002E4C58 /* ConnectivityResponseContainsStringValidator.swift in Sources */,
 				60AC3C3598BD1305AB36C62FF6840217 /* ConnectivityPercentage.swift in Sources */,
 				25FD8D81F56B99631EB2B121645CFB74 /* ConnectivityStatus.swift in Sources */,
 				1302B55223674E76002E4C58 /* ConnectivityResponseValidator.swift in Sources */,
+				13FD6DF12461F6E20009E28E /* PublishersAdditions.swift in Sources */,
 				1302B55323674E76002E4C58 /* ConnectivityResponseValidationMode.swift in Sources */,
 				5DF7AF2B351254DDDB02A79D59682EC5 /* NotificationNameAdditions.swift in Sources */,
+				13EDCA6424621B85006FAE75 /* ConnectivityPublisher.swift in Sources */,
 				FB42AB021E15E59D8AB72121C2448D88 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1058,7 +1079,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 3.3.4;
+				MARKETING_VERSION = 4.0.0;
 				MODULEMAP_FILE = "Target Support Files/Connectivity/Connectivity.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rwbutler.Connectivity;
 				PRODUCT_MODULE_NAME = Connectivity;
@@ -1091,7 +1112,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 3.3.4;
+				MARKETING_VERSION = 4.0.0;
 				MODULEMAP_FILE = "Target Support Files/Connectivity/Connectivity.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rwbutler.Connectivity;
 				PRODUCT_MODULE_NAME = Connectivity;

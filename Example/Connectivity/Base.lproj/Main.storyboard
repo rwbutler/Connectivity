@@ -1,34 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7rZ-7B-8NH">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Menu View Controller-->
+        <scene sceneID="XCQ-AM-rVZ">
+            <objects>
+                <viewController id="7rZ-7B-8NH" customClass="MenuViewController" customModule="Connectivity_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="e2V-HZ-tNE"/>
+                        <viewControllerLayoutGuide type="bottom" id="FwU-Zq-esB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CJJ-du-HcF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xj9-q9-gD0">
+                                <rect key="frame" x="130" y="391" width="115" height="30"/>
+                                <state key="normal" title="Original Example"/>
+                                <connections>
+                                    <segue destination="vXZ-lx-hvc" kind="show" id="dyU-HG-JJQ"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nij-bo-pik">
+                                <rect key="frame" x="104" y="441" width="167" height="30"/>
+                                <state key="normal" title="Example Using Combine"/>
+                                <connections>
+                                    <segue destination="Uhy-fZ-Uzq" kind="show" id="YpK-Nq-1U7"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connectivity" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="une-2D-8Uh">
+                                <rect key="frame" x="76.333333333333329" y="84" width="222.33333333333337" height="55"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="40"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Nij-bo-pik" firstAttribute="centerX" secondItem="xj9-q9-gD0" secondAttribute="centerX" id="OXj-4T-yDC"/>
+                            <constraint firstItem="une-2D-8Uh" firstAttribute="top" secondItem="e2V-HZ-tNE" secondAttribute="bottom" constant="40" id="Sw9-bm-iMh"/>
+                            <constraint firstItem="xj9-q9-gD0" firstAttribute="centerY" secondItem="CJJ-du-HcF" secondAttribute="centerY" id="UiV-My-cfE"/>
+                            <constraint firstItem="xj9-q9-gD0" firstAttribute="centerX" secondItem="CJJ-du-HcF" secondAttribute="centerX" id="gdu-1a-GJM"/>
+                            <constraint firstItem="une-2D-8Uh" firstAttribute="centerX" secondItem="CJJ-du-HcF" secondAttribute="centerX" id="ygs-2p-fLP"/>
+                            <constraint firstItem="Nij-bo-pik" firstAttribute="top" secondItem="xj9-q9-gD0" secondAttribute="bottom" constant="20" id="z7Y-fA-rT1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="combineExampleButton" destination="Nij-bo-pik" id="Ym6-N9-okt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cdR-Gc-RE7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-775" y="127"/>
+        </scene>
+        <!--Original Example View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Connectivity_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="OriginalExampleViewController" customModule="Connectivity_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking connectivity..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKn-mc-aB2">
-                                <rect key="frame" x="58" y="389.66666666666669" width="259.33333333333331" height="33"/>
+                                <rect key="frame" x="58" y="362.66666666666669" width="259.33333333333331" height="33"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMD-6B-x5l">
-                                <rect key="frame" x="137" y="721" width="101" height="37"/>
+                                <rect key="frame" x="137" y="667" width="101" height="37"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                 <state key="normal" title="Start notifier">
                                     <color key="titleColor" red="0.0" green="0.42352941630000002" blue="0.21176470820000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -38,10 +86,10 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="iLk-Qe-AeN">
-                                <rect key="frame" x="258" y="729.66666666666663" width="20" height="20"/>
+                                <rect key="frame" x="258" y="675.66666666666663" width="20" height="20"/>
                             </activityIndicatorView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="35X-5o-0zm">
-                                <rect key="frame" x="99" y="673" width="177" height="29"/>
+                                <rect key="frame" x="93" y="616" width="189" height="32"/>
                                 <segments>
                                     <segment title="Reachability"/>
                                     <segment title="Network"/>
@@ -65,6 +113,7 @@
                             <constraint firstItem="bMD-6B-x5l" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="syv-7v-y2m"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="UwX-a9-mxn"/>
                     <connections>
                         <outlet property="activityIndicator" destination="iLk-Qe-AeN" id="FQc-Hf-LiT"/>
                         <outlet property="notifierButton" destination="bMD-6B-x5l" id="Sk6-yW-wIW"/>
@@ -74,6 +123,60 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="129" y="119"/>
+        </scene>
+        <!--Combine View Controller-->
+        <scene sceneID="GdK-rB-GCl">
+            <objects>
+                <viewController id="Uhy-fZ-Uzq" customClass="CombineViewController" customModule="Connectivity_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HSd-ub-5nR"/>
+                        <viewControllerLayoutGuide type="bottom" id="kyy-cw-Pa3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GvO-qZ-hKa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap 'Start notifier' to begin" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L5-dx-0sa">
+                                <rect key="frame" x="42.666666666666657" y="362.66666666666669" width="290" height="33"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7w-Pv-4LA">
+                                <rect key="frame" x="137" y="667" width="101" height="37"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                <state key="normal" title="Start notifier">
+                                    <color key="titleColor" red="0.0" green="0.42352941630000002" blue="0.21176470820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="notifierButtonTapped:" destination="Uhy-fZ-Uzq" eventType="touchUpInside" id="FLl-Sg-59s"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CQs-6S-aRh">
+                                <rect key="frame" x="258" y="675.66666666666663" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="J7w-Pv-4LA" firstAttribute="centerX" secondItem="GvO-qZ-hKa" secondAttribute="centerX" id="W8d-LS-okL"/>
+                            <constraint firstItem="6L5-dx-0sa" firstAttribute="centerX" secondItem="GvO-qZ-hKa" secondAttribute="centerX" id="dIs-s3-PLX"/>
+                            <constraint firstItem="CQs-6S-aRh" firstAttribute="centerY" secondItem="J7w-Pv-4LA" secondAttribute="centerY" id="sHt-jw-NFz"/>
+                            <constraint firstItem="6L5-dx-0sa" firstAttribute="centerY" secondItem="GvO-qZ-hKa" secondAttribute="centerY" id="u5C-CU-ZDA"/>
+                            <constraint firstItem="kyy-cw-Pa3" firstAttribute="top" secondItem="J7w-Pv-4LA" secondAttribute="bottom" constant="20" id="uP5-xC-EYU"/>
+                            <constraint firstItem="CQs-6S-aRh" firstAttribute="leading" secondItem="J7w-Pv-4LA" secondAttribute="trailing" constant="20" id="uek-tC-hqL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="a19-Nx-WT9"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="CQs-6S-aRh" id="RbD-cN-Y4F"/>
+                        <outlet property="notifierButton" destination="J7w-Pv-4LA" id="fze-Jb-HKu"/>
+                        <outlet property="statusLabel" destination="6L5-dx-0sa" id="KgE-7T-ayT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WDW-H5-cVG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="119" y="799"/>
         </scene>
     </scenes>
 </document>

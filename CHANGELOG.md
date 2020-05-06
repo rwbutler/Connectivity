@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2020-05-05
+### Added
+- `Connectivity.Publisher` introduced providing support for Combine in iOS 13.0.
+
 ## [3.3.4] - 2020-04-21
 ### Changed
 - Lowered the default connectivity threshold to 50% as it was recently reported that in certain parts of the world the recently added iOS 13 connectivity URL is inaccessible causing an offline result to be returned with the previous default threshold of 75% and only the two example connectivity URLs used. See [issue #41](https://github.com/rwbutler/Connectivity/issues/41).
