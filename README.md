@@ -18,6 +18,7 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 
 - [Features](#features)
 - [What's New in Connectivity 4.0.0?](#whats-new-in-connectivity-400)
+- [Hyperconnectivity](#hyperconnectivity)
 - [Installation](#installation)
 	- [Cocoapods](#cocoapods)
 	- [Carthage](#carthage)
@@ -62,6 +63,16 @@ Or if you are using Carthage add the following to your `Cartfile`:
 ```ogdl
 github "rwbutler/Connectivity" ~> 3.0
 ```
+
+## Hyperconnectivity
+
+If you don't require support for Objective-C or versions of iOS prior to iOS 13 then you may want to consider using [Hyperconnectivity](https://github.com/rwbutler/Hyperconnectivity) (an offshoot project of Connectivity), which drops support for these in favour of a modern, elegant syntax. For a comparison of the two frameworks see [here](https://github.com/rwbutler/Hyperconnectivity#connectivity-vs-hyperconnectivity).
+
+<br/>
+<div align="center">
+    <img src="https://github.com/rwbutler/Hyperconnectivity/raw/master/docs/images/hyperconnectivity-logo.png" alt="Xcode 11 Package Options" height="100" width="100">
+</div>
+
 
 ## Installation
 
