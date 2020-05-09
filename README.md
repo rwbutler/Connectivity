@@ -18,7 +18,6 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 
 - [Features](#features)
 - [What's New in Connectivity 4.0.0?](#whats-new-in-connectivity-400)
-- [What's New in Connectivity 3.0.0?](#whats-new-in-connectivity-300)
 - [Installation](#installation)
 	- [Cocoapods](#cocoapods)
 	- [Carthage](#carthage)
@@ -52,20 +51,16 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 
 Connectivity 4.0.0 adds [`Connectivity.Publisher`](https://github.com/rwbutler/Connectivity/blob/master/Connectivity/Classes/Combine/ConnectivityPublisher.swift) enabling Connectivity to be used with Apple's [Combine](https://developer.apple.com/documentation/combine) framework. For more information see the example using Combine in the sample app.
 
-## What's new in Connectivity 3.0.0?
-
-Connectivity 3.0.0 brings support for Swift 5.0. The previous version supporting Swift 4.2 is version 2.2.1.
-
-If you require the Swift 4.2 version then in your `Podfile`:
+If you require the previous version then in your `Podfile` set:
 
 ```ruby
-pod "Connectivity" "~> 2.0" 
+pod "Connectivity" "~> 3.0" 
 ```
 
 Or if you are using Carthage add the following to your `Cartfile`:
 
 ```ogdl
-github "rwbutler/Connectivity" ~> 2.2.1
+github "rwbutler/Connectivity" ~> 3.0
 ```
 
 ## Installation
