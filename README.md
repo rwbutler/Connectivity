@@ -70,7 +70,7 @@ If you don't require support for Objective-C or versions of iOS prior to iOS 13 
 
 <br/>
 <div align="center">
-    <img src="https://github.com/rwbutler/Hyperconnectivity/raw/master/docs/images/hyperconnectivity-logo.png" alt="Xcode 11 Package Options" height="100" width="100">
+    <a href="https://github.com/rwbutler/Hyperconnectivity"><img src="https://github.com/rwbutler/Hyperconnectivity/raw/master/docs/images/hyperconnectivity-logo.png" alt="Xcode 11 Package Options" height="100" width="100"></a>
 </div>
 
 
