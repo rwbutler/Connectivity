@@ -33,4 +33,15 @@ class RegularExpressionResponseValidatorTests: XCTestCase {
         let message = "Expected \"\(string)\" to \(expectedResultStr) \(regEx) via regex"
         XCTAssertEqual(result, expectedResult, message, file: file, line: line)
     }
+
+    func testResponseInvalidWhenDataIsNil() {
+        let regEx = "test[0-9]+"
+        let validator = ConnectivityResponseRegExValidator(regEx: regEx)
+        let responseValid = validator.isResponseValid(
+            url: URL(string: "https://example.com")!,
+            response: nil,
+            data: nil
+        )
+        XCTAssertFalse(responseValid)
+    }
 }

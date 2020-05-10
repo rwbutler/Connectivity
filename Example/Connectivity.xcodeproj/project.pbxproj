@@ -13,6 +13,7 @@
 		1302B56523676EAF002E4C58 /* string-equality-response.html in Resources */ = {isa = PBXBuildFile; fileRef = 1302B56423676EAF002E4C58 /* string-equality-response.html */; };
 		1302B56623676ED0002E4C58 /* string-equality-response.html in Resources */ = {isa = PBXBuildFile; fileRef = 1302B56423676EAF002E4C58 /* string-equality-response.html */; };
 		134B21C624687BE900A8F332 /* ConnectivityPercentageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134B21C424687BD700A8F332 /* ConnectivityPercentageTests.swift */; };
+		134B21C92468811D00A8F332 /* ConnectivityStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134B21C7246880F600A8F332 /* ConnectivityStatusTests.swift */; };
 		135760F321283C8600AB6301 /* UIColorAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135760F221283C8600AB6301 /* UIColorAdditions.swift */; };
 		13861A4A2361CBE0005512BE /* RegularExpressionResponseValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13861A482361CBD9005512BE /* RegularExpressionResponseValidatorTests.swift */; };
 		13E5FE86237DB5CF004979A6 /* ObjCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E5FE85237DB5CF004979A6 /* ObjCViewController.m */; };
@@ -47,6 +48,7 @@
 		1302B56023676CD5002E4C58 /* string-contains-response.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "string-contains-response.html"; sourceTree = "<group>"; };
 		1302B56423676EAF002E4C58 /* string-equality-response.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "string-equality-response.html"; sourceTree = "<group>"; };
 		134B21C424687BD700A8F332 /* ConnectivityPercentageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityPercentageTests.swift; sourceTree = "<group>"; };
+		134B21C7246880F600A8F332 /* ConnectivityStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityStatusTests.swift; sourceTree = "<group>"; };
 		135760F221283C8600AB6301 /* UIColorAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorAdditions.swift; sourceTree = "<group>"; };
 		13861A482361CBD9005512BE /* RegularExpressionResponseValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularExpressionResponseValidatorTests.swift; sourceTree = "<group>"; };
 		13E5FE83237DB5CE004979A6 /* Connectivity_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Connectivity_Example-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				134B21C424687BD700A8F332 /* ConnectivityPercentageTests.swift */,
+				134B21C7246880F600A8F332 /* ConnectivityStatusTests.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 			files = (
 				13861A4A2361CBE0005512BE /* RegularExpressionResponseValidatorTests.swift in Sources */,
 				134B21C624687BE900A8F332 /* ConnectivityPercentageTests.swift in Sources */,
+				134B21C92468811D00A8F332 /* ConnectivityStatusTests.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* ConnectivityTests.swift in Sources */,
 				1302B56323676DD7002E4C58 /* StringEqualityResponseValidatorTests.swift in Sources */,
 				13EF54F223637BBF00E467DF /* ResponseValidatorFactoryTests.swift in Sources */,
