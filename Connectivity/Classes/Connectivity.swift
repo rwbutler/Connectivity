@@ -202,8 +202,8 @@ public extension Connectivity {
         let dispatchGroup = DispatchGroup()
         var tasks: [URLSessionDataTask] = []
         let session: URLSession = urlSession()
-        var successfulChecks: Int = 0, failedChecks: Int = 0
-        let totalChecks: Int = connectivityURLs.count
+        var successfulChecks: UInt = 0, failedChecks: UInt = 0
+        let totalChecks: UInt = UInt(connectivityURLs.count)
 
         // Connectivity check callback
         let completionHandlerForUrl: (URL) -> ((Data?, URLResponse?, Error?) -> Void) = { url in
@@ -325,7 +325,11 @@ private extension Connectivity {
     }
 
     /// Check whether enough tasks have successfully completed to be considered connected
-    private func cancelConnectivityCheck(pendingTasks: [URLSessionDataTask], successfulChecks: Int, totalChecks: Int) {
+    private func cancelConnectivityCheck(
+        pendingTasks: [URLSessionDataTask],
+        successfulChecks: UInt,
+        totalChecks: UInt
+    ) {
         let isConnected = isThresholdMet(successfulChecks, outOf: totalChecks)
         guard isConnected else { return }
         cancelPendingTasks(pendingTasks)
@@ -408,11 +412,6 @@ private extension Connectivity {
         }
     }
 
-    /// Determines whether connected based on percentage of successful connectivity checks
-    private func isThresholdMet(percentage: Percentage) -> Bool {
-        return percentage >= successThreshold
-    }
-
     /// Determines whether connected with the given method.
     func isConnected(with networkStatus: NetworkStatus) -> Bool {
         if #available(iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
@@ -455,9 +454,8 @@ private extension Connectivity {
     }
 
     /// Determines whether enough connectivity checks have succeeded to be considered connected.
-    private func isThresholdMet(_ successfulChecks: Int, outOf totalChecks: Int) -> Bool {
-        let success: Percentage = percentageSuccessful(successfulChecks, outOf: totalChecks)
-        return isThresholdMet(percentage: success)
+    private func isThresholdMet(_ successfulChecks: UInt, outOf totalChecks: UInt) -> Bool {
+        return Percentage(successfulChecks, outOf: totalChecks) >= successThreshold
     }
 
     /// Whether or not the we should use the Network framework on iOS 12+.
@@ -475,12 +473,6 @@ private extension Connectivity {
             callback?(unownedSelf)
         }
         previousStatus = currentStatus // Update for the next connectivity check
-    }
-
-    /// Determines percentage successful connectivity checks.
-    private func percentageSuccessful(_ successfulChecks: Int, outOf totalChecks: Int) -> Percentage {
-        let percentageValue: Double = (Double(successfulChecks) / Double(totalChecks)) * 100.0
-        return Percentage(percentageValue)
     }
 
     /// Checks connectivity when change in reachability observed
