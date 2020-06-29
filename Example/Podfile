@@ -9,3 +9,7 @@ target 'Connectivity_Example' do
     
   end
 end
+
+target 'Connectivity_Example_macOS' do
+  pod 'Connectivity', :path => '../'
+end

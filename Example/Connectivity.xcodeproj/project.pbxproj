@@ -24,6 +24,7 @@
 		13FD6DF32462067B0009E28E /* CombineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FD6DF22462067B0009E28E /* CombineViewController.swift */; };
 		13FD6DFB246210690009E28E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FD6DFA246210690009E28E /* MenuViewController.swift */; };
 		4992400D384F73130F10F078 /* Pods_Connectivity_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9101FE1CB42B71A47A459A9 /* Pods_Connectivity_Tests.framework */; };
+		4F9D5DC49043F14E05052C85 /* Pods_Connectivity_Example_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E30A99229C7601196BE416 /* Pods_Connectivity_Example_macOS.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* OriginalExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* OriginalExampleViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -31,6 +32,10 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* ConnectivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* ConnectivityTests.swift */; };
 		B5AE95FBAF83E86E09C71F53 /* Pods_Connectivity_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CC3C92548787468F0C65E3 /* Pods_Connectivity_Example.framework */; };
+		D5F1BD1E24AA051100D10B24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F1BD1D24AA051100D10B24 /* AppDelegate.swift */; };
+		D5F1BD2024AA051100D10B24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F1BD1F24AA051100D10B24 /* ViewController.swift */; };
+		D5F1BD2224AA051400D10B24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5F1BD2124AA051400D10B24 /* Assets.xcassets */; };
+		D5F1BD2524AA051400D10B24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5F1BD2324AA051400D10B24 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,10 +79,20 @@
 		607FACEB1AFB9204008FA782 /* ConnectivityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityTests.swift; sourceTree = "<group>"; };
 		69CC3C92548787468F0C65E3 /* Pods_Connectivity_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connectivity_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D2EC5685A21E721BE90F9DC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		756991B8EB92F4B50383EDCD /* Pods-Connectivity_Example_macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example_macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example_macOS/Pods-Connectivity_Example_macOS.release.xcconfig"; sourceTree = "<group>"; };
 		7834EB795119690B628EF770 /* Pods-Connectivity_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example/Pods-Connectivity_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AE8026CB81F7E1D74EB3EEDF /* Pods-Connectivity_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Tests/Pods-Connectivity_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C9101FE1CB42B71A47A459A9 /* Pods_Connectivity_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connectivity_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A64AA190C10F19094EC842 /* Connectivity.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Connectivity.podspec; path = ../Connectivity.podspec; sourceTree = "<group>"; };
+		D5F1BD1B24AA051100D10B24 /* Connectivity_Example_macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connectivity_Example_macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5F1BD1D24AA051100D10B24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D5F1BD1F24AA051100D10B24 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D5F1BD2124AA051400D10B24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D5F1BD2424AA051400D10B24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D5F1BD2624AA051400D10B24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5F1BD2724AA051400D10B24 /* Connectivity_Example_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Connectivity_Example_macOS.entitlements; sourceTree = "<group>"; };
+		EC9FE05BACAB7A571B66CFBA /* Pods-Connectivity_Example_macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example_macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example_macOS/Pods-Connectivity_Example_macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		F5E30A99229C7601196BE416 /* Pods_Connectivity_Example_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connectivity_Example_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +109,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4992400D384F73130F10F078 /* Pods_Connectivity_Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5F1BD1824AA051100D10B24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F9D5DC49043F14E05052C85 /* Pods_Connectivity_Example_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +167,8 @@
 				59AC20C4169D5C969777DC33 /* Pods-Connectivity_Example.release.xcconfig */,
 				1A67A15C226AE5041C7BBBBC /* Pods-Connectivity_Tests.debug.xcconfig */,
 				AE8026CB81F7E1D74EB3EEDF /* Pods-Connectivity_Tests.release.xcconfig */,
+				EC9FE05BACAB7A571B66CFBA /* Pods-Connectivity_Example_macOS.debug.xcconfig */,
+				756991B8EB92F4B50383EDCD /* Pods-Connectivity_Example_macOS.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -154,6 +179,7 @@
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for Connectivity */,
 				607FACE81AFB9204008FA782 /* Tests */,
+				D5F1BD1C24AA051100D10B24 /* Connectivity_Example_macOS */,
 				607FACD11AFB9204008FA782 /* Products */,
 				35AD42983D257CA6A2F53909 /* Pods */,
 				A8CA67091073AD9C029746CF /* Frameworks */,
@@ -165,6 +191,7 @@
 			children = (
 				607FACD01AFB9204008FA782 /* Connectivity_Example.app */,
 				607FACE51AFB9204008FA782 /* Connectivity_Tests.xctest */,
+				D5F1BD1B24AA051100D10B24 /* Connectivity_Example_macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -233,8 +260,22 @@
 			children = (
 				69CC3C92548787468F0C65E3 /* Pods_Connectivity_Example.framework */,
 				C9101FE1CB42B71A47A459A9 /* Pods_Connectivity_Tests.framework */,
+				F5E30A99229C7601196BE416 /* Pods_Connectivity_Example_macOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D5F1BD1C24AA051100D10B24 /* Connectivity_Example_macOS */ = {
+			isa = PBXGroup;
+			children = (
+				D5F1BD1D24AA051100D10B24 /* AppDelegate.swift */,
+				D5F1BD1F24AA051100D10B24 /* ViewController.swift */,
+				D5F1BD2124AA051400D10B24 /* Assets.xcassets */,
+				D5F1BD2324AA051400D10B24 /* Main.storyboard */,
+				D5F1BD2624AA051400D10B24 /* Info.plist */,
+				D5F1BD2724AA051400D10B24 /* Connectivity_Example_macOS.entitlements */,
+			);
+			path = Connectivity_Example_macOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,13 +322,32 @@
 			productReference = 607FACE51AFB9204008FA782 /* Connectivity_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D5F1BD1A24AA051100D10B24 /* Connectivity_Example_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5F1BD2A24AA051400D10B24 /* Build configuration list for PBXNativeTarget "Connectivity_Example_macOS" */;
+			buildPhases = (
+				A0EE6F904280A27ADAA79D3B /* [CP] Check Pods Manifest.lock */,
+				D5F1BD1724AA051100D10B24 /* Sources */,
+				D5F1BD1824AA051100D10B24 /* Frameworks */,
+				D5F1BD1924AA051100D10B24 /* Resources */,
+				7825510D86FA8784D8EE1089 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Connectivity_Example_macOS;
+			productName = Connectivity_Example_macOS;
+			productReference = D5F1BD1B24AA051100D10B24 /* Connectivity_Example_macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
@@ -299,6 +359,10 @@
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 1020;
 						TestTargetID = 607FACCF1AFB9204008FA782;
+					};
+					D5F1BD1A24AA051100D10B24 = {
+						CreatedOnToolsVersion = 11.5;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -317,6 +381,7 @@
 			targets = (
 				607FACCF1AFB9204008FA782 /* Connectivity_Example */,
 				607FACE41AFB9204008FA782 /* Connectivity_Tests */,
+				D5F1BD1A24AA051100D10B24 /* Connectivity_Example_macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -343,6 +408,15 @@
 				13F603C12359D2A30012F230 /* success-response.html in Resources */,
 				1302B56223676CE4002E4C58 /* string-contains-response.html in Resources */,
 				13F603C42359EE290012F230 /* failure-response.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5F1BD1924AA051100D10B24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5F1BD2224AA051400D10B24 /* Assets.xcassets in Resources */,
+				D5F1BD2524AA051400D10B24 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +491,46 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7825510D86FA8784D8EE1089 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Connectivity_Example_macOS/Pods-Connectivity_Example_macOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Connectivity-macOS/Connectivity.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Connectivity.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Connectivity_Example_macOS/Pods-Connectivity_Example_macOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0EE6F904280A27ADAA79D3B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Connectivity_Example_macOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A7532169CCE6A976C11858A9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -442,7 +556,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Connectivity_Example/Pods-Connectivity_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Connectivity/Connectivity.framework",
+				"${BUILT_PRODUCTS_DIR}/Connectivity-iOS/Connectivity.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -482,6 +596,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D5F1BD1724AA051100D10B24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5F1BD2024AA051100D10B24 /* ViewController.swift in Sources */,
+				D5F1BD1E24AA051100D10B24 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -507,6 +630,14 @@
 				607FACDF1AFB9204008FA782 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		D5F1BD2324AA051400D10B24 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5F1BD2424AA051400D10B24 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -684,6 +815,67 @@
 			};
 			name = Release;
 		};
+		D5F1BD2824AA051400D10B24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC9FE05BACAB7A571B66CFBA /* Pods-Connectivity_Example_macOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Connectivity_Example_macOS/Connectivity_Example_macOS.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Connectivity_Example_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwbutler.demo.Connectivity-Example-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D5F1BD2924AA051400D10B24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 756991B8EB92F4B50383EDCD /* Pods-Connectivity_Example_macOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Connectivity_Example_macOS/Connectivity_Example_macOS.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Connectivity_Example_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwbutler.demo.Connectivity-Example-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -710,6 +902,15 @@
 			buildConfigurations = (
 				607FACF31AFB9204008FA782 /* Debug */,
 				607FACF41AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5F1BD2A24AA051400D10B24 /* Build configuration list for PBXNativeTarget "Connectivity_Example_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5F1BD2824AA051400D10B24 /* Debug */,
+				D5F1BD2924AA051400D10B24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

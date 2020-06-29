@@ -1,5 +1,5 @@
 PODS:
-  - Connectivity (3.1.2)
+  - Connectivity (4.0.0)
   - OHHTTPStubs/Core (8.0.0)
   - OHHTTPStubs/Default (8.0.0):
     - OHHTTPStubs/Core
@@ -27,9 +27,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Connectivity: 115905e721e93401f7bf5d2922ff2dae08c58f98
+  Connectivity: ef44778dc67453b295c513fbe4954f3047b37e88
   OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
 
-PODFILE CHECKSUM: be09c229336ca8bf9216d34bee3c5b0509f383f9
+PODFILE CHECKSUM: 4bb603ef83c5b2aabf902b94dd97a3ec0ce60584
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.3
