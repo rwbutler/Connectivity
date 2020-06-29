@@ -11,5 +11,5 @@ target 'Connectivity_Example' do
 end
 
 target 'Connectivity_Example_macOS' do
-  pod 'Connectivity', :path => '../'
+    pod 'Connectivity', :path => '../'
 end

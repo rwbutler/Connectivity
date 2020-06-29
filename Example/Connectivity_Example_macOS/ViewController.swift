@@ -10,13 +10,12 @@ import Cocoa
 import Connectivity
 
 class ViewController: NSViewController {
-    
     private let connectivity = Connectivity(shouldUseHTTPS: false)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        connectivity.framework = .network
+        connectivity.framework = .network
         connectivity.whenConnected = { connectivity in
             print("connectivity11", connectivity.status.description)
         }
@@ -25,13 +24,4 @@ class ViewController: NSViewController {
         }
         connectivity.startNotifier()
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-
 }
-

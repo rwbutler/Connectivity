@@ -331,6 +331,8 @@
 				D5F1BD1824AA051100D10B24 /* Frameworks */,
 				D5F1BD1924AA051100D10B24 /* Resources */,
 				7825510D86FA8784D8EE1089 /* [CP] Embed Pods Frameworks */,
+				132AFCA823A2957200BAEAB0 /* SwiftFormat */,
+				131E1F442119B6F4008012A1 /* SwiftLint */,
 			);
 			buildRules = (
 			);
