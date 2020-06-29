@@ -22,7 +22,7 @@ public class Connectivity: NSObject {
     public typealias Status = ConnectivityStatus
     public typealias ValidationMode = ConnectivityResponseValidationMode
 #if canImport(Combine)
-    @available(iOS 13.0, tvOS 13.0, *)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, *)
     public typealias Publisher = ConnectivityPublisher
 #endif
 
@@ -260,14 +260,14 @@ public extension Connectivity {
         externalQueue = queue
         isObservingInterfaceChanges = true
         setPollingEnabled(isPollingEnabled)
-        if #available(iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
+        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
             startPathMonitorNotifier()
         } else {
             startReachabilityNotifier()
         }
     }
 
-    @available(iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
     private func startPathMonitorNotifier() {
         let monitor = NWPathMonitor()
         pathMonitor = monitor
@@ -291,7 +291,7 @@ public extension Connectivity {
     /// Stop listening for Reachability changes
     func stopNotifier() {
         timer?.invalidate()
-        if #available(iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
+        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
             stopPathMonitorNotifier()
         } else {
             stopReachabilityNotifier()
@@ -299,7 +299,7 @@ public extension Connectivity {
         isObservingInterfaceChanges = false
     }
 
-    @available(iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
     private func stopPathMonitorNotifier() {
         if isObservingInterfaceChanges, let monitor = pathMonitor as? NWPathMonitor {
             monitor.cancel()
@@ -381,7 +381,7 @@ private extension Connectivity {
         }
     }
 
-    @available(iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
     func interface(with path: NWPath) -> ConnectivityInterface {
         if path.usesInterfaceType(.wifi) {
             return .wifi
@@ -392,7 +392,7 @@ private extension Connectivity {
         }
     }
 
-    @available(iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
     func interfaces(with path: NWPath) -> [ConnectivityInterface] {
         return path.availableInterfaces.map { interface in
             switch interface.type {
@@ -414,7 +414,7 @@ private extension Connectivity {
 
     /// Determines whether connected with the given method.
     func isConnected(with networkStatus: NetworkStatus) -> Bool {
-        if #available(iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
+        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
             var isNetworkInterfaceMatch: Bool = false
             if let monitor = self.pathMonitor as? NWPathMonitor, let interface = interfaceType(from: networkStatus) {
                 isNetworkInterfaceMatch = monitor.currentPath.availableInterfaces.map { $0.type }.contains(interface)
@@ -428,7 +428,7 @@ private extension Connectivity {
 
     /// Determines whether connected with the given method without Internet access (no connectivity).
     func isDisconnected(with networkStatus: NetworkStatus) -> Bool {
-        if #available(iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
+        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
             var isNetworkInterfaceMatch: Bool = false
             if let monitor = self.pathMonitor as? NWPathMonitor, let interface = interfaceType(from: networkStatus) {
                 isNetworkInterfaceMatch = monitor.currentPath.availableInterfaces.map { $0.type }.contains(interface)
@@ -441,7 +441,7 @@ private extension Connectivity {
     }
 
     /// Maps a NetworkStatus to a NWInterface.InterfaceType, if possible.
-    @available(iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
     private func interfaceType(from networkStatus: NetworkStatus) -> NWInterface.InterfaceType? {
         switch networkStatus {
         case ReachableViaWiFi:
@@ -508,7 +508,7 @@ private extension Connectivity {
     }
 
     /// Determines the connectivity status using network interface info provided by `NWPath`.
-    @available(iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
     func status(from path: NWPath, isConnected: Bool) -> ConnectivityStatus {
         let currentInterface = interface(with: path)
         let currentStatus: ConnectivityStatus
@@ -531,7 +531,7 @@ private extension Connectivity {
     }
 
     /// Updates the connectivity status using network interface info provided by `NWPath`.
-    @available(iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
     func updateStatus(from path: NWPath, isConnected: Bool) {
         availableInterfaces = interfaces(with: path)
         currentInterface = interface(with: path)
@@ -552,7 +552,7 @@ private extension Connectivity {
     func updateStatus(isConnected: Bool) {
         switch framework {
         case .network:
-            if #available(iOS 12.0, tvOS 12.0, *) {
+            if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *) {
                 let monitor = (pathMonitor as? NWPathMonitor) ?? NWPathMonitor()
                 updateStatus(from: monitor.currentPath, isConnected: isConnected)
             } else { // Fallback to SystemConfiguration framework.
