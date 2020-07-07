@@ -212,62 +212,6 @@ public extension Connectivity {
         }
     }
 
-    /// Checks specified URLs for the expected response to determine whether Internet connectivity exists. It is
-    /// intended that this function should be called only from `checkConnectivity` to ensure that it is executed
-    /// on  `internalQueue`.
-    private func checkConnectivityOnInternalQueue(completion: ((Connectivity) -> Void)? = nil) {
-        let dispatchGroup = DispatchGroup()
-        var tasks: [URLSessionDataTask] = []
-        let session: URLSession = urlSession()
-        var successfulChecks: UInt = 0, failedChecks: UInt = 0
-        let totalChecks: UInt = UInt(connectivityURLs.count)
-
-        // Connectivity check callback
-        let completionHandlerForUrl: (URL) -> ((Data?, URLResponse?, Error?) -> Void) = { url in
-            return { [weak self] data, response, _ in
-                let connectivityCheckSuccess = self?.connectivityCheckSucceeded(
-                    for: url,
-                    response: response,
-                    data: data
-                ) ?? false
-                connectivityCheckSuccess ? (successfulChecks += 1) : (failedChecks += 1)
-                dispatchGroup.leave()
-                // Abort early if enough tasks have completed successfully
-                self?.cancelConnectivityCheck(
-                    pendingTasks: tasks,
-                    successfulChecks: successfulChecks,
-                    totalChecks: totalChecks
-                )
-            }
-        }
-
-        // Check each of the specified URLs in turn
-        tasks = connectivityURLs.map {
-            guard let urlRequest = authorizedURLRequest(with: $0) else {
-                return session.dataTask(with: $0, completionHandler: completionHandlerForUrl($0))
-            }
-            return session.dataTask(with: urlRequest, completionHandler: completionHandlerForUrl($0))
-        }
-
-        tasks.forEach { task in
-            dispatchGroup.enter()
-            internalQueue.async {
-                task.resume()
-            }
-        }
-        dispatchGroup.notify(queue: externalQueue) { [weak self] in
-            let isConnected = self?.isThresholdMet(successfulChecks, outOf: totalChecks) ?? false
-            self?.updateStatus(isConnected: isConnected)
-            if let strongSelf = self {
-                unowned let unownedSelf = strongSelf
-                completion?(unownedSelf) // Caller responsible for retaining the reference.
-            }
-            if let isObserving = self?.isObservingInterfaceChanges, isObserving {
-                self?.notifyConnectivityDidChange()
-            }
-        }
-    }
-
     /// Listen for changes in Reachability
     func startNotifier(queue: DispatchQueue = DispatchQueue.main) {
         if isObservingInterfaceChanges { stopNotifier() } // Perform cleanup in event this method called twice
@@ -294,6 +238,7 @@ public extension Connectivity {
 
     private func startReachabilityNotifier() {
         checkConnectivity()
+        reachability.connectionRequired()
         reachability.startNotifier()
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(
@@ -364,6 +309,62 @@ private extension Connectivity {
     private func cancelPendingTasks(_ tasks: [URLSessionDataTask]) {
         for task in tasks where [.running, .suspended].contains(task.state) {
             task.cancel()
+        }
+    }
+
+    /// Checks specified URLs for the expected response to determine whether Internet connectivity exists. It is
+    /// intended that this function should be called only from `checkConnectivity` to ensure that it is executed
+    /// on  `internalQueue`.
+    private func checkConnectivityOnInternalQueue(completion: ((Connectivity) -> Void)? = nil) {
+        let dispatchGroup = DispatchGroup()
+        var tasks: [URLSessionDataTask] = []
+        let session: URLSession = urlSession()
+        var successfulChecks: UInt = 0, failedChecks: UInt = 0
+        let totalChecks: UInt = UInt(connectivityURLs.count)
+
+        // Connectivity check callback
+        let completionHandlerForUrl: (URL) -> ((Data?, URLResponse?, Error?) -> Void) = { url in
+            return { [weak self] data, response, _ in
+                let connectivityCheckSuccess = self?.connectivityCheckSucceeded(
+                    for: url,
+                    response: response,
+                    data: data
+                ) ?? false
+                connectivityCheckSuccess ? (successfulChecks += 1) : (failedChecks += 1)
+                dispatchGroup.leave()
+                // Abort early if enough tasks have completed successfully
+                self?.cancelConnectivityCheck(
+                    pendingTasks: tasks,
+                    successfulChecks: successfulChecks,
+                    totalChecks: totalChecks
+                )
+            }
+        }
+
+        // Check each of the specified URLs in turn
+        tasks = connectivityURLs.map {
+            guard let urlRequest = authorizedURLRequest(with: $0) else {
+                return session.dataTask(with: $0, completionHandler: completionHandlerForUrl($0))
+            }
+            return session.dataTask(with: urlRequest, completionHandler: completionHandlerForUrl($0))
+        }
+
+        tasks.forEach { task in
+            dispatchGroup.enter()
+            internalQueue.async {
+                task.resume()
+            }
+        }
+        dispatchGroup.notify(queue: externalQueue) { [weak self] in
+            let isConnected = self?.isThresholdMet(successfulChecks, outOf: totalChecks) ?? false
+            self?.updateStatus(isConnected: isConnected)
+            if let strongSelf = self {
+                unowned let unownedSelf = strongSelf
+                completion?(unownedSelf) // Caller responsible for retaining the reference.
+            }
+            if let isObserving = self?.isObservingInterfaceChanges, isObserving {
+                self?.notifyConnectivityDidChange()
+            }
         }
     }
 
