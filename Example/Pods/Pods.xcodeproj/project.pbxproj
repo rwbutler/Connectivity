@@ -1065,6 +1065,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 35D35BC3EDF7BE0F36E8BCD9E2D3D612 /* Connectivity.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1079,7 +1080,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 4.0.0;
+				MARKETING_VERSION = 4.1.0;
 				MODULEMAP_FILE = "Target Support Files/Connectivity/Connectivity.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rwbutler.Connectivity;
 				PRODUCT_MODULE_NAME = Connectivity;
@@ -1098,6 +1099,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 35D35BC3EDF7BE0F36E8BCD9E2D3D612 /* Connectivity.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1112,7 +1114,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 4.0.0;
+				MARKETING_VERSION = 4.1.0;
 				MODULEMAP_FILE = "Target Support Files/Connectivity/Connectivity.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rwbutler.Connectivity;
 				PRODUCT_MODULE_NAME = Connectivity;
