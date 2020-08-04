@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2020-07-07
+### Added
+- Added `checkWhenApplicationDidBecomeActive` flag which when enabled will check connectivity status when an app returns from the background.
+- Added `pollWhileOfflineOnly` flag which ensures that Connectivity only polls after recording an unsuccessful connection result. Following a successful result polling will cease.
+
+### Changed
+- The entirety of the logic that was previously in `checkConnectivity` is now offloaded to `internalQueue` immediately.
+- Where polling, it was possible for a successful connection check to not be able to report the network interface used (as Reachability returned `NotReachable`) where using the `.systemConfiguration` framework option. In this instance, Connectivity now uses `NWPathMonitor` as a fallback on iOS 12+ even where `.systemConfiguration` is the selected option.
+
 ## [4.0.0] - 2020-05-05
 ### Added
 - `Connectivity.Publisher` introduced providing support for Combine in iOS 13.0.
