@@ -1,11 +1,19 @@
 use_frameworks!
 
+def connectivity
+  pod 'Connectivity', path: '../'
+end
+
 target 'Connectivity_Example' do
-  pod 'Connectivity', :path => '../'
+  connectivity
 
   target 'Connectivity_Tests' do
     inherit! :search_paths
     pod 'OHHTTPStubs/Swift'
     
   end
+end
+
+target 'Connectivity_Example_macOS' do
+  connectivity
 end

@@ -10,7 +10,7 @@
 import Combine
 import Foundation
 
-@available(iOS 13.0, tvOS 13.0, *)
+@available(OSX 10.15, iOS 13.0, tvOS 13.0, *)
 public struct ConnectivityPublisher: Publisher {
     public typealias Output = Connectivity
     public typealias Failure = Never
