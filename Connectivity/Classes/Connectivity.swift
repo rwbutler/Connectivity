@@ -611,7 +611,7 @@ private extension Connectivity {
             let networkStatus = reachability.currentReachabilityStatus()
             // Reachability can report NotReachable in instances where it is possible to make a connection
             // - NWPathMonitor can provide a more accurate result.
-            if #available(iOS 12.0, tvOS 12.0, *), isConnected, networkStatus == NotReachable {
+            if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *), isConnected, networkStatus == NotReachable {
                 let monitor = (pathMonitor as? NWPathMonitor) ?? NWPathMonitor()
                 updateStatus(from: monitor.currentPath, isConnected: isConnected)
             } else {
