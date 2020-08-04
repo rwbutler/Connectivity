@@ -337,7 +337,7 @@ Please ensure that any implementation making use of this framework holds a stron
 
 ### Simulator issues
 
-Before reporting a bug please ensure that you have tested on a physical device as on simulator changes in network adapter state are not reported correctly by iOS frameworks particularly when transitioning from a disconnected -> connected state. This behaviour functions correctly on a physical device. Setting `isPollingEnabled = true` and specifying an appropriate `pollingInterval` when running on simulator will resolve this issue.
+Before reporting a bug please ensure that you have tested on a physical device as on simulator changes in network adapter state are not reported correctly by iOS frameworks particularly when transitioning from a disconnected -> connected state. This behaviour functions correctly on a physical device. Setting `pollWhileOfflineOnly = true` should resolve this issue.
 
 ## Author
 
