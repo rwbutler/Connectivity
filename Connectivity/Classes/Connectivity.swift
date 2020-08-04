@@ -8,6 +8,9 @@
 
 import Foundation
 import Network
+#if canImport(UIKit)
+import UIKit
+#endif
 #if IMPORT_REACHABILITY
 import Reachability
 #endif
@@ -49,8 +52,10 @@ public class Connectivity: NSObject {
     /// Available network interfaces as of most recent connectivity check.
     public private(set) var availableInterfaces: [Interface] = []
 
+#if canImport(UIKit)
     /// Whether or not the connectivity should be checked when the application becomes active.
     public var checkWhenApplicationDidBecomeActive: Bool = true
+#endif
 
     /// There can be a delay between being informed of a network interface change and the
     /// network actually being available.
@@ -218,7 +223,9 @@ public extension Connectivity {
         externalQueue = queue
         isObservingInterfaceChanges = true
         setPollingEnabled(isPollingEnabled)
+#if canImport(UIKit)
         observeApplicationDidBecomeActive()
+#endif
         if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
             startPathMonitorNotifier()
         } else {
@@ -278,12 +285,14 @@ public extension Connectivity {
 
 // Private API
 private extension Connectivity {
+#if canImport(UIKit)
     /// Checks connectivity when the application becomes active.
     @objc func applicationDidBecomeActive(_: NSNotification) {
         if checkWhenApplicationDidBecomeActive {
             checkConnectivity()
         }
     }
+#endif
 
     /// Returns a URL request for an Authorization header if the `bearerToken` property is set,
     /// otherwise `nil` is returned.
@@ -501,6 +510,7 @@ private extension Connectivity {
         previousStatus = currentStatus // Update for the next connectivity check
     }
 
+#if canImport(UIKit)
     // Registers Connectivity as an observer of the `UIApplication.didBecomeActiveNotification` notification.
     private func observeApplicationDidBecomeActive() {
         let notificationCenter = NotificationCenter.default
@@ -511,6 +521,7 @@ private extension Connectivity {
             object: nil
         )
     }
+#endif
 
     /// Checks connectivity when the polling timer fires.
     @objc private func pollingTimerDidFire() {

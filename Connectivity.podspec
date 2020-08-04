@@ -15,7 +15,7 @@ Connectivity wraps Apple's Reachability code to provide a reliable measure of wh
   s.tvos.deployment_target = '9.0'
   s.macos.deployment_target = '10.10'
   s.frameworks      = 'SystemConfiguration'
-  s.weak_frameworks = 'Network', 'Combine'
+  s.weak_frameworks = 'Network', 'Combine', 'UIKit'
   s.source_files = 'Connectivity/Classes/**/*'
   s.exclude_files = [
     'Connectivity/Classes/Reachability/LICENSE.txt'
