@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "Connectivity",
     platforms: [
-        .iOS("8.3"),
+        .iOS(.v9),
         .tvOS(.v9)
     ],
     products: [

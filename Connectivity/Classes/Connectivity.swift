@@ -226,7 +226,7 @@ public extension Connectivity {
 #if canImport(UIKit)
         observeApplicationDidBecomeActive()
 #endif
-        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
+        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *), isNetworkFramework() {
             startPathMonitorNotifier()
         } else {
             startReachabilityNotifier()
@@ -260,7 +260,7 @@ public extension Connectivity {
     func stopNotifier() {
         timer?.invalidate()
         NotificationCenter.default.removeObserver(self)
-        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
+        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *), isNetworkFramework() {
             stopPathMonitorNotifier()
         } else {
             stopReachabilityNotifier()
@@ -449,7 +449,7 @@ private extension Connectivity {
 
     /// Determines whether connected with the given method.
     func isConnected(with networkStatus: NetworkStatus) -> Bool {
-        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
+        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *), isNetworkFramework() {
             var isNetworkInterfaceMatch: Bool = false
             if let monitor = self.pathMonitor as? NWPathMonitor, let interface = interfaceType(from: networkStatus) {
                 isNetworkInterfaceMatch = monitor.currentPath.availableInterfaces.map { $0.type }.contains(interface)
@@ -463,7 +463,7 @@ private extension Connectivity {
 
     /// Determines whether connected with the given method without Internet access (no connectivity).
     func isDisconnected(with networkStatus: NetworkStatus) -> Bool {
-        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *), isNetworkFramework() {
+        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *), isNetworkFramework() {
             var isNetworkInterfaceMatch: Bool = false
             if let monitor = self.pathMonitor as? NWPathMonitor, let interface = interfaceType(from: networkStatus) {
                 isNetworkInterfaceMatch = monitor.currentPath.availableInterfaces.map { $0.type }.contains(interface)
@@ -611,7 +611,7 @@ private extension Connectivity {
     func updateStatus(isConnected: Bool) {
         switch framework {
         case .network:
-            if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *) {
+            if #available(OSX 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *) {
                 let monitor = (pathMonitor as? NWPathMonitor) ?? NWPathMonitor()
                 updateStatus(from: monitor.currentPath, isConnected: isConnected)
             } else { // Fallback to SystemConfiguration framework.
@@ -622,7 +622,7 @@ private extension Connectivity {
             let networkStatus = reachability.currentReachabilityStatus()
             // Reachability can report NotReachable in instances where it is possible to make a connection
             // - NWPathMonitor can provide a more accurate result.
-            if #available(OSX 10.14, iOS 12.0, tvOS 12.0, *), isConnected, networkStatus == NotReachable {
+            if #available(OSX 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *), isConnected, networkStatus == NotReachable {
                 let monitor = (pathMonitor as? NWPathMonitor) ?? NWPathMonitor()
                 updateStatus(from: monitor.currentPath, isConnected: isConnected)
             } else {
