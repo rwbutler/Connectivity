@@ -10,7 +10,7 @@
 #endif
 #endif
 
-#import "Reachability.h"
+#import <Connectivity/Reachability.h>
 
 FOUNDATION_EXPORT double ConnectivityVersionNumber;
 FOUNDATION_EXPORT const unsigned char ConnectivityVersionString[];

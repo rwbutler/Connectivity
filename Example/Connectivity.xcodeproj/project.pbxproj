@@ -18,6 +18,8 @@
 		13861A4A2361CBE0005512BE /* RegularExpressionResponseValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13861A482361CBD9005512BE /* RegularExpressionResponseValidatorTests.swift */; };
 		13E5FE86237DB5CF004979A6 /* ObjCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E5FE85237DB5CF004979A6 /* ObjCViewController.m */; };
 		13EF54F223637BBF00E467DF /* ResponseValidatorFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF54F123637BBF00E467DF /* ResponseValidatorFactoryTests.swift */; };
+		13EF56222511679700277472 /* BackgroundingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF56212511679700277472 /* BackgroundingTests.swift */; };
+		13EF56242511686D00277472 /* PollingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EF56232511686D00277472 /* PollingTests.swift */; };
 		13F603C12359D2A30012F230 /* success-response.html in Resources */ = {isa = PBXBuildFile; fileRef = 13F603BF2359D2880012F230 /* success-response.html */; };
 		13F603C32359ED000012F230 /* failure-response.html in Resources */ = {isa = PBXBuildFile; fileRef = 13F603C22359ED000012F230 /* failure-response.html */; };
 		13F603C42359EE290012F230 /* failure-response.html in Resources */ = {isa = PBXBuildFile; fileRef = 13F603C22359ED000012F230 /* failure-response.html */; };
@@ -60,6 +62,8 @@
 		13E5FE84237DB5CF004979A6 /* ObjCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCViewController.h; sourceTree = "<group>"; };
 		13E5FE85237DB5CF004979A6 /* ObjCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjCViewController.m; sourceTree = "<group>"; };
 		13EF54F123637BBF00E467DF /* ResponseValidatorFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseValidatorFactoryTests.swift; sourceTree = "<group>"; };
+		13EF56212511679700277472 /* BackgroundingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundingTests.swift; sourceTree = "<group>"; };
+		13EF56232511686D00277472 /* PollingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingTests.swift; sourceTree = "<group>"; };
 		13F603BF2359D2880012F230 /* success-response.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "success-response.html"; sourceTree = "<group>"; };
 		13F603C22359ED000012F230 /* failure-response.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "failure-response.html"; sourceTree = "<group>"; };
 		13FD6DF22462067B0009E28E /* CombineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				607FACEB1AFB9204008FA782 /* ConnectivityTests.swift */,
+				13EF56212511679700277472 /* BackgroundingTests.swift */,
+				13EF56232511686D00277472 /* PollingTests.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -350,7 +356,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
@@ -594,6 +600,8 @@
 				134B21C92468811D00A8F332 /* ConnectivityStatusTests.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* ConnectivityTests.swift in Sources */,
 				1302B56323676DD7002E4C58 /* StringEqualityResponseValidatorTests.swift in Sources */,
+				13EF56242511686D00277472 /* PollingTests.swift in Sources */,
+				13EF56222511679700277472 /* BackgroundingTests.swift in Sources */,
 				13EF54F223637BBF00E467DF /* ResponseValidatorFactoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,6 +676,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -693,7 +702,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -724,6 +733,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -742,7 +752,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -758,7 +768,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Connectivity/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rwbutler.demo.Connectivity-Example";
@@ -777,7 +786,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = Connectivity/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rwbutler.demo.Connectivity-Example";

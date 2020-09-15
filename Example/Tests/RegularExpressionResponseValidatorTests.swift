@@ -20,7 +20,7 @@ class RegularExpressionResponseValidatorTests: XCTestCase {
         string: String,
         matchedBy regEx: String,
         expectedResult: Bool,
-        file: StaticString = #file,
+        file: StaticString = #filePath,
         line: UInt = #line
     ) {
         let validator = ConnectivityResponseRegExValidator(regEx: regEx)

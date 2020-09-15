@@ -19,13 +19,6 @@ class StringEqualityResponseValidatorTests: XCTestCase {
         OHHTTPStubs.removeAllStubs()
     }
 
-    private func stubHost(_ host: String, withHTMLFrom fileName: String) {
-        stub(condition: isHost(host)) { _ in
-            let stubPath = OHPathForFile(fileName, type(of: self))
-            return fixture(filePath: stubPath!, headers: ["Content-Type": "text/html"])
-        }
-    }
-
     /// Test response is valid when the response string is equal to the expected response.
     func testEqualsExpectedResponseString() {
         stubHost("www.apple.com", withHTMLFrom: "string-equality-response.html")

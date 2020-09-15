@@ -17,6 +17,7 @@ Connectivity's objective is to solve the captive portal problem whereby an iOS d
 To learn more about how to use Connectivity, take a look at the [keynote presentation](https://github.com/rwbutler/Connectivity/blob/master/docs/presentations/connectivity.pdf), check out the [blog post](https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e), or make use of the table of contents below:
 
 - [Features](#features)
+- [What's New in Connectivity 5.0.0?](#whats-new-in-connectivity-500)
 - [What's New in Connectivity 4.0.0?](#whats-new-in-connectivity-400)
 - [Hyperconnectivity](#hyperconnectivity)
 - [Installation](#installation)
@@ -47,6 +48,10 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 - [x] Detect when connected to a router that has no Internet access.
 - [x] Be notified of changes in Internet connectivity.
 - [x] Polling connectivity checks may be performed where a constant network connection is required (optional).
+
+## What's new in Connectivity 5.0.0?
+
+Connectivity 5.0.0 provides support for Xcode 12 and raises the minimum deployment target to iOS 9 (dropping support for iOS 8).
 
 ## What's new in Connectivity 4.0.0?
 
