@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5F862368CBA8C1A8F9CD87B35B83FFAC"
+               BlueprintIdentifier = "1AB8DE08C5EE252DA1C8848981CECD5C"
                BuildableName = "Connectivity.framework"
-               BlueprintName = "Connectivity"
+               BlueprintName = "Connectivity-iOS"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -40,15 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5F862368CBA8C1A8F9CD87B35B83FFAC"
-            BuildableName = "Connectivity.framework"
-            BlueprintName = "Connectivity"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -59,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5F862368CBA8C1A8F9CD87B35B83FFAC"
+            BlueprintIdentifier = "1AB8DE08C5EE252DA1C8848981CECD5C"
             BuildableName = "Connectivity.framework"
-            BlueprintName = "Connectivity"
+            BlueprintName = "Connectivity-iOS"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
