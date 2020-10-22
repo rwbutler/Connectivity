@@ -11,7 +11,7 @@ Connectivity wraps Apple's Reachability code to provide a reliable measure of wh
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Ross Butler' => 'github@rwbutler.com' }
   s.source           = { :git => 'https://github.com/rwbutler/Connectivity.git', :tag => s.version.to_s }
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
   s.macos.deployment_target = '10.10'
   s.frameworks      = 'SystemConfiguration'
