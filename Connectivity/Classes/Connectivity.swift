@@ -152,13 +152,10 @@ public class Connectivity: NSObject {
     private var timer: Timer?
 
     /// URL session configuration ignoring cache
-    public static var urlSessionConfiguration: URLSessionConfiguration = {
-        let sessionConfiguration = URLSessionConfiguration.default
-        sessionConfiguration.requestCachePolicy = .reloadIgnoringCacheData
-        sessionConfiguration.timeoutIntervalForRequest = 5.0
-        sessionConfiguration.timeoutIntervalForResource = 5.0
-        return sessionConfiguration
-    }()
+    public static var urlSessionConfiguration: URLSessionConfiguration = defaultURLSessionConfiguration()
+
+    /// URL session used to check connectivity
+    private lazy var urlSession = defaultURLSession()
 
     /// Method used to determine whether response content is valid
     public var validationMode: ValidationMode = .containsExpectedResponseString {
@@ -327,9 +324,11 @@ private extension Connectivity {
     private func checkConnectivityOnInternalQueue(completion: ((Connectivity) -> Void)? = nil) {
         let dispatchGroup = DispatchGroup()
         var tasks: [URLSessionDataTask] = []
-        let session: URLSession = urlSession()
         var successfulChecks: UInt = 0, failedChecks: UInt = 0
         let totalChecks: UInt = UInt(connectivityURLs.count)
+
+        // Ensure that we are using the latest session configuration.
+        urlSession = defaultURLSession()
 
         // Connectivity check callback
         let completionHandlerForUrl: (URL) -> ((Data?, URLResponse?, Error?) -> Void) = { url in
@@ -353,9 +352,9 @@ private extension Connectivity {
         // Check each of the specified URLs in turn
         tasks = connectivityURLs.map {
             guard let urlRequest = authorizedURLRequest(with: $0) else {
-                return session.dataTask(with: $0, completionHandler: completionHandlerForUrl($0))
+                return urlSession.dataTask(with: $0, completionHandler: completionHandlerForUrl($0))
             }
-            return session.dataTask(with: urlRequest, completionHandler: completionHandlerForUrl($0))
+            return urlSession.dataTask(with: urlRequest, completionHandler: completionHandlerForUrl($0))
         }
 
         tasks.forEach { task in
@@ -403,6 +402,20 @@ private extension Connectivity {
             }
         }
         return result
+    }
+
+    /// Ensures that the instance var `urlSessionConfiguration` is used to create a session.
+    func defaultURLSession() -> URLSession {
+        URLSession(configuration: type(of: self).urlSessionConfiguration)
+    }
+
+    /// Returns a default `URLSessionConfiguration`.
+    static func defaultURLSessionConfiguration() -> URLSessionConfiguration {
+        let sessionConfiguration = URLSessionConfiguration.default
+        sessionConfiguration.requestCachePolicy = .reloadIgnoringCacheData
+        sessionConfiguration.timeoutIntervalForRequest = 5.0
+        sessionConfiguration.timeoutIntervalForResource = 5.0
+        return sessionConfiguration
     }
 
     func interface(with networkStatus: NetworkStatus) -> ConnectivityInterface {
@@ -635,10 +648,5 @@ private extension Connectivity {
     func updateValidator(for _: ValidationMode) {
         let validator = responseValidatorFactory.manufacture()
         responseValidator = validator
-    }
-
-    /// Returns URLSession configured with the urlSessionConfiguration property.
-    func urlSession() -> URLSession {
-        return URLSession(configuration: type(of: self).urlSessionConfiguration)
     }
 }
