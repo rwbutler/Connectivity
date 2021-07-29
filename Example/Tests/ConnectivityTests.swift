@@ -12,7 +12,7 @@ class ConnectivityTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
     }
 
     func testSuccessfulConnectivityCheckUsingSysConfig() {

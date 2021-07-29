@@ -443,7 +443,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo $(pwd)\nif which swiftlint >/dev/null; then\ncd ..\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\ncd ..\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		132AFCA823A2957200BAEAB0 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;

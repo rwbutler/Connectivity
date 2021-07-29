@@ -16,7 +16,7 @@ class StringEqualityResponseValidatorTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
     }
 
     /// Test response is valid when the response string is equal to the expected response.

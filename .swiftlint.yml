@@ -3,8 +3,8 @@ disabled_rules:
   - file_length
 opt_in_rules:
   - empty_count
-excluded:
-  - Example/Pods/OHHTTPStubs
+included:
+  - Connectivity/
 reporter: "xcode"
 type_name:
     excluded:

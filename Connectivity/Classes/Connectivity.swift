@@ -430,7 +430,7 @@ private extension Connectivity {
     }
 
     @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
-    func interface(with path: NWPath) -> ConnectivityInterface {
+    func interface(from path: NWPath) -> ConnectivityInterface {
         if path.usesInterfaceType(.wifi) {
             return .wifi
         } else if path.usesInterfaceType(.cellular) {
@@ -582,16 +582,18 @@ private extension Connectivity {
     /// Determines the connectivity status using network interface info provided by `NWPath`.
     @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
     func status(from path: NWPath, isConnected: Bool) -> ConnectivityStatus {
-        let currentInterface = interface(with: path)
-        let currentStatus: ConnectivityStatus
-        if currentInterface == .wifi {
-            currentStatus = isConnected ? .connectedViaWiFi : .connectedViaWiFiWithoutInternet
-        } else if currentInterface == .cellular {
-            currentStatus = isConnected ? .connectedViaCellular : .connectedViaCellularWithoutInternet
-        } else {
-            currentStatus = isConnected ? .connected : .notConnected
+        switch interface(from: path) {
+        case .cellular:
+            return isConnected ? .connectedViaCellular : .connectedViaCellularWithoutInternet
+        case .ethernet:
+            return isConnected ? .connected : .notConnected
+        case .loopback:
+            return isConnected ? .connected : .notConnected
+        case .other:
+            return isConnected ? .connected : .notConnected
+        case .wifi:
+            return isConnected ? .connectedViaWiFi : .connectedViaWiFiWithoutInternet
         }
-        return currentStatus
     }
 
     /// Determines whether a change in connectivity has taken place.
@@ -606,7 +608,7 @@ private extension Connectivity {
     @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
     func updateStatus(from path: NWPath, isConnected: Bool) {
         availableInterfaces = interfaces(with: path)
-        currentInterface = interface(with: path)
+        currentInterface = interface(from: path)
         self.isConnected = isConnected
         status = status(from: path, isConnected: isConnected)
     }
