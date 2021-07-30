@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.1.0] - 2021-07-30
+### Added
+- Support for determining connection state of Ethernet connections
+### Changed
+- Support compilation under Xcode 12.5.1.
+- OHHTTPStubs 8.0.0 -> 9.1.0 for testing
+- Updated documentation in README.md
+- Headers search path added to Package.swift with thanks to @larryonoff
+
 ## [5.0.0] - 2020-09-15
 ### Added
 - Support for Xcode 12.

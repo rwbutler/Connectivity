@@ -174,7 +174,7 @@ If on downloading this small HTML page iOS finds that it contains the word `Succ
 
 Apple hosts a number of these pages such that should one of these pages go down, a number of fallbacks can be checked to determine whether connectivity is present or whether our connection is blocked by the presence of a captive portal. Unfortunately iOS exposes no framework to developers which allows us to make use of the operating system’s awareness of captive portals.
 
-Connectivity is an open-source framework which wraps Reachability and endeavours to replicate iOS’s means of detecting captive portals. When Reachability detects Wi-Fi or WWAN connectivity, Connectivity contacts a number of endpoints to determine whether true Internet connectivity is present or whether a captive portal is intercepting the connections. This approach can also be used to determine whether an iOS device is connected to a Wi-Fi router with no Internet access. 
+Connectivity is an open-source framework which wraps Reachability and endeavours to replicate iOS’s means of detecting captive portals. When Reachability detects Wi-Fi or cellular connectivity, Connectivity contacts a number of endpoints to determine whether true Internet connectivity is present or whether a captive portal is intercepting the connections. This approach can also be used to determine whether an iOS device is connected to a Wi-Fi router with no Internet access. 
 
 Connectivity provides an interface as close to Reachability as possible so that it is familiar to developers used to working with Reachability. This includes providing the methods `startNotifier()` and `stopNotifier()` to begin checking for changes in Internet connectivity. Once the notifier has been started, you may query for the current connectivity status synchronously using the `status` property (similar to Reachability’s `currentReachabilityStatus`) or asynchronously by registering as an observer with the default NotificationCenter for the notification `kNetworkConnectivityChangedNotification` (in Swift this is accessed through `Notification.Name.ConnectivityDidChange`) — similar to Reachability’s notification `kNetworkReachabilityChangedNotification`.
 
@@ -204,8 +204,8 @@ func updateConnectionStatus(_ status: Connectivity.ConnectivityStatus) {
       case .connected:
 	    case .connectedViaWiFi:
 	    case .connectedViaWiFiWithoutInternet:
-	    case .connectedViaWWAN:
-	    case .connectedViaWWANWithoutInternet:
+	    case .connectedViaCellular:
+	    case .connectedViaCellularWithoutInternet:
 	    case .notConnected:
     }
         
@@ -236,9 +236,9 @@ connectivity.checkConnectivity { connectivity in
 			break
 		case .connectedViaWiFiWithoutInternet:
 			break
-		case .connectedViaWWAN:
+		case .connectedViaCellular:
 			break
-		case .connectedViaWWANWithoutInternet:
+		case .connectedViaCellularWithoutInternet:
 			break
 		case .notConnected:
 			break
