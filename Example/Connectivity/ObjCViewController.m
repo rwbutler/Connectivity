@@ -38,6 +38,10 @@
                 break;
             case ConnectivityStatusConnectedViaCellularWithoutInternet:
                 break;
+            case ConnectivityStatusConnectedViaEthernet:
+                break;
+            case ConnectivityStatusConnectedViaEthernetWithoutInternet:
+                break;
         }
     }];
     [_connectivity setWhenDisconnected:^(Connectivity * connectivity) {

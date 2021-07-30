@@ -192,6 +192,10 @@ public extension Connectivity {
     var isConnectedViaCellular: Bool {
         return isConnected(with: ReachableViaWWAN)
     }
+    
+    var isConnectedViaEthernet: Bool {
+        return isConnectedUsingEthernet()
+    }
 
     var isConnectedViaWiFi: Bool {
         return isConnected(with: ReachableViaWiFi)
@@ -199,6 +203,10 @@ public extension Connectivity {
 
     var isConnectedViaCellularWithoutInternet: Bool {
         return isDisconnected(with: ReachableViaWWAN)
+    }
+    
+    var isConnectedViaEthernetWithoutInternet: Bool {
+        return isDisconnectedUsingEthernet()
     }
 
     var isConnectedViaWiFiWithoutInternet: Bool {
@@ -433,6 +441,8 @@ private extension Connectivity {
     func interface(from path: NWPath) -> ConnectivityInterface {
         if path.usesInterfaceType(.wifi) {
             return .wifi
+        } else if path.usesInterfaceType(.wiredEthernet) {
+            return .ethernet
         } else if path.usesInterfaceType(.cellular) {
             return .cellular
         } else {
@@ -441,7 +451,7 @@ private extension Connectivity {
     }
 
     @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
-    func interfaces(with path: NWPath) -> [ConnectivityInterface] {
+    func interfaces(from path: NWPath) -> [ConnectivityInterface] {
         return path.availableInterfaces.map { interface in
             switch interface.type {
             case .cellular:
@@ -473,6 +483,19 @@ private extension Connectivity {
             return isConnected && reachability.currentReachabilityStatus() == networkStatus
         }
     }
+    
+    func isConnectedUsingEthernet() -> Bool {
+        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *), isNetworkFramework() {
+            guard let monitor = self.pathMonitor as? NWPathMonitor else {
+                return false
+            }
+            let usingEthernet = monitor.currentPath.availableInterfaces.map { interface in
+                interface.type
+            }.contains(.wiredEthernet)
+            return isConnected && usingEthernet
+        }
+        return false
+    }
 
     /// Determines whether connected with the given method without Internet access (no connectivity).
     func isDisconnected(with networkStatus: NetworkStatus) -> Bool {
@@ -486,6 +509,19 @@ private extension Connectivity {
         } else {
             return !isConnected && reachability.currentReachabilityStatus() == networkStatus
         }
+    }
+    
+    func isDisconnectedUsingEthernet() -> Bool {
+        if #available(OSX 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *), isNetworkFramework() {
+            guard let monitor = self.pathMonitor as? NWPathMonitor else {
+                return false
+            }
+            let usingEthernet = monitor.currentPath.availableInterfaces.map { interface in
+                interface.type
+            }.contains(.wiredEthernet)
+            return !isConnected && usingEthernet
+        }
+        return false
     }
 
     /// Maps a NetworkStatus to a NWInterface.InterfaceType, if possible.
@@ -586,10 +622,8 @@ private extension Connectivity {
         case .cellular:
             return isConnected ? .connectedViaCellular : .connectedViaCellularWithoutInternet
         case .ethernet:
-            return isConnected ? .connected : .notConnected
-        case .loopback:
-            return isConnected ? .connected : .notConnected
-        case .other:
+            return isConnected ? .connectedViaEthernet : .connectedViaEthernetWithoutInternet
+        case .loopback, .other:
             return isConnected ? .connected : .notConnected
         case .wifi:
             return isConnected ? .connectedViaWiFi : .connectedViaWiFiWithoutInternet
@@ -607,7 +641,7 @@ private extension Connectivity {
     /// Updates the connectivity status using network interface info provided by `NWPath`.
     @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
     func updateStatus(from path: NWPath, isConnected: Bool) {
-        availableInterfaces = interfaces(with: path)
+        availableInterfaces = interfaces(from: path)
         currentInterface = interface(from: path)
         self.isConnected = isConnected
         status = status(from: path, isConnected: isConnected)

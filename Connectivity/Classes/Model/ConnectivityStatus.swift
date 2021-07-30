@@ -11,6 +11,8 @@ import Foundation
     case connected, // where a connection is present but the interface cannot be determined.
         connectedViaCellular,
         connectedViaCellularWithoutInternet,
+        connectedViaEthernet,
+        connectedViaEthernetWithoutInternet,
         connectedViaWiFi,
         connectedViaWiFiWithoutInternet,
         determining,
@@ -24,6 +26,10 @@ import Foundation
             return "Cellular with Internet access"
         case .connectedViaCellularWithoutInternet:
             return "Cellular without Internet access"
+        case .connectedViaEthernet:
+            return "Ethernet with Internet access"
+        case .connectedViaEthernetWithoutInternet:
+            return "Ethernet without Internet access"
         case .connectedViaWiFi:
             return "Wi-Fi with Internet access"
         case .connectedViaWiFiWithoutInternet:

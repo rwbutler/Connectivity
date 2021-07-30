@@ -65,9 +65,9 @@ private extension CombineViewController {
 
     func updateConnectionStatus(_ status: Connectivity.Status) {
         switch status {
-        case .connectedViaWiFi, .connectedViaCellular, .connected:
+        case .connectedViaWiFi, .connectedViaCellular, .connected, .connectedViaEthernet:
             statusLabel.textColor = UIColor.darkGreen
-        case .connectedViaWiFiWithoutInternet, .connectedViaCellularWithoutInternet, .notConnected:
+        case .connectedViaWiFiWithoutInternet, .connectedViaCellularWithoutInternet, .connectedViaEthernetWithoutInternet, .notConnected:
             statusLabel.textColor = UIColor.red
         case .determining:
             statusLabel.textColor = UIColor.black
