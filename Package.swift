@@ -26,7 +26,10 @@ let package = Package(
             name: "Reachability",
             dependencies: [],
             path: "Connectivity/Classes/Reachability",
-            publicHeadersPath: ""
+            publicHeadersPath: "",
+            cSettings: [
+                .headerSearchPath("Connectivity/Classes/Reachability")
+            ]
         )
     ]
 )
