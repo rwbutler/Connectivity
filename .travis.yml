@@ -2,6 +2,7 @@ language: objective-c
 osx_image: xcode12
 before_install:
   - gem install cocoapods -v '1.8.3'
+  - brew update
 install:
   - brew install swiftformat
   - brew install swiftlint
