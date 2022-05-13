@@ -461,7 +461,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftformat >/dev/null; then\ncd ..\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+			shellScript = "if [ $ENABLE_PREVIEWS == \"NO\" ]\nthen\n  SDKROOT=(xcrun --sdk macosx --show-sdk-path)  \n  swift run -c release --package-path ../tools/linting swiftformat \"$SRCROOT/Connectivity*\"\nelse\n  echo \"Skipping the script because of preview mode\"\nfi\n";
 		};
 		3511C667F00570A014824B88 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

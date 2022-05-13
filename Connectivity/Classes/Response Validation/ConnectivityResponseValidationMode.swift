@@ -10,7 +10,7 @@ import Foundation
 @objc
 public enum ConnectivityResponseValidationMode: Int {
     case containsExpectedResponseString,
-        equalsExpectedResponseString,
-        matchesRegularExpression,
-        custom
+         equalsExpectedResponseString,
+         matchesRegularExpression,
+         custom
 }

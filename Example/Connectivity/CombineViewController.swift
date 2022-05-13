@@ -51,7 +51,7 @@ private extension CombineViewController {
                 strongSelf.updateNotifierButton(isCheckingConnectivity: strongSelf.isCheckingConnectivity)
             }, receiveValue: { [weak self] connectivity in
                 self?.updateConnectionStatus(connectivity.status)
-        })
+            })
         isCheckingConnectivity = true
         updateNotifierButton(isCheckingConnectivity: isCheckingConnectivity)
     }

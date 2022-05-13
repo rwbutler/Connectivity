@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Notification.Name {
-    public static let ReachabilityDidChange = Notification.Name("kNetworkReachabilityChangedNotification")
-    public static let ConnectivityDidChange = Notification.Name("kNetworkConnectivityChangedNotification")
+public extension Notification.Name {
+    static let ReachabilityDidChange = Notification.Name("kNetworkReachabilityChangedNotification")
+    static let ConnectivityDidChange = Notification.Name("kNetworkConnectivityChangedNotification")
 }

@@ -82,7 +82,7 @@ public class Connectivity: NSObject {
     public var framework: Connectivity.Framework = .systemConfiguration
 
     /// Used to for checks using NWPathMonitor
-    private var internalQueue: DispatchQueue = DispatchQueue.global(qos: .background)
+    private var internalQueue = DispatchQueue.global(qos: .background)
 
     /// Whether or not we are currently deemed to have connectivity
     public private(set) var isConnected: Bool = false
@@ -92,9 +92,10 @@ public class Connectivity: NSObject {
         didSet {
             // Only set true if `allow arbitrary loads` is set
             guard let bundleInfo = Bundle.main.infoDictionary,
-                let appTransportSecurity = bundleInfo["NSAppTransportSecurity"] as? [String: Any],
-                let allowsArbitraryLoads = appTransportSecurity["NSAllowsArbitraryLoads"] as? Bool,
-                allowsArbitraryLoads else {
+                  let appTransportSecurity = bundleInfo["NSAppTransportSecurity"] as? [String: Any],
+                  let allowsArbitraryLoads = appTransportSecurity["NSAllowsArbitraryLoads"] as? Bool,
+                  allowsArbitraryLoads
+            else {
                 isHTTPSOnly = true
                 return
             }
@@ -126,7 +127,7 @@ public class Connectivity: NSObject {
     private var previousStatus: ConnectivityStatus = .determining
 
     /// Queue to callback on
-    private var externalQueue: DispatchQueue = DispatchQueue.main
+    private var externalQueue = DispatchQueue.main
 
     /// Reachability instance for checking network adapter status
     private let reachability: Reachability
@@ -192,7 +193,7 @@ public extension Connectivity {
     var isConnectedViaCellular: Bool {
         return isConnected(with: ReachableViaWWAN)
     }
-    
+
     var isConnectedViaEthernet: Bool {
         return isConnectedUsingEthernet()
     }
@@ -204,7 +205,7 @@ public extension Connectivity {
     var isConnectedViaCellularWithoutInternet: Bool {
         return isDisconnected(with: ReachableViaWWAN)
     }
-    
+
     var isConnectedViaEthernetWithoutInternet: Bool {
         return isDisconnectedUsingEthernet()
     }
@@ -333,7 +334,7 @@ private extension Connectivity {
         let dispatchGroup = DispatchGroup()
         var tasks: [URLSessionDataTask] = []
         var successfulChecks: UInt = 0, failedChecks: UInt = 0
-        let totalChecks: UInt = UInt(connectivityURLs.count)
+        let totalChecks = UInt(connectivityURLs.count)
 
         // Ensure that we are using the latest session configuration.
         urlSession = defaultURLSession()
@@ -483,7 +484,7 @@ private extension Connectivity {
             return isConnected && reachability.currentReachabilityStatus() == networkStatus
         }
     }
-    
+
     func isConnectedUsingEthernet() -> Bool {
         if #available(OSX 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *), isNetworkFramework() {
             guard let monitor = self.pathMonitor as? NWPathMonitor else {
@@ -510,7 +511,7 @@ private extension Connectivity {
             return !isConnected && reachability.currentReachabilityStatus() == networkStatus
         }
     }
-    
+
     func isDisconnectedUsingEthernet() -> Bool {
         if #available(OSX 10.14, iOS 12.0, tvOS 12.0, watchOS 5.0, *), isNetworkFramework() {
             guard let monitor = self.pathMonitor as? NWPathMonitor else {

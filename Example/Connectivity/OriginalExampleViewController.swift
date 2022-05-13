@@ -12,7 +12,7 @@ import UIKit
 class OriginalExampleViewController: UIViewController {
     // MARK: Dependencies
 
-    fileprivate let connectivity: Connectivity = Connectivity()
+    fileprivate let connectivity = Connectivity()
 
     // MARK: Outlets
 
