@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias ResponseContainsStringValidator = ConnectivityResponseContainsStringValidator // For internal use.
+
 @objcMembers
 public class ConnectivityResponseContainsStringValidator: ConnectivityResponseValidator {
     /// The `String` expected to be contained in the response

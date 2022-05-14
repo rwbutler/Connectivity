@@ -177,6 +177,12 @@ public class Connectivity: NSObject {
         type(of: self).isHTTPSOnly = shouldUseHTTPS
         self.reachability = Reachability.forInternetConnection()
     }
+    
+    public init(configuration: ConnectivityConfiguration) {
+        self.reachability = Reachability.forInternetConnection()
+        super.init()
+        configure(with: configuration)
+    }
 
     deinit {
         stopNotifier()
@@ -385,6 +391,20 @@ private extension Connectivity {
         }
     }
 
+    /// Applies the settings specified by the `ConnectivityConfiguration` object.
+    private func configure(with configuration: ConnectivityConfiguration) {
+        self.checkWhenApplicationDidBecomeActive = configuration.checkWhenApplicationDidBecomeActive
+        self.connectivityURLs = configuration.connectivityURLs
+        self.externalQueue = configuration.callbackQueue
+        self.internalQueue = configuration.connectivityQueue
+        self.pollingInterval = configuration.pollingInterval
+        self.isPollingEnabled = configuration.pollingIsEnabled
+        self.pollWhileOfflineOnly = configuration.pollWhileOfflineOnly
+        self.responseValidator = configuration.responseValidator
+        self.successThreshold = configuration.successThreshold
+        Self.urlSessionConfiguration = configuration.urlSessionConfiguration
+    }
+    
     /// Determines whether or not the connectivity check was successful.
     private func connectivityCheckSucceeded(for url: URL, response: URLResponse?, data: Data?) -> Bool {
         let validator = responseValidatorFactory.manufacture()

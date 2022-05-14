@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias ResponseStringEqualityValidator = ConnectivityResponseStringEqualityValidator // For internal use.
+
 @objcMembers
 public class ConnectivityResponseStringEqualityValidator: ConnectivityResponseValidator {
     /// The `String` expected as the response

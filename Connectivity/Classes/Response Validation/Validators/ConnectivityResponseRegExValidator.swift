@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias ResponseRegExValidator = ConnectivityResponseRegExValidator // For internal use.
+
 @objcMembers
 public class ConnectivityResponseRegExValidator: ConnectivityResponseValidator {
     public static let defaultRegularExpression = ".*?<BODY>.*?Success.*?</BODY>.*"

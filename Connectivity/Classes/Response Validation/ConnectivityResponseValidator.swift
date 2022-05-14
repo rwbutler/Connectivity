@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias ResponseValidator = ConnectivityResponseValidator // For internal use.
+
 /// The contract for a response validator used to determine
 /// connectivity based on a network response
 @objc public protocol ConnectivityResponseValidator {

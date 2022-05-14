@@ -16,6 +16,8 @@
 		218DA3923B3AE403F7B313E3AAB35A2A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915BFF71C4778431F5E7A8027E122BE0 /* Foundation.framework */; };
 		22369D00D0A04CE8601D72983A5520E0 /* ResponseValidatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0250AB896CB6B1A1B2B71423BE349B2 /* ResponseValidatorFactory.swift */; };
 		2F889E1A12402574FF1FA29C75904EC1 /* Connectivity-macOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C3951D5ED1F84D565D430C4872F90C3B /* Connectivity-macOS-dummy.m */; };
+		30C46A07282FA7C000D59563 /* ConnectivityConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C46A06282FA7C000D59563 /* ConnectivityConfiguration.swift */; };
+		30C46A08282FA7C000D59563 /* ConnectivityConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C46A06282FA7C000D59563 /* ConnectivityConfiguration.swift */; };
 		32F62D18F90EDD0572C5360A6C77A48B /* Pods-Connectivity_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 52AE9AC750FCC73187151E0FCA5B4680 /* Pods-Connectivity_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		388719963BD7CE68A690E39602C0ABA3 /* HTTPStubsMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 7733FD4A1A3AB538B245BD517B663B28 /* HTTPStubsMethodSwizzling.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		38B33DD878E4E5E2AFD7CBC4057413D2 /* HTTPStubsResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9104B13FA4CDFA3B9E98F37F21ED3F /* HTTPStubsResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -132,6 +134,7 @@
 		2B3D3237BDFD3BFD3B61513F838E21F6 /* OHHTTPStubs-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs-prefix.pch"; sourceTree = "<group>"; };
 		2BE71C90D0922845354C4FD8ADBDEB5A /* ConnectivityResponseValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseValidator.swift; sourceTree = "<group>"; };
 		2E54BB7F8AD5924DF412D7D72EDB8949 /* Pods_Connectivity_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connectivity_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		30C46A06282FA7C000D59563 /* ConnectivityConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityConfiguration.swift; sourceTree = "<group>"; };
 		32E276B84B1AD3141F5DA6D54942853D /* Pods-Connectivity_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Connectivity_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		35A162E1F69D61D7F102A33DCC029280 /* ConnectivityResponseStringEqualityValidator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConnectivityResponseStringEqualityValidator.swift; sourceTree = "<group>"; };
 		3690542DB83A630A06B06E35787159C5 /* Pods-Connectivity_Example_macOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Connectivity_Example_macOS-umbrella.h"; sourceTree = "<group>"; };
@@ -481,6 +484,7 @@
 				3D60D68475945B9A32A86957BB251460 /* ConnectivityInterface.swift */,
 				B1462A82D6A31800EBE741CBD515A0E1 /* ConnectivityPercentage.swift */,
 				CF4850042421E679A313BFA7596527C1 /* ConnectivityStatus.swift */,
+				30C46A06282FA7C000D59563 /* ConnectivityConfiguration.swift */,
 			);
 			name = Model;
 			path = Connectivity/Classes/Model;
@@ -885,6 +889,7 @@
 				EBAC470A5D2614C3F7416803552B747A /* Factory.swift in Sources */,
 				20CBE55D87D65A68F74FD1265BA193B4 /* NotificationNameAdditions.swift in Sources */,
 				184C0D975E6DCDB7C8E4AC349078D985 /* PublishersAdditions.swift in Sources */,
+				30C46A07282FA7C000D59563 /* ConnectivityConfiguration.swift in Sources */,
 				EEE2A10CA1F7EF67B72C11BEF6BFD250 /* Reachability.m in Sources */,
 				22369D00D0A04CE8601D72983A5520E0 /* ResponseValidatorFactory.swift in Sources */,
 			);
@@ -935,6 +940,7 @@
 				861AF98E14B7B09DA1D16572BD3314B8 /* Factory.swift in Sources */,
 				AF769541C055F4DB92A42286DFECF16B /* NotificationNameAdditions.swift in Sources */,
 				6D872FC01755609F823529E03623B3FB /* PublishersAdditions.swift in Sources */,
+				30C46A08282FA7C000D59563 /* ConnectivityConfiguration.swift in Sources */,
 				460617CC5ACBE8FB3DDD0C4DD33DFB3E /* Reachability.m in Sources */,
 				6567B55BC58C5BB8B94E1CEF65DA8BC3 /* ResponseValidatorFactory.swift in Sources */,
 			);

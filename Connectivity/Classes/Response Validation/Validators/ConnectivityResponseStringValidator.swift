@@ -14,6 +14,8 @@ public enum ConnectivityResponseStringValidationMode: Int {
          matchesRegularExpression
 }
 
+typealias ResponseStringValidator = ConnectivityResponseStringValidator // For internal use.
+
 @objcMembers
 public class ConnectivityResponseStringValidator: ConnectivityResponseValidator {
     public typealias ValidationMode = ConnectivityResponseStringValidationMode
