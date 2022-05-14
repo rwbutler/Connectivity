@@ -393,15 +393,17 @@ private extension Connectivity {
 
     /// Applies the settings specified by the `ConnectivityConfiguration` object.
     private func configure(with configuration: ConnectivityConfiguration) {
-        self.checkWhenApplicationDidBecomeActive = configuration.checkWhenApplicationDidBecomeActive
-        self.connectivityURLs = configuration.connectivityURLs
-        self.externalQueue = configuration.callbackQueue
-        self.internalQueue = configuration.connectivityQueue
-        self.pollingInterval = configuration.pollingInterval
-        self.isPollingEnabled = configuration.pollingIsEnabled
-        self.pollWhileOfflineOnly = configuration.pollWhileOfflineOnly
-        self.responseValidator = configuration.responseValidator
-        self.successThreshold = configuration.successThreshold
+#if canImport(UIKit)
+        checkWhenApplicationDidBecomeActive = configuration.checkWhenApplicationDidBecomeActive
+#endif
+        connectivityURLs = configuration.connectivityURLs
+        externalQueue = configuration.callbackQueue
+        internalQueue = configuration.connectivityQueue
+        pollingInterval = configuration.pollingInterval
+        isPollingEnabled = configuration.pollingIsEnabled
+        pollWhileOfflineOnly = configuration.pollWhileOfflineOnly
+        responseValidator = configuration.responseValidator
+        successThreshold = configuration.successThreshold
         Self.urlSessionConfiguration = configuration.urlSessionConfiguration
     }
     
