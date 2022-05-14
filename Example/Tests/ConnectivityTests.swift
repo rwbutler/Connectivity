@@ -156,7 +156,103 @@ class ConnectivityTests: XCTestCase {
         ))
     }
 
-    // MARK: - Polling
+    // MARK: - Fluent configuration API.
+    
+    func testWhenConfigurationCheckWhenApplicationDidBecomeActiveIsTrueThenConnectivityIsTrue() {
+        let configuration = Configuration(checkWhenApplicationDidBecomeActive: true)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertTrue(sut.checkWhenApplicationDidBecomeActive)
+    }
+    
+    func testWhenConfigurationCheckWhenApplicationDidBecomeActiveIsFalseThenConnectivityIsFalse() {
+        let configuration = Configuration(checkWhenApplicationDidBecomeActive: false)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertFalse(sut.checkWhenApplicationDidBecomeActive)
+    }
+    
+    func testWhenConfigurationConnectivityURLsAreSetThenConnectivityURLsAreSetCorrectly() throws {
+        let connectivityURL = try XCTUnwrap(URL(string: "https://www.microsoft.com"))
+        let connectivityURLs: [URL] = [connectivityURL]
+        let configuration = Configuration(connectivityURLs: connectivityURLs)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertEqual(sut.connectivityURLs.count, 1)
+        guard let firstConnectivityURL = sut.connectivityURLs.first else {
+            return
+        }
+        XCTAssertEqual(firstConnectivityURL, connectivityURL)
+    }
+    
+    func testWhenConfigurationConnectivityURLIsNotHTTPSThenConnectivityURLIsNotSet() throws {
+        let connectivityURL = try XCTUnwrap(URL(string: "http://www.microsoft.com"))
+        let connectivityURLs: [URL] = [connectivityURL]
+        let configuration = Configuration(connectivityURLs: connectivityURLs)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertTrue(sut.connectivityURLs.isEmpty)
+    }
+    
+    func testWhenConfigurationCallbackQueueIsSetThenConnectivityExternalQueueIsSetCorrectly() {
+        let callbackQueue = DispatchQueue(label: "test-queue")
+        let configuration = Configuration(callbackQueue: callbackQueue)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertTrue(sut.externalQueue === callbackQueue)
+    }
+    
+    func testWhenConfigurationConnectivityQueueIsSetThenConnectivityInternalQueueIsSetCorrectly() {
+        let connectivityQueue = DispatchQueue(label: "test-queue")
+        let configuration = Configuration(connectivityQueue: connectivityQueue)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertTrue(sut.internalQueue === connectivityQueue)
+    }
+    
+    func testWhenConfigurationPollingIsEnabledIsTrueThenConnectivityIsPollingEnabledIsTrue() {
+        let configuration = Configuration(pollingIsEnabled: true)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertTrue(sut.isPollingEnabled)
+    }
+    
+    func testWhenConfigurationPollingIntervalIsSetThenConnectivityPollingIntervalIsSetCorrectly() {
+        let configuration = Configuration(pollingInterval: 21)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertEqual(sut.pollingInterval, 21)
+    }
+    
+    func testWhenConfigurationPollingIsEnabledIsFalseThenConnectivityIsPollingEnabledIsFalse() {
+        let configuration = Configuration(pollingIsEnabled: false)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertFalse(sut.isPollingEnabled)
+    }
+    
+    func testWhenConfigurationPollWhileOfflineOnlyIsTrueThenConnectivityPollWhileOfflineOnlyIsTrue() {
+        let configuration = Configuration(pollWhileOfflineOnly: true)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertTrue(sut.pollWhileOfflineOnly)
+    }
+    
+    func testWhenConfigurationPollWhileOfflineOnlyIsFalseThenConnectivityPollWhileOfflineOnlyIsFalse() {
+        let configuration = Configuration(pollWhileOfflineOnly: true)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertTrue(sut.pollWhileOfflineOnly)
+    }
+    
+    func testWhenConfigurationResponseValidatorIsSetThenConnectivityResponseValidatorIsSetCorrectly() {
+        let responseValidator = MockResponseValidator()
+        let configuration = Configuration(responseValidator: responseValidator)
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertTrue(sut.responseValidator === sut.responseValidator)
+    }
+    
+    func testWhenConfigurationSuccessThresholdIs50PCThenConnectivityIs50PC() {
+        let configuration = Configuration(successThreshold: Connectivity.Percentage(50))
+        let sut = Connectivity(configuration: configuration)
+        XCTAssertEqual(sut.successThreshold, Connectivity.Percentage(50))
+    }
+    
+    func testWhenConfigurationURLSessionConfigIsSetThenConnectivityURLSessionConfigIsSetCorrectly() {
+        let urlSessionConfiguration = URLSessionConfiguration.default
+        let configuration = Configuration(urlSessionConfiguration: urlSessionConfiguration)
+        let _ = Connectivity(configuration: configuration)
+        XCTAssertTrue(Connectivity.urlSessionConfiguration === urlSessionConfiguration)
+    }
 }
 
 extension XCTestCase {

@@ -31,21 +31,6 @@ public class Connectivity: NSObject {
 
     // MARK: State
 
-    /// % successful connections required to be deemed to have connectivity
-    public var successThreshold = Connectivity.Percentage(50.0)
-
-    /// URLs to contact in order to check connectivity
-    public var connectivityURLs: [URL] = Connectivity
-        .defaultConnectivityURLs(shouldUseHTTPS: Connectivity.isHTTPSOnly) {
-        didSet {
-            if Connectivity.isHTTPSOnly { // if HTTPS only set only allow HTTPS URLs
-                connectivityURLs = connectivityURLs.filter { url in
-                    return url.absoluteString.lowercased().starts(with: "https")
-                }
-            }
-        }
-    }
-
     /// Optionally configure a bearer token to be sent as part of an Authorization header.
     public var bearerToken: String?
 
@@ -61,6 +46,18 @@ public class Connectivity: NSObject {
     /// network actually being available.
     public var connectivityCheckLatency: Double = 0.5
 
+    /// URLs to contact in order to check connectivity
+    public var connectivityURLs: [URL] = Connectivity
+        .defaultConnectivityURLs(shouldUseHTTPS: Connectivity.isHTTPSOnly) {
+        didSet {
+            if Connectivity.isHTTPSOnly { // if HTTPS only set only allow HTTPS URLs
+                connectivityURLs = connectivityURLs.filter { url in
+                    return url.absoluteString.lowercased().starts(with: "https")
+                }
+            }
+        }
+    }
+    
     /// Current network interface as of most recent connectivity check.
     public private(set) var currentInterface: Interface = .other
 
@@ -78,11 +75,14 @@ public class Connectivity: NSObject {
         }
     }
 
+    /// Queue to callback on
+    private (set) var externalQueue = DispatchQueue.main
+    
     /// Whether or not to use System Configuration or Network (on iOS 12+) framework.
     public var framework: Connectivity.Framework = .systemConfiguration
 
     /// Used to for checks using NWPathMonitor
-    private var internalQueue = DispatchQueue.global(qos: .background)
+    private (set) var internalQueue = DispatchQueue.global(qos: .background)
 
     /// Whether or not we are currently deemed to have connectivity
     public private(set) var isConnected: Bool = false
@@ -126,9 +126,6 @@ public class Connectivity: NSObject {
     /// Status last time a check was performed
     private var previousStatus: ConnectivityStatus = .determining
 
-    /// Queue to callback on
-    private var externalQueue = DispatchQueue.main
-
     /// Reachability instance for checking network adapter status
     private let reachability: Reachability
 
@@ -149,6 +146,9 @@ public class Connectivity: NSObject {
     /// Status of the current connection
     public var status: ConnectivityStatus = .determining
 
+    /// % successful connections required to be deemed to have connectivity
+    public var successThreshold = Connectivity.Percentage(50.0)
+    
     /// Timer for polling connectivity endpoints when not awaiting changes in reachability
     private var timer: Timer?
 
