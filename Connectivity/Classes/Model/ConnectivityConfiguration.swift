@@ -39,7 +39,7 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
     public init(
         callbackQueue: DispatchQueue = DispatchQueue.main,
         checkWhenApplicationDidBecomeActive: Bool = true,
-        connectivityQueue: DispatchQueue = DispatchQueue.global(qos: .default),
+        connectivityQueue: DispatchQueue = .global(qos: .default),
         connectivityURLs: [URL] = defaultConnectivityURLs,
         pollingInterval: Double = 10.0,
         pollingIsEnabled: Bool = true,

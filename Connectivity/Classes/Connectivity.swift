@@ -82,7 +82,7 @@ public class Connectivity: NSObject {
     public var framework: Connectivity.Framework = .systemConfiguration
 
     /// Used to for checks using NWPathMonitor
-    private (set) var internalQueue = DispatchQueue.global(qos: .background)
+    private (set) var internalQueue = DispatchQueue.global(qos: .default)
 
     /// Whether or not we are currently deemed to have connectivity
     public private(set) var isConnected: Bool = false

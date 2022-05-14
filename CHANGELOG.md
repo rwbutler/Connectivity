@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [5.2.0] - 2022-05-14
 ### Added
 - Fluent configuration API: Connectivity may now be configured by passing a `ConnectivityConfiguration` object to the initializer.
+### Changed
+- Internal `DispatchQueue` used by the framework now uses `.default` QOS rather than `.background`.
 
 ## [5.1.1] - 2022-05-13
 ### Changed
