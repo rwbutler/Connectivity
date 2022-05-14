@@ -17,8 +17,7 @@ Connectivity's objective is to solve the captive portal problem whereby an iOS d
 To learn more about how to use Connectivity, take a look at the [keynote presentation](https://github.com/rwbutler/Connectivity/blob/master/docs/presentations/connectivity.pdf), check out the [blog post](https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e), or make use of the table of contents below:
 
 - [Features](#features)
-- [What's New in Connectivity 5.0.0?](#whats-new-in-connectivity-500)
-- [What's New in Connectivity 4.0.0?](#whats-new-in-connectivity-400)
+- [What's New in Connectivity 5.2.0?](#whats-new-in-connectivity-520)
 - [Hyperconnectivity](#hyperconnectivity)
 - [Installation](#installation)
 	- [Cocoapods](#cocoapods)
@@ -27,6 +26,8 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 - [How It Works](#how-it-works)
 - [Usage](#usage)
 	- [Callbacks](#callbacks)
+	- [Combine](#combine)
+	- [Configuration](#configuration)
 	- [One-Off Checks](#one-off-checks)
 	- [Connectivity URLs](#connectivity-urls)
 	- [Network Framework](#network-framework)
@@ -48,26 +49,11 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 - [x] Detect when connected to a router that has no Internet access.
 - [x] Be notified of changes in Internet connectivity.
 - [x] Polling connectivity checks may be performed where a constant network connection is required (optional).
+- [x] Combine support via [`Connectivity.Publisher`](https://github.com/rwbutler/Connectivity/blob/master/Connectivity/Classes/Combine/ConnectivityPublisher.swift).
 
-## What's new in Connectivity 5.0.0?
+## What's new in Connectivity 5.2.0?
 
-Connectivity 5.0.0 provides support for Xcode 12 and raises the minimum deployment target to iOS 9 (dropping support for iOS 8).
-
-## What's new in Connectivity 4.0.0?
-
-Connectivity 4.0.0 adds [`Connectivity.Publisher`](https://github.com/rwbutler/Connectivity/blob/master/Connectivity/Classes/Combine/ConnectivityPublisher.swift) enabling Connectivity to be used with Apple's [Combine](https://developer.apple.com/documentation/combine) framework. For more information see the example using Combine in the sample app.
-
-If you require the previous version then in your `Podfile` set:
-
-```ruby
-pod "Connectivity" "~> 3.0" 
-```
-
-Or if you are using Carthage add the following to your `Cartfile`:
-
-```ogdl
-github "rwbutler/Connectivity" ~> 3.0
-```
+Connectivity 5.2.0 provides a new fluent interface for configuring the Connectivity framework. See [Configuration](#configuration) for more information.
 
 ## Hyperconnectivity
 
@@ -75,9 +61,14 @@ If you don't require support for Objective-C or versions of iOS prior to iOS 13 
 
 <br/>
 <div align="center">
-    <a href="https://github.com/rwbutler/Hyperconnectivity"><img src="https://github.com/rwbutler/Hyperconnectivity/raw/master/docs/images/hyperconnectivity-logo.png" alt="Xcode 11 Package Options" height="100" width="100"></a>
+    <a href="https://github.com/rwbutler/Hyperconnectivity"><img src="https://github.com/rwbutler/Hyperconnectivity/raw/master/docs/images/hyperconnectivity-logo.png" alt="Hyperconnectivity logo" height="100" width="100"></a>
 </div>
 
+## OpenConnectivity
+
+Connectivity and Hyperconnectivity both provide support for Combine however if you're working in an environment where Combine is unavailable e.g. supporting versions of iOS prior to 13 then you may make use of [OpenCombine](https://github.com/OpenCombine/OpenCombine). 
+
+[OpenConnectivity](https://github.com/rwbutler/OpenConnectivity) extends Connectivity with an OpenCombine-compatible publisher to allow you to take advantage of Combine syntax in environments where Combine itself is unavailable.
 
 ## Installation
 
@@ -219,6 +210,34 @@ connectivity.startNotifier()
 ```
 
 Then remember to call `connectivity.stopNotifier()` when you are done.
+
+### Combine
+Connectivity provides support for [Combine](https://developer.apple.com/documentation/combine) via the provision of [`Connectivity.Publisher`](https://github.com/rwbutler/Connectivity/blob/master/Connectivity/Classes/Combine/ConnectivityPublisher.swift) which allows a client to subscribe and be notified of changes in Internet connectivity.
+
+The provided sample application includes [CombineViewController.swift](./Example/Connectivity/CombineViewController.swift) illustrating how to use Connectivity with the Combine framework.
+
+Note: You do not need to call `startNotifier` when using `ConnectivityPublisher` - this will be done for you automatically on subscription.
+
+### Configuration
+
+The framework can be configured by setting the relevant properties on the `Connectivity` object directly e.g.
+
+```swift
+let connectivity = Connectivity()
+connectivity.pollingInterval = 5
+connectivity.expectedResponseString = "Success"
+connectivity.validationMode = .containsExpectedResponseString
+```
+
+Connectivity 5.2.0 introduces a new fluent interface for configuring the framework by passing a `ConnectivityConfiguration` object to the `Connectivity` initializer.
+
+```swift
+let connectivity = Connectivity(
+    configuration: .init()
+                .configurePolling(interval: 5)
+                .configureResponseValidation(.containsExpectedResponseString, expected: "Success")
+)
+```
 
 ### One-Off Checks
 
