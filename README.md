@@ -17,7 +17,7 @@ Connectivity's objective is to solve the captive portal problem whereby an iOS d
 To learn more about how to use Connectivity, take a look at the [keynote presentation](https://github.com/rwbutler/Connectivity/blob/master/docs/presentations/connectivity.pdf), check out the [blog post](https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e), or make use of the table of contents below:
 
 - [Features](#features)
-- [What's New in Connectivity 5.2.0?](#whats-new-in-connectivity-520)
+- [What's New in Connectivity 5.3.0?](#whats-new-in-connectivity-530)
 - [Hyperconnectivity](#hyperconnectivity)
 - [Installation](#installation)
 	- [Cocoapods](#cocoapods)
@@ -51,9 +51,19 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 - [x] Polling connectivity checks may be performed where a constant network connection is required (optional).
 - [x] Combine support via [`Connectivity.Publisher`](https://github.com/rwbutler/Connectivity/blob/master/Connectivity/Classes/Combine/ConnectivityPublisher.swift).
 
-## What's new in Connectivity 5.2.0?
+## What's new in Connectivity 5.3.0?
 
-Connectivity 5.2.0 provides a new fluent interface for configuring the Connectivity framework. See [Configuration](#configuration) for more information.
+Connectivity 5.3.0 provides a new fluent interface for configuring the Connectivity framework. See [Configuration](#configuration) for more information.
+
+This allows you to configure the framework when making use of Combine publishers e.g.
+
+```swift
+let publisher = Connectivity.Publisher(
+    configuration:
+					.init()
+          .configureURLSession(.default)
+)
+```
 
 ## Hyperconnectivity
 
@@ -214,7 +224,15 @@ Then remember to call `connectivity.stopNotifier()` when you are done.
 ### Combine
 Connectivity provides support for [Combine](https://developer.apple.com/documentation/combine) via the provision of [`Connectivity.Publisher`](https://github.com/rwbutler/Connectivity/blob/master/Connectivity/Classes/Combine/ConnectivityPublisher.swift) which allows a client to subscribe and be notified of changes in Internet connectivity.
 
-The provided sample application includes [CombineViewController.swift](./Example/Connectivity/CombineViewController.swift) illustrating how to use Connectivity with the Combine framework.
+The provided sample application includes [CombineViewController.swift](./Example/Connectivity/CombineViewController.swift) illustrating how to use Connectivity with the Combine framework e.g.
+
+```swift
+let publisher = Connectivity.Publisher(
+    configuration:
+					.init()
+          .configureURLSession(.default)
+)
+```
 
 Note: You do not need to call `startNotifier` when using `ConnectivityPublisher` - this will be done for you automatically on subscription.
 

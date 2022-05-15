@@ -15,13 +15,13 @@ import UIKit
 @available(iOS 13.0, *)
 class CombineViewController: UIViewController {
     // MARK: Outlets
-
+    
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var notifierButton: UIButton!
     @IBOutlet var statusLabel: UILabel!
-
+    
     // MARK: Status
-
+    
     fileprivate var isCheckingConnectivity: Bool = false
     private var cancellable: AnyCancellable?
 }
@@ -39,9 +39,12 @@ extension CombineViewController {
 private extension CombineViewController {
     func startConnectivityChecks() {
         activityIndicator.startAnimating()
-        let publisher = Connectivity.Publisher()
+        let publisher = Connectivity.Publisher(
+            configuration:
+                    .init()
+                    .configureURLSession(.default)
+        ).eraseToAnyPublisher()
         cancellable = publisher.receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
             .sink(receiveCompletion: { [weak self] _ in
                 guard let strongSelf = self else {
                     return
@@ -55,14 +58,14 @@ private extension CombineViewController {
         isCheckingConnectivity = true
         updateNotifierButton(isCheckingConnectivity: isCheckingConnectivity)
     }
-
+    
     func stopConnectivityChecks() {
         activityIndicator.stopAnimating()
         cancellable?.cancel()
         isCheckingConnectivity = false
         updateNotifierButton(isCheckingConnectivity: isCheckingConnectivity)
     }
-
+    
     func updateConnectionStatus(_ status: Connectivity.Status) {
         switch status {
         case .connectedViaWiFi, .connectedViaCellular, .connected, .connectedViaEthernet:
@@ -74,7 +77,7 @@ private extension CombineViewController {
         }
         statusLabel.text = status.description
     }
-
+    
     func updateNotifierButton(isCheckingConnectivity: Bool) {
         let buttonText = isCheckingConnectivity ? "Stop notifier" : "Start notifier"
         let buttonTextColor = isCheckingConnectivity ? UIColor.red : UIColor.darkGreen
