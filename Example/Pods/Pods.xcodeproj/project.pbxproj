@@ -1043,7 +1043,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MARKETING_VERSION = 5.3.0;
+				MARKETING_VERSION = 5.3.1;
 				MODULEMAP_FILE = "Target Support Files/Connectivity-macOS/Connectivity-macOS.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rwbutler.connectivity;
 				PRODUCT_MODULE_NAME = Connectivity;
@@ -1106,7 +1106,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 5.3.0;
+				MARKETING_VERSION = 5.3.1;
 				MODULEMAP_FILE = "Target Support Files/Connectivity-iOS/Connectivity-iOS.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rwbutler.connectivity;
 				PRODUCT_MODULE_NAME = Connectivity;
@@ -1139,7 +1139,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 5.3.0;
+				MARKETING_VERSION = 5.3.1;
 				MODULEMAP_FILE = "Target Support Files/Connectivity-iOS/Connectivity-iOS.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rwbutler.connectivity;
 				PRODUCT_MODULE_NAME = Connectivity;
@@ -1392,7 +1392,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MARKETING_VERSION = 5.3.0;
+				MARKETING_VERSION = 5.3.1;
 				MODULEMAP_FILE = "Target Support Files/Connectivity-macOS/Connectivity-macOS.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rwbutler.connectivity;
 				PRODUCT_MODULE_NAME = Connectivity;

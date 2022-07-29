@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.3.1] - 2022-07-29
+### Changed
+Applied Carthage fix - see: [https://github.com/rwbutler/Connectivity/pull/66](https://github.com/rwbutler/Connectivity/pull/66) and [https://github.com/rwbutler/Connectivity/issues/65](https://github.com/rwbutler/Connectivity/issues/65).
+
 ## [5.3.0] - 2022-05-15
 ### Added
 A Connectivity publisher now accepts a configuration object which can be used to configure the framework.
