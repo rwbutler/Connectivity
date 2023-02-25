@@ -18,6 +18,8 @@ class ConnectivitySubscription<S: Subscriber>: Subscription where S.Input == Con
     init(configuration: ConnectivityConfiguration, subscriber: S) {
         connectivity = Connectivity(configuration: configuration)
         connectivity.framework = configuration.framework
+        connectivity.bearerToken = configuration.bearerToken
+        connectivity.authorizationHeader = configuration.authorizationHeader
         self.subscriber = subscriber
         startNotifier(with: subscriber)
     }

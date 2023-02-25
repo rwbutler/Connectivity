@@ -33,6 +33,10 @@ public class Connectivity: NSObject {
 
     /// Optionally configure a bearer token to be sent as part of an Authorization header.
     public var bearerToken: String?
+    
+    /// Optionally configure the Authorization header manually.
+    /// Note: `bearerToken` has a higher priority
+    public var authorizationHeader: String?
 
     /// Available network interfaces as of most recent connectivity check.
     public private(set) var availableInterfaces: [Interface] = []
@@ -309,9 +313,9 @@ private extension Connectivity {
     /// Returns a URL request for an Authorization header if the `bearerToken` property is set,
     /// otherwise `nil` is returned.
     func authorizedURLRequest(with url: URL) -> URLRequest? {
-        guard let bearerToken = self.bearerToken else { return nil }
+        guard let headerValue = bearerToken != nil ? "Bearer \(bearerToken!)" : authorizationHeader != nil ? authorizationHeader : nil  else { return nil }
         var request = URLRequest(url: url)
-        request.setValue("Bearer \(bearerToken)", forHTTPHeaderField: "Authorization")
+        request.setValue(headerValue, forHTTPHeaderField: "Authorization")
         return request
     }
 

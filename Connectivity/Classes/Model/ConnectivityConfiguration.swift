@@ -32,6 +32,8 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
     private (set) var  pollWhileOfflineOnly: Bool
     private (set) var responseValidator: ResponseValidator
     private (set) var framework: Connectivity.Framework = .systemConfiguration
+    private (set) var bearerToken: String?
+    private (set) var authorizationHeader: String?
     
     /// % successful connections required to be deemed to have connectivity
     let successThreshold: Connectivity.Percentage
@@ -97,6 +99,16 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
     
     public func configureFramework(_ framework: Connectivity.Framework) -> Self {
         self.framework = framework
+        return self
+    }
+    
+    public func configureBearerToken(with token: String?) -> Self {
+        self.bearerToken = token
+        return self
+    }
+    
+    public func configureAuthorizationHeader(with value: String?) -> Self {
+        self.authorizationHeader = value
         return self
     }
 }
