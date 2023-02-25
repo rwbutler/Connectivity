@@ -31,6 +31,7 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
     private (set) var  pollingIsEnabled: Bool
     private (set) var  pollWhileOfflineOnly: Bool
     private (set) var responseValidator: ResponseValidator
+    private (set) var framework: Connectivity.Framework = .systemConfiguration
     
     /// % successful connections required to be deemed to have connectivity
     let successThreshold: Connectivity.Percentage
@@ -91,6 +92,11 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
     
     public func configureURLSession(_ urlSessionConfiguration: URLSessionConfiguration) -> Self {
         self.urlSessionConfiguration = urlSessionConfiguration
+        return self
+    }
+    
+    public func configureFramework(_ framework: Connectivity.Framework) -> Self {
+        self.framework = framework
         return self
     }
 }
