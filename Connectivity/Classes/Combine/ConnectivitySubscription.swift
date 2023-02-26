@@ -20,6 +20,9 @@ class ConnectivitySubscription<S: Subscriber>: Subscription where S.Input == Con
         connectivity.framework = configuration.framework
         connectivity.bearerToken = configuration.bearerToken
         connectivity.authorizationHeader = configuration.authorizationHeader
+        if let validatioMode = configuration.validatioMode {
+            connectivity.validationMode = validatioMode
+        }
         self.subscriber = subscriber
         startNotifier(with: subscriber)
     }
