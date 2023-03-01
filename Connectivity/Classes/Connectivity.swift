@@ -414,6 +414,12 @@ private extension Connectivity {
         pollWhileOfflineOnly = configuration.pollWhileOfflineOnly
         responseValidator = configuration.responseValidator
         successThreshold = configuration.successThreshold
+        framework = configuration.framework
+        bearerToken = configuration.bearerToken
+        authorizationHeader = configuration.authorizationHeader
+        if let validatioMode = configuration.validatioMode {
+            validationMode = validatioMode
+        }
         Self.urlSessionConfiguration = configuration.urlSessionConfiguration
     }
     
