@@ -310,7 +310,8 @@ private extension Connectivity {
     }
 #endif
 
-    /// Returns a URL request for an Authorization header if the `bearerToken` property is set,
+    /// Returns a URL request for an Authorization header if `authorizationHeader` or `bearerToken` property is set,
+    /// `authorizationHeader` is prefered over `bearerToken`
     /// otherwise `nil` is returned.
     func authorizedURLRequest(with url: URL) -> URLRequest? {
         var authHeader: String? = authorizationHeader
