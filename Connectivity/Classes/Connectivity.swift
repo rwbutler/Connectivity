@@ -313,9 +313,15 @@ private extension Connectivity {
     /// Returns a URL request for an Authorization header if the `bearerToken` property is set,
     /// otherwise `nil` is returned.
     func authorizedURLRequest(with url: URL) -> URLRequest? {
-        guard let headerValue = bearerToken != nil ? "Bearer \(bearerToken!)" : authorizationHeader != nil ? authorizationHeader : nil  else { return nil }
+        var authHeader: String? = authorizationHeader
+        if let bearerToken {
+            authHeader = authHeader ?? "Bearer \(bearerToken)"
+        }
+        guard let authHeader else {
+            return nil
+        }
         var request = URLRequest(url: url)
-        request.setValue(headerValue, forHTTPHeaderField: "Authorization")
+        request.setValue(authHeader, forHTTPHeaderField: "Authorization")
         return request
     }
 
