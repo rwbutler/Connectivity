@@ -31,6 +31,10 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
     private (set) var  pollingIsEnabled: Bool
     private (set) var  pollWhileOfflineOnly: Bool
     private (set) var responseValidator: ResponseValidator
+    private (set) var framework: Connectivity.Framework = .systemConfiguration
+    private (set) var bearerToken: String?
+    private (set) var authorizationHeader: String?
+    private (set) var validatioMode: Connectivity.ValidationMode?
     
     /// % successful connections required to be deemed to have connectivity
     let successThreshold: Connectivity.Percentage
@@ -49,7 +53,8 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
             expectedResponse: "Success"
         ),
         successThreshold: Connectivity.Percentage = Connectivity.Percentage(50.0),
-        urlSessionConfiguration: URLSessionConfiguration = defaultURLSessionConfiguration
+        urlSessionConfiguration: URLSessionConfiguration = defaultURLSessionConfiguration,
+        validatioMode: Connectivity.ValidationMode? = nil
     ) {
         self.callbackQueue = callbackQueue
         self.checkWhenApplicationDidBecomeActive = checkWhenApplicationDidBecomeActive
@@ -61,6 +66,7 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
         self.responseValidator = responseValidator
         self.successThreshold = successThreshold
         self.urlSessionConfiguration = urlSessionConfiguration
+        self.validatioMode = validatioMode
     }
     
     // MARK: Fluent configuration API.
@@ -91,6 +97,26 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
     
     public func configureURLSession(_ urlSessionConfiguration: URLSessionConfiguration) -> Self {
         self.urlSessionConfiguration = urlSessionConfiguration
+        return self
+    }
+    
+    public func configureFramework(_ framework: Connectivity.Framework) -> Self {
+        self.framework = framework
+        return self
+    }
+    
+    public func configureBearerToken(with token: String?) -> Self {
+        self.bearerToken = token
+        return self
+    }
+    
+    public func configureAuthorizationHeader(with value: String?) -> Self {
+        self.authorizationHeader = value
+        return self
+    }
+    
+    public func configureValidationMode(with validationMode: Connectivity.ValidationMode) -> Self {
+        self.validatioMode = validationMode
         return self
     }
 }
