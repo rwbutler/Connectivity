@@ -404,24 +404,24 @@ private extension Connectivity {
     
     /// Applies the settings specified by the `ConnectivityConfiguration` object.
     private func configure(with configuration: ConnectivityConfiguration) {
+        authorizationHeader = configuration.authorizationHeader
+        bearerToken = configuration.bearerToken
 #if canImport(UIKit)
         checkWhenApplicationDidBecomeActive = configuration.checkWhenApplicationDidBecomeActive
 #endif
         connectivityURLs = configuration.connectivityURLs
         externalQueue = configuration.callbackQueue
+        framework = configuration.framework
         internalQueue = configuration.connectivityQueue
-        pollingInterval = configuration.pollingInterval
         isPollingEnabled = configuration.pollingIsEnabled
+        pollingInterval = configuration.pollingInterval
         pollWhileOfflineOnly = configuration.pollWhileOfflineOnly
         responseValidator = configuration.responseValidator
         successThreshold = configuration.successThreshold
-        framework = configuration.framework
-        bearerToken = configuration.bearerToken
-        authorizationHeader = configuration.authorizationHeader
-        if let validatioMode = configuration.validatioMode {
-            validationMode = validatioMode
-        }
         Self.urlSessionConfiguration = configuration.urlSessionConfiguration
+        if let validationMode = configuration.validationMode {
+            self.validationMode = validationMode
+        }
     }
     
     /// Determines whether or not the connectivity check was successful.

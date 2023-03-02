@@ -34,7 +34,7 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
     private (set) var framework: Connectivity.Framework = .systemConfiguration
     private (set) var bearerToken: String?
     private (set) var authorizationHeader: String?
-    private (set) var validatioMode: Connectivity.ValidationMode?
+    private (set) var validationMode: Connectivity.ValidationMode?
     
     /// % successful connections required to be deemed to have connectivity
     let successThreshold: Connectivity.Percentage
@@ -66,7 +66,7 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
         self.responseValidator = responseValidator
         self.successThreshold = successThreshold
         self.urlSessionConfiguration = urlSessionConfiguration
-        self.validatioMode = validatioMode
+        self.validationMode = validatioMode
     }
     
     // MARK: Fluent configuration API.
@@ -116,7 +116,7 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
     }
     
     public func configureValidationMode(with validationMode: Connectivity.ValidationMode) -> Self {
-        self.validatioMode = validationMode
+        self.validationMode = validationMode
         return self
     }
 }
