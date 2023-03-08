@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.4.0] - 2023-03-08
+### Added
+- Added ability to set the authorization header to be used when contacting an endpoint (thanks to  [Nils Bergmann](https://github.com/TheNoim) - see [https://github.com/rwbutler/Connectivity/pull/73](https://github.com/rwbutler/Connectivity/pull/73)) .
+
+### Changed
+- Fixed being unable to set `bearerToken`, `framework` and `validationMode` using the configuration object (thanks to  [Nils Bergmann](https://github.com/TheNoim) - see [https://github.com/rwbutler/Connectivity/pull/73](https://github.com/rwbutler/Connectivity/pull/73)).
+
 ## [5.3.1] - 2022-07-29
 ### Changed
 Applied Carthage fix - see: [https://github.com/rwbutler/Connectivity/pull/66](https://github.com/rwbutler/Connectivity/pull/66) and [https://github.com/rwbutler/Connectivity/issues/65](https://github.com/rwbutler/Connectivity/issues/65).
