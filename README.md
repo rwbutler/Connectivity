@@ -1,6 +1,6 @@
 ![Connectivity](https://github.com/rwbutler/Connectivity/raw/master/docs/images/connectivity-banner.png)
 
-[![Build Status](https://app.travis-ci.com/rwbutler/Connectivity.svg?branch=master)](https://app.travis-ci.com/rwbutler/Connectivity)
+[![Build Status](https://img.shields.io/bitrise/b5aa7312b448b91e/main?label=build&logo=bitrise&token=MV0hRfaUhReSBdVMU_Csig)](https://app.bitrise.io/app/b5aa7312b448b91e?branch=main)
 [![Version](https://img.shields.io/cocoapods/v/Connectivity.svg?style=flat)](http://cocoapods.org/pods/Connectivity)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c3041fef8e33cc4d00df/maintainability)](https://codeclimate.com/github/rwbutler/Connectivity/maintainability)
