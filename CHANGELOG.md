@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.0.0] - 2023-03-08
+## [6.0.0] - 2023-03-09
 ### Added
 - Added ability to set the authorization header to be used when contacting an endpoint (thanks to  [Nils Bergmann](https://github.com/TheNoim) - see [https://github.com/rwbutler/Connectivity/pull/73](https://github.com/rwbutler/Connectivity/pull/73)).
 
