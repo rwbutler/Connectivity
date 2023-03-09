@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [6.0.0] - 2023-03-08
 ### Added
-- Added ability to set the authorization header to be used when contacting an endpoint (thanks to  [Nils Bergmann](https://github.com/TheNoim) - see [https://github.com/rwbutler/Connectivity/pull/73](https://github.com/rwbutler/Connectivity/pull/73)) .
+- Added ability to set the authorization header to be used when contacting an endpoint (thanks to  [Nils Bergmann](https://github.com/TheNoim) - see [https://github.com/rwbutler/Connectivity/pull/73](https://github.com/rwbutler/Connectivity/pull/73)).
 
 ### Changed
 - iOS deployment target updated to iOS 11.0 (dropped support for iOS 9.0 and 10.0 in-line with Xcode 14).
