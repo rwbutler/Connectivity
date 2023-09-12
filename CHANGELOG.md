@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.1.0] - 2023-09-13
+## [6.1.0] - 2023-09-12
 ### Added
 - `Connectivity` property `connectivityURLs: [URL]` swapped to `connectivityURLRequests: [URLRequest]`. The framework now uses `URLRequest` primarily throughout. Suggestion by [@brunomiguens](https://github.com/BrunoMiguens) - [https://github.com/rwbutler/Connectivity/issues/67](https://github.com/rwbutler/Connectivity/issues/67). 
 - `URLRequest` objects used for connectivity checks may not be configured via configuration initialiser or via the fluent configuration API e.g. 
