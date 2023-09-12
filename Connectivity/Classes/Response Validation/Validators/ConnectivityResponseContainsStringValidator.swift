@@ -21,7 +21,7 @@ public class ConnectivityResponseContainsStringValidator: ConnectivityResponseVa
         self.expectedResponse = expectedResponse
     }
 
-    public func isResponseValid(url _: URL, response _: URLResponse?, data: Data?) -> Bool {
+    public func isResponseValid(urlRequest _: URLRequest, response _: URLResponse?, data: Data?) -> Bool {
         guard let data = data, let responseString = String(data: data, encoding: .utf8) else {
             return false
         }

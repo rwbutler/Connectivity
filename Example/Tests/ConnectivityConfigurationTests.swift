@@ -25,12 +25,43 @@ class ConfigurationTests: XCTestCase {
     
     func testDefaultConnectivityURLsAreCorrect() {
         let sut = Configuration()
-        XCTAssertEqual(sut.connectivityURLs.count, 2)
-        guard sut.connectivityURLs.count == 2 else {
+        XCTAssertEqual(sut.connectivityURLRequests.count, 2)
+        guard sut.connectivityURLRequests.count == 2 else {
             return
         }
-        XCTAssertEqual(sut.connectivityURLs[0], URL(string: "https://www.apple.com/library/test/success.html"))
-        XCTAssertEqual(sut.connectivityURLs[1], URL(string: "https://captive.apple.com/hotspot-detect.html"))
+        XCTAssertEqual(
+            sut.connectivityURLRequests[0].url,
+            URL(string: "https://www.apple.com/library/test/success.html")
+        )
+        XCTAssertEqual(
+            sut.connectivityURLRequests[1].url,
+            URL(string: "https://captive.apple.com/hotspot-detect.html")
+        )
+    }
+    
+    func testConfiguringConnectivityURLs() throws {
+        let appleURL = try XCTUnwrap(URL(string: "https://www.apple.com"))
+        let googleURL = try XCTUnwrap(URL(string: "https://www.google.com"))
+        let configuration = Configuration()
+            .configureConnectivity(urls: [appleURL, googleURL])
+        XCTAssertEqual(configuration.connectivityURLRequests[0].url, appleURL)
+        XCTAssertEqual(configuration.connectivityURLRequests[1].url, googleURL)
+    }
+    
+    func testConfiguringConnectivityURLRequests() throws {
+        let appleURL = try XCTUnwrap(URL(string: "https://www.apple.com"))
+        let appleURLRequest = URLRequest(url: appleURL)
+        let googleURL = try XCTUnwrap(URL(string: "https://www.google.com"))
+        let googleURLRequest = URLRequest(url: googleURL)
+        let configuration = Configuration()
+            .configureConnectivity(urlRequests: [appleURLRequest, googleURLRequest])
+        XCTAssertEqual(configuration.connectivityURLRequests[0], appleURLRequest)
+        XCTAssertEqual(configuration.connectivityURLRequests[1], googleURLRequest)
+    }
+    
+    func testDefaultFrameworkIsNetwork() {
+        let sut = Configuration()
+        XCTAssertEqual(sut.framework, .network)
     }
     
     func testDefaultPollingIntervalIsSetTo10() {

@@ -33,7 +33,7 @@ public class ConnectivityResponseRegExValidator: ConnectivityResponseValidator {
         self.regularExpression = regEx
     }
 
-    public func isResponseValid(url _: URL, response _: URLResponse?, data: Data?) -> Bool {
+    public func isResponseValid(urlRequest _: URLRequest, response _: URLResponse?, data: Data?) -> Bool {
         guard let data = data, let responseString = String(data: data, encoding: .utf8),
               let regEx = try? NSRegularExpression(pattern: regularExpression, options: options)
         else {

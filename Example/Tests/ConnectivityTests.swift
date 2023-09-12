@@ -81,14 +81,14 @@ class ConnectivityTests: XCTestCase {
         connectivity.stopNotifier()
     }
 
-    func testContainsStringValidation() {
-        checkValidation(
+    func testContainsStringValidation() throws {
+        try checkValidation(
             string: "a test",
             matchedBy: "test",
             expectedResult: true,
             using: .containsExpectedResponseString
         )
-        checkValidation(
+        try checkValidation(
             string: "est",
             matchedBy: "test",
             expectedResult: false,
@@ -96,14 +96,14 @@ class ConnectivityTests: XCTestCase {
         )
     }
 
-    func testEqualsStringValidation() {
-        checkValidation(
+    func testEqualsStringValidation() throws {
+        try checkValidation(
             string: "test",
             matchedBy: "test",
             expectedResult: true,
             using: .equalsExpectedResponseString
         )
-        checkValidation(
+        try checkValidation(
             string: "est",
             matchedBy: "test",
             expectedResult: false,
@@ -111,14 +111,14 @@ class ConnectivityTests: XCTestCase {
         )
     }
 
-    func testRegexStringValidation() {
-        checkValidation(
+    func testRegexStringValidation() throws {
+        try checkValidation(
             string: "test1234",
             matchedBy: "test[0-9]+",
             expectedResult: true,
             using: .matchesRegularExpression
         )
-        checkValidation(
+        try checkValidation(
             string: "testa1234",
             matchedBy: "test[0-9]+",
             expectedResult: false,
@@ -126,31 +126,32 @@ class ConnectivityTests: XCTestCase {
         )
     }
 
-    func testCustomValidation() {
+    func testCustomValidation() throws {
         // swiftlint:disable:next nesting
         final class Validator: ConnectivityResponseValidator {
-            func isResponseValid(url: URL, response _: URLResponse?, data: Data?) -> Bool {
+            func isResponseValid(urlRequest: URLRequest, response _: URLResponse?, data: Data?) -> Bool {
                 let str = data.flatMap { String(data: $0, encoding: .utf8) } ?? ""
-                return url.host == "example.com" &&
+                return urlRequest.url?.host == "example.com" &&
                     str.hasPrefix("1") &&
                     str.hasSuffix("z")
             }
         }
 
         let validator = Validator()
-        let example = URL(string: "https://example.com")!
+        let appleURL = try XCTUnwrap(URL(string: "https://apple.com"))
+        let exampleURL = try XCTUnwrap(URL(string: "https://example.com"))
         XCTAssertTrue(validator.isResponseValid(
-            url: example,
+            urlRequest: URLRequest(url: exampleURL),
             response: nil,
             data: "11234z".data(using: .utf8)
         ))
         XCTAssertFalse(validator.isResponseValid(
-            url: URL(string: "https://apple.com")!,
+            urlRequest: URLRequest(url: appleURL),
             response: nil,
             data: "11234z".data(using: .utf8)
         ))
         XCTAssertFalse(validator.isResponseValid(
-            url: example,
+            urlRequest: URLRequest(url: exampleURL),
             response: nil,
             data: "21234y".data(using: .utf8)
         ))
@@ -172,22 +173,26 @@ class ConnectivityTests: XCTestCase {
     
     func testWhenConfigurationConnectivityURLsAreSetThenConnectivityURLsAreSetCorrectly() throws {
         let connectivityURL = try XCTUnwrap(URL(string: "https://www.microsoft.com"))
-        let connectivityURLs: [URL] = [connectivityURL]
-        let configuration = Configuration(connectivityURLs: connectivityURLs)
+        let connectivityURLRequests: [URLRequest] = [connectivityURL].map {
+            URLRequest(url: $0)
+        }
+        let configuration = Configuration(connectivityURLRequests: connectivityURLRequests)
         let sut = Connectivity(configuration: configuration)
-        XCTAssertEqual(sut.connectivityURLs.count, 1)
-        guard let firstConnectivityURL = sut.connectivityURLs.first else {
+        XCTAssertEqual(sut.connectivityURLRequests.count, 1)
+        guard let firstConnectivityURLRequest = sut.connectivityURLRequests.first else {
             return
         }
-        XCTAssertEqual(firstConnectivityURL, connectivityURL)
+        XCTAssertEqual(firstConnectivityURLRequest.url, connectivityURL)
     }
     
     func testWhenConfigurationConnectivityURLIsNotHTTPSThenConnectivityURLIsNotSet() throws {
         let connectivityURL = try XCTUnwrap(URL(string: "http://www.microsoft.com"))
-        let connectivityURLs: [URL] = [connectivityURL]
-        let configuration = Configuration(connectivityURLs: connectivityURLs)
+        let connectivityURLRequests: [URLRequest] = [connectivityURL].map {
+            URLRequest(url: $0)
+        }
+        let configuration = Configuration(connectivityURLRequests: connectivityURLRequests)
         let sut = Connectivity(configuration: configuration)
-        XCTAssertTrue(sut.connectivityURLs.isEmpty)
+        XCTAssertTrue(sut.connectivityURLRequests.isEmpty)
     }
     
     func testWhenConfigurationCallbackQueueIsSetThenConnectivityExternalQueueIsSetCorrectly() {
@@ -273,13 +278,14 @@ private extension XCTestCase {
         using mode: ConnectivityResponseStringValidationMode,
         file: StaticString = #filePath,
         line: UInt = #line
-    ) {
+    ) throws {
+        let url = try XCTUnwrap(URL(string: "https://example.com"))
         let validator = ConnectivityResponseStringValidator(
             validationMode: mode,
             expectedResponse: matchStr
         )
         let result = validator.isResponseValid(
-            url: URL(string: "https://example.com")!,
+            urlRequest: URLRequest(url: url),
             response: nil,
             data: string.data(using: .utf8)
         )

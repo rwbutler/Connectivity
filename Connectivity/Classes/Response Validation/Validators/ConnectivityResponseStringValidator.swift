@@ -37,7 +37,7 @@ public class ConnectivityResponseStringValidator: ConnectivityResponseValidator 
         self.expectedResponse = expectedResponse
     }
 
-    public func isResponseValid(url: URL, response: URLResponse?, data: Data?) -> Bool {
+    public func isResponseValid(urlRequest: URLRequest, response: URLResponse?, data: Data?) -> Bool {
         let validator: ConnectivityResponseValidator
         switch responseValidationMode {
         case .containsExpectedResponseString:
@@ -51,6 +51,6 @@ public class ConnectivityResponseStringValidator: ConnectivityResponseValidator 
         case .matchesRegularExpression:
             validator = ConnectivityResponseRegExValidator(regEx: expectedResponse)
         }
-        return validator.isResponseValid(url: url, response: response, data: data)
+        return validator.isResponseValid(urlRequest: urlRequest, response: response, data: data)
     }
 }

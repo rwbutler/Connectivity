@@ -4,9 +4,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [6.0.1] - 2023-09-12
+## [6.1.0] - 2023-09-13
+### Added
+- `Connectivity` property `connectivityURLs: [URL]` swapped to `connectivityURLRequests: [URLRequest]`. The framework now uses `URLRequest` primarily throughout. Suggestion by [@brunomiguens](https://github.com/BrunoMiguens) - [https://github.com/rwbutler/Connectivity/issues/67](https://github.com/rwbutler/Connectivity/issues/67). 
+- `URLRequest` objects used for connectivity checks may not be configured via configuration initialiser or via the fluent configuration API e.g. 
+	- ```swift
+	ConnectivityConfiguration()
+	.configureConnectivity(urlRequests: [
+	    URLRequest(...)
+	])
+	```
+- `URL` objects may still be used rather than `URLRequesd` objects via the fluent configuration API only e.g.
+	- ```swift
+	ConnectivityConfiguration()
+	.configureConnectivity(urls: [
+	    URL(...)
+	])
+	```
+	
 ### Changed
 - Changed the default framework used to monitor network interface changes to `.network`. To continue using the System Configuration (Apple's Reachability) framework for monitoring network interface changes set the `framework` property to `.systemConfiguration`.
+- Fixed a typo in `ConnectivityConfiguration`. `validationMode` was incorrectly spelt as `validatioMode`.
 
 ## [6.0.0] - 2023-03-09
 ### Added

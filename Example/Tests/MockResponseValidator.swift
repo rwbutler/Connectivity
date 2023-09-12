@@ -14,17 +14,17 @@ class MockResponseValidator: ResponseValidator {
     private (set) var isResponseValidCalled = false
     private (set) var lastData: Data?
     private (set) var lastResponse: URLResponse?
-    private (set) var lastURL: URL?
+    private (set) var lastURLRequest: URLRequest?
     
     init(isResponseValid: Bool = true) {
         self.isResponseValid = isResponseValid
     }
     
-    func isResponseValid(url: URL, response: URLResponse?, data: Data?) -> Bool {
+    func isResponseValid(urlRequest: URLRequest, response: URLResponse?, data: Data?) -> Bool {
         isResponseValidCalled = true
         lastData = data
         lastResponse = response
-        lastURL = url
+        lastURLRequest = urlRequest
         return isResponseValid
     }
 }

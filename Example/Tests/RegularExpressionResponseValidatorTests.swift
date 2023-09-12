@@ -11,9 +11,9 @@ import Foundation
 import XCTest
 
 class RegularExpressionResponseValidatorTests: XCTestCase {
-    func testRegexStringValidation() {
-        checkValid(string: "test1234", matchedBy: "test[0-9]+", expectedResult: true)
-        checkValid(string: "testa1234", matchedBy: "test[0-9]+", expectedResult: false)
+    func testRegexStringValidation() throws {
+        try checkValid(string: "test1234", matchedBy: "test[0-9]+", expectedResult: true)
+        try checkValid(string: "testa1234", matchedBy: "test[0-9]+", expectedResult: false)
     }
 
     private func checkValid(
@@ -22,26 +22,23 @@ class RegularExpressionResponseValidatorTests: XCTestCase {
         expectedResult: Bool,
         file: StaticString = #filePath,
         line: UInt = #line
-    ) {
+    ) throws {
+        let data = string.data(using: .utf8)
+        let url = try XCTUnwrap(URL(string: "https://example.com"))
+        let urlRequest = URLRequest(url: url)
         let validator = ConnectivityResponseRegExValidator(regEx: regEx)
-        let result = validator.isResponseValid(
-            url: URL(string: "https://example.com")!,
-            response: nil,
-            data: string.data(using: .utf8)
-        )
+        let result = validator.isResponseValid(urlRequest: urlRequest, response: nil, data: data)
         let expectedResultStr = expectedResult ? "match" : "not match"
         let message = "Expected \"\(string)\" to \(expectedResultStr) \(regEx) via regex"
         XCTAssertEqual(result, expectedResult, message, file: file, line: line)
     }
 
-    func testResponseInvalidWhenDataIsNil() {
+    func testResponseInvalidWhenDataIsNil() throws {
         let regEx = "test[0-9]+"
+        let url = try XCTUnwrap(URL(string: "https://example.com"))
+        let urlRequest = URLRequest(url: url)
         let validator = ConnectivityResponseRegExValidator(regEx: regEx)
-        let responseValid = validator.isResponseValid(
-            url: URL(string: "https://example.com")!,
-            response: nil,
-            data: nil
-        )
+        let responseValid = validator.isResponseValid(urlRequest: urlRequest, response: nil, data: nil)
         XCTAssertFalse(responseValid)
     }
 }
