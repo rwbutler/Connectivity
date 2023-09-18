@@ -50,6 +50,25 @@ public class Connectivity: NSObject {
     /// network actually being available.
     public var connectivityCheckLatency: Double = 0.5
     
+    @available(*, deprecated, renamed: "connectivityURLRequests")
+    public var connectivityURLs: [URL] {
+        get {
+            var urls = [URL]()
+            connectivityURLRequests.forEach({ urlRequest in
+                guard let url = urlRequest.url else {
+                    return
+                }
+                urls.append(url)
+            })
+            return urls
+        }
+        set {
+            connectivityURLRequests = newValue.map {
+                URLRequest(url: $0)
+            }
+        }
+    }
+
     /// URLs to contact in order to check connectivity
     public var connectivityURLRequests: [URLRequest] = Connectivity
         .defaultConnectivityURLRequests(shouldUseHTTPS: Connectivity.isHTTPSOnly) {
