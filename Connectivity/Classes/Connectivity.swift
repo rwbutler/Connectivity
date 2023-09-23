@@ -53,18 +53,13 @@ public class Connectivity: NSObject {
     @available(*, deprecated, renamed: "connectivityURLRequests")
     public var connectivityURLs: [URL] {
         get {
-            var urls = [URL]()
-            connectivityURLRequests.forEach({ urlRequest in
-                guard let url = urlRequest.url else {
-                    return
-                }
-                urls.append(url)
-            })
-            return urls
+            connectivityURLRequests.compactMap { urlRequest in
+                urlRequest.url
+            }
         }
         set {
-            connectivityURLRequests = newValue.map {
-                URLRequest(url: $0)
+            connectivityURLRequests = newValue.map { url in
+                URLRequest(url: url)
             }
         }
     }
