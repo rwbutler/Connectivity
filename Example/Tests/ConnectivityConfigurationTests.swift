@@ -39,7 +39,52 @@ class ConfigurationTests: XCTestCase {
         )
     }
     
-    func testConfiguringConnectivityURLs() throws {
+    func testConfiguringConnectivityURLsUsingProperty() throws {
+        let appleURL = try XCTUnwrap(URL(string: "https://www.apple.com"))
+        let googleURL = try XCTUnwrap(URL(string: "https://www.google.com"))
+        let connectivity = Connectivity()
+        connectivity.connectivityURLs = [appleURL, googleURL]
+        XCTAssertEqual(connectivity.connectivityURLRequests[0].url, appleURL)
+        XCTAssertEqual(connectivity.connectivityURLRequests[1].url, googleURL)
+    }
+    
+    func testRetrievingConnectivityURLsUsingProperty() throws {
+        let appleURL = try XCTUnwrap(URL(string: "https://www.apple.com"))
+        let appleURLRequest = URLRequest(url: appleURL)
+        let googleURL = try XCTUnwrap(URL(string: "https://www.google.com"))
+        let googleURLRequest = URLRequest(url: googleURL)
+        let configuration = Configuration()
+            .configureConnectivity(urlRequests: [appleURLRequest, googleURLRequest])
+        let connectivity = Connectivity(configuration: configuration)
+        let connectivityURLs = connectivity.connectivityURLs
+        XCTAssertEqual(connectivityURLs[0], appleURL)
+        XCTAssertEqual(connectivityURLs[1], googleURL)
+    }
+    
+    func testConfiguringConnectivityURLRequestsUsingProperty() throws {
+        let appleURL = try XCTUnwrap(URL(string: "https://www.apple.com"))
+        let appleURLRequest = URLRequest(url: appleURL)
+        let googleURL = try XCTUnwrap(URL(string: "https://www.google.com"))
+        let googleURLRequest = URLRequest(url: googleURL)
+        let connectivity = Connectivity()
+        connectivity.connectivityURLRequests = [appleURLRequest, googleURLRequest]
+        XCTAssertEqual(connectivity.connectivityURLRequests[0], appleURLRequest)
+        XCTAssertEqual(connectivity.connectivityURLRequests[1], googleURLRequest)
+    }
+    
+    func testRetrievingConnectivityURLRequestsUsingProperty() throws {
+        let appleURL = try XCTUnwrap(URL(string: "https://www.apple.com"))
+        let appleURLRequest = URLRequest(url: appleURL)
+        let googleURL = try XCTUnwrap(URL(string: "https://www.google.com"))
+        let googleURLRequest = URLRequest(url: googleURL)
+        let configuration = Configuration()
+            .configureConnectivity(urlRequests: [appleURLRequest, googleURLRequest])
+        let connectivity = Connectivity(configuration: configuration)
+        XCTAssertEqual(connectivity.connectivityURLRequests[0], appleURLRequest)
+        XCTAssertEqual(connectivity.connectivityURLRequests[1], googleURLRequest)
+    }
+    
+    func testConfiguringConnectivityURLsUsingConfig() throws {
         let appleURL = try XCTUnwrap(URL(string: "https://www.apple.com"))
         let googleURL = try XCTUnwrap(URL(string: "https://www.google.com"))
         let configuration = Configuration()
@@ -48,7 +93,7 @@ class ConfigurationTests: XCTestCase {
         XCTAssertEqual(configuration.connectivityURLRequests[1].url, googleURL)
     }
     
-    func testConfiguringConnectivityURLRequests() throws {
+    func testConfiguringConnectivityURLRequestsUsingConfig() throws {
         let appleURL = try XCTUnwrap(URL(string: "https://www.apple.com"))
         let appleURLRequest = URLRequest(url: appleURL)
         let googleURL = try XCTUnwrap(URL(string: "https://www.google.com"))
