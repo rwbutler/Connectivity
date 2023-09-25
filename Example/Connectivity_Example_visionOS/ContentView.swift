@@ -11,7 +11,7 @@ import Connectivity
 
 struct ContentView: View {
     private let connectivity = Connectivity(shouldUseHTTPS: false)
-    
+
     var body: some View {
         VStack {
             Text("Hello, world!")

@@ -41,7 +41,7 @@
 		D5F1BD2024AA051100D10B24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F1BD1F24AA051100D10B24 /* ViewController.swift */; };
 		D5F1BD2224AA051400D10B24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5F1BD2124AA051400D10B24 /* Assets.xcassets */; };
 		D5F1BD2524AA051400D10B24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5F1BD2324AA051400D10B24 /* Main.storyboard */; };
-		FCD2C90C2AC1B7F400441914 /* Connectivity_Example_visionOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD2C90B2AC1B7F400441914 /* Connectivity_Example_visionOSApp.swift */; };
+		FCD2C90C2AC1B7F400441914 /* ConnectivityExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD2C90B2AC1B7F400441914 /* ConnectivityExampleApp.swift */; };
 		FCD2C90E2AC1B7F400441914 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD2C90D2AC1B7F400441914 /* ContentView.swift */; };
 		FCD2C9102AC1B7F500441914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD2C90F2AC1B7F500441914 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -109,7 +109,7 @@
 		EC9FE05BACAB7A571B66CFBA /* Pods-Connectivity_Example_macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example_macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example_macOS/Pods-Connectivity_Example_macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		F5E30A99229C7601196BE416 /* Pods_Connectivity_Example_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connectivity_Example_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCD2C9052AC1B7F400441914 /* Connectivity_Example_visionOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connectivity_Example_visionOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCD2C90B2AC1B7F400441914 /* Connectivity_Example_visionOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity_Example_visionOSApp.swift; sourceTree = "<group>"; };
+		FCD2C90B2AC1B7F400441914 /* ConnectivityExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityExampleApp.swift; sourceTree = "<group>"; };
 		FCD2C90D2AC1B7F400441914 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FCD2C90F2AC1B7F500441914 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCD2C9142AC1B7F500441914 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -326,7 +326,7 @@
 		FCD2C9062AC1B7F400441914 /* Connectivity_Example_visionOS */ = {
 			isa = PBXGroup;
 			children = (
-				FCD2C90B2AC1B7F400441914 /* Connectivity_Example_visionOSApp.swift */,
+				FCD2C90B2AC1B7F400441914 /* ConnectivityExampleApp.swift */,
 				FCD2C90D2AC1B7F400441914 /* ContentView.swift */,
 				FCD2C90F2AC1B7F500441914 /* Assets.xcassets */,
 				FCD2C9142AC1B7F500441914 /* Info.plist */,
@@ -746,7 +746,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCD2C90E2AC1B7F400441914 /* ContentView.swift in Sources */,
-				FCD2C90C2AC1B7F400441914 /* Connectivity_Example_visionOSApp.swift in Sources */,
+				FCD2C90C2AC1B7F400441914 /* ConnectivityExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
