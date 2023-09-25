@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -35,11 +35,15 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* ConnectivityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* ConnectivityTests.swift */; };
+		7DF3288E86A2F107228B1EA4 /* Pods_Connectivity_Example_visionOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 974A24A5DCF390E1522A0396 /* Pods_Connectivity_Example_visionOS.framework */; };
 		B5AE95FBAF83E86E09C71F53 /* Pods_Connectivity_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CC3C92548787468F0C65E3 /* Pods_Connectivity_Example.framework */; };
 		D5F1BD1E24AA051100D10B24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F1BD1D24AA051100D10B24 /* AppDelegate.swift */; };
 		D5F1BD2024AA051100D10B24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F1BD1F24AA051100D10B24 /* ViewController.swift */; };
 		D5F1BD2224AA051400D10B24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5F1BD2124AA051400D10B24 /* Assets.xcassets */; };
 		D5F1BD2524AA051400D10B24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5F1BD2324AA051400D10B24 /* Main.storyboard */; };
+		FCD2C90C2AC1B7F400441914 /* Connectivity_Example_visionOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD2C90B2AC1B7F400441914 /* Connectivity_Example_visionOSApp.swift */; };
+		FCD2C90E2AC1B7F400441914 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD2C90D2AC1B7F400441914 /* ContentView.swift */; };
+		FCD2C9102AC1B7F500441914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCD2C90F2AC1B7F500441914 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +78,7 @@
 		1A67A15C226AE5041C7BBBBC /* Pods-Connectivity_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Tests/Pods-Connectivity_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		30C46A09282FBCB400D59563 /* ConnectivityConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityConfigurationTests.swift; sourceTree = "<group>"; };
 		30C46A0C282FBD7600D59563 /* MockResponseValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResponseValidator.swift; sourceTree = "<group>"; };
+		4B58C7772837819C44F2A8F6 /* Pods-Connectivity_Example_visionOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example_visionOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example_visionOS/Pods-Connectivity_Example_visionOS.release.xcconfig"; sourceTree = "<group>"; };
 		59AC20C4169D5C969777DC33 /* Pods-Connectivity_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example/Pods-Connectivity_Example.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Connectivity_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connectivity_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,6 +94,7 @@
 		6D2EC5685A21E721BE90F9DC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		756991B8EB92F4B50383EDCD /* Pods-Connectivity_Example_macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example_macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example_macOS/Pods-Connectivity_Example_macOS.release.xcconfig"; sourceTree = "<group>"; };
 		7834EB795119690B628EF770 /* Pods-Connectivity_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example/Pods-Connectivity_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		974A24A5DCF390E1522A0396 /* Pods_Connectivity_Example_visionOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connectivity_Example_visionOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE8026CB81F7E1D74EB3EEDF /* Pods-Connectivity_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Tests/Pods-Connectivity_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C9101FE1CB42B71A47A459A9 /* Pods_Connectivity_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connectivity_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A64AA190C10F19094EC842 /* Connectivity.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Connectivity.podspec; path = ../Connectivity.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -99,8 +105,14 @@
 		D5F1BD2424AA051400D10B24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D5F1BD2624AA051400D10B24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5F1BD2724AA051400D10B24 /* Connectivity_Example_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Connectivity_Example_macOS.entitlements; sourceTree = "<group>"; };
+		E0BD2B6DEEA4AA1B446CC10A /* Pods-Connectivity_Example_visionOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example_visionOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example_visionOS/Pods-Connectivity_Example_visionOS.debug.xcconfig"; sourceTree = "<group>"; };
 		EC9FE05BACAB7A571B66CFBA /* Pods-Connectivity_Example_macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connectivity_Example_macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connectivity_Example_macOS/Pods-Connectivity_Example_macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		F5E30A99229C7601196BE416 /* Pods_Connectivity_Example_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Connectivity_Example_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCD2C9052AC1B7F400441914 /* Connectivity_Example_visionOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connectivity_Example_visionOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCD2C90B2AC1B7F400441914 /* Connectivity_Example_visionOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity_Example_visionOSApp.swift; sourceTree = "<group>"; };
+		FCD2C90D2AC1B7F400441914 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FCD2C90F2AC1B7F500441914 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCD2C9142AC1B7F500441914 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +137,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F9D5DC49043F14E05052C85 /* Pods_Connectivity_Example_macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCD2C9022AC1B7F400441914 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DF3288E86A2F107228B1EA4 /* Pods_Connectivity_Example_visionOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +208,8 @@
 				AE8026CB81F7E1D74EB3EEDF /* Pods-Connectivity_Tests.release.xcconfig */,
 				EC9FE05BACAB7A571B66CFBA /* Pods-Connectivity_Example_macOS.debug.xcconfig */,
 				756991B8EB92F4B50383EDCD /* Pods-Connectivity_Example_macOS.release.xcconfig */,
+				E0BD2B6DEEA4AA1B446CC10A /* Pods-Connectivity_Example_visionOS.debug.xcconfig */,
+				4B58C7772837819C44F2A8F6 /* Pods-Connectivity_Example_visionOS.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -199,6 +221,7 @@
 				607FACD21AFB9204008FA782 /* Example for Connectivity */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				D5F1BD1C24AA051100D10B24 /* Connectivity_Example_macOS */,
+				FCD2C9062AC1B7F400441914 /* Connectivity_Example_visionOS */,
 				607FACD11AFB9204008FA782 /* Products */,
 				35AD42983D257CA6A2F53909 /* Pods */,
 				A8CA67091073AD9C029746CF /* Frameworks */,
@@ -211,6 +234,7 @@
 				607FACD01AFB9204008FA782 /* Connectivity_Example.app */,
 				607FACE51AFB9204008FA782 /* Connectivity_Tests.xctest */,
 				D5F1BD1B24AA051100D10B24 /* Connectivity_Example_macOS.app */,
+				FCD2C9052AC1B7F400441914 /* Connectivity_Example_visionOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -281,6 +305,7 @@
 				69CC3C92548787468F0C65E3 /* Pods_Connectivity_Example.framework */,
 				C9101FE1CB42B71A47A459A9 /* Pods_Connectivity_Tests.framework */,
 				F5E30A99229C7601196BE416 /* Pods_Connectivity_Example_macOS.framework */,
+				974A24A5DCF390E1522A0396 /* Pods_Connectivity_Example_visionOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -296,6 +321,17 @@
 				D5F1BD2724AA051400D10B24 /* Connectivity_Example_macOS.entitlements */,
 			);
 			path = Connectivity_Example_macOS;
+			sourceTree = "<group>";
+		};
+		FCD2C9062AC1B7F400441914 /* Connectivity_Example_visionOS */ = {
+			isa = PBXGroup;
+			children = (
+				FCD2C90B2AC1B7F400441914 /* Connectivity_Example_visionOSApp.swift */,
+				FCD2C90D2AC1B7F400441914 /* ContentView.swift */,
+				FCD2C90F2AC1B7F500441914 /* Assets.xcassets */,
+				FCD2C9142AC1B7F500441914 /* Info.plist */,
+			);
+			path = Connectivity_Example_visionOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,6 +399,27 @@
 			productReference = D5F1BD1B24AA051100D10B24 /* Connectivity_Example_macOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		FCD2C9042AC1B7F400441914 /* Connectivity_Example_visionOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCD2C9172AC1B7F500441914 /* Build configuration list for PBXNativeTarget "Connectivity_Example_visionOS" */;
+			buildPhases = (
+				F5AB71EF066A058B92AD961E /* [CP] Check Pods Manifest.lock */,
+				FCD2C9012AC1B7F400441914 /* Sources */,
+				FCD2C9022AC1B7F400441914 /* Frameworks */,
+				FCD2C9032AC1B7F400441914 /* Resources */,
+				2A9CC02BAC438392A7B0FE64 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Connectivity_Example_visionOS;
+			packageProductDependencies = (
+			);
+			productName = Connectivity_Example_visionOS;
+			productReference = FCD2C9052AC1B7F400441914 /* Connectivity_Example_visionOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -370,7 +427,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1150;
+				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
@@ -386,6 +443,9 @@
 					D5F1BD1A24AA051100D10B24 = {
 						CreatedOnToolsVersion = 11.5;
 						ProvisioningStyle = Automatic;
+					};
+					FCD2C9042AC1B7F400441914 = {
+						CreatedOnToolsVersion = 15.0;
 					};
 				};
 			};
@@ -405,6 +465,7 @@
 				607FACCF1AFB9204008FA782 /* Connectivity_Example */,
 				607FACE41AFB9204008FA782 /* Connectivity_Tests */,
 				D5F1BD1A24AA051100D10B24 /* Connectivity_Example_macOS */,
+				FCD2C9042AC1B7F400441914 /* Connectivity_Example_visionOS */,
 			);
 		};
 /* End PBXProject section */
@@ -443,6 +504,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FCD2C9032AC1B7F400441914 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCD2C9102AC1B7F500441914 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -477,6 +546,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ $ENABLE_PREVIEWS == \"NO\" ]\nthen\n  SDKROOT=(xcrun --sdk macosx --show-sdk-path)  \n  swift run -c release --package-path ../tools/linting swiftformat \"$SRCROOT/Connectivity*\"\nelse\n  echo \"Skipping the script because of preview mode\"\nfi\n";
+		};
+		2A9CC02BAC438392A7B0FE64 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Connectivity_Example_visionOS/Pods-Connectivity_Example_visionOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Connectivity-visionOS/Connectivity.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Connectivity.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Connectivity_Example_visionOS/Pods-Connectivity_Example_visionOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		3511C667F00570A014824B88 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -590,6 +677,28 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Connectivity_Example/Pods-Connectivity_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F5AB71EF066A058B92AD961E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Connectivity_Example_visionOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -629,6 +738,15 @@
 			files = (
 				D5F1BD2024AA051100D10B24 /* ViewController.swift in Sources */,
 				D5F1BD1E24AA051100D10B24 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCD2C9012AC1B7F400441914 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCD2C90E2AC1B7F400441914 /* ContentView.swift in Sources */,
+				FCD2C90C2AC1B7F400441914 /* Connectivity_Example_visionOSApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -932,6 +1050,89 @@
 			};
 			name = Release;
 		};
+		FCD2C9152AC1B7F500441914 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0BD2B6DEEA4AA1B446CC10A /* Pods-Connectivity_Example_visionOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 3M5P376P9C;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwbutler.demo.Connectivity-Example-visionOS.Connectivity-Example-visionOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Debug;
+		};
+		FCD2C9162AC1B7F500441914 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B58C7772837819C44F2A8F6 /* Pods-Connectivity_Example_visionOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 3M5P376P9C;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(TARGET_NAME)/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwbutler.demo.Connectivity-Example-visionOS.Connectivity-Example-visionOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
+				SUPPORTED_PLATFORMS = "xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -967,6 +1168,15 @@
 			buildConfigurations = (
 				D5F1BD2824AA051400D10B24 /* Debug */,
 				D5F1BD2924AA051400D10B24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCD2C9172AC1B7F500441914 /* Build configuration list for PBXNativeTarget "Connectivity_Example_visionOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCD2C9152AC1B7F500441914 /* Debug */,
+				FCD2C9162AC1B7F500441914 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
