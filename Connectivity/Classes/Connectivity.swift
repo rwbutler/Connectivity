@@ -263,7 +263,7 @@ public extension Connectivity {
         }
     }
     
-    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, visionOS 1.0, *)
     private func startPathMonitorNotifier() {
         let monitor = NWPathMonitor()
         pathMonitor = monitor
@@ -298,7 +298,7 @@ public extension Connectivity {
         isObservingInterfaceChanges = false
     }
     
-    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, visionOS 1.0, *)
     private func stopPathMonitorNotifier() {
         if isObservingInterfaceChanges, let monitor = pathMonitor as? NWPathMonitor {
             monitor.cancel()
@@ -491,7 +491,7 @@ private extension Connectivity {
         }
     }
     
-    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, visionOS 1.0, *)
     func interface(from path: NWPath) -> ConnectivityInterface {
         if path.usesInterfaceType(.wifi) {
             return .wifi
@@ -504,7 +504,7 @@ private extension Connectivity {
         }
     }
     
-    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, visionOS 1.0, *)
     func interfaces(from path: NWPath) -> [ConnectivityInterface] {
         return path.availableInterfaces.map { interface in
             switch interface.type {
@@ -579,7 +579,7 @@ private extension Connectivity {
     }
     
     /// Maps a NetworkStatus to a NWInterface.InterfaceType, if possible.
-    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, visionOS 1.0, *)
     private func interfaceType(from networkStatus: NetworkStatus) -> NWInterface.InterfaceType? {
         switch networkStatus {
         case ReachableViaWiFi:
@@ -670,7 +670,7 @@ private extension Connectivity {
     }
     
     /// Determines the connectivity status using network interface info provided by `NWPath`.
-    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, visionOS 1.0, *)
     func status(from path: NWPath, isConnected: Bool) -> ConnectivityStatus {
         switch interface(from: path) {
         case .cellular:
@@ -693,7 +693,7 @@ private extension Connectivity {
     }
     
     /// Updates the connectivity status using network interface info provided by `NWPath`.
-    @available(OSX 10.14, iOS 12.0, tvOS 12.0, *)
+    @available(OSX 10.14, iOS 12.0, tvOS 12.0, visionOS 1.0, *)
     func updateStatus(from path: NWPath, isConnected: Bool) {
         availableInterfaces = interfaces(from: path)
         currentInterface = interface(from: path)
