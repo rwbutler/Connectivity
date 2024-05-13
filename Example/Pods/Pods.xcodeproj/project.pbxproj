@@ -19,6 +19,8 @@
 		0FA410D60DF5288CFC20CBAA70E81C2E /* NotificationNameAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090DF413AE8A1A1B60BE2576F5FFFDA /* NotificationNameAdditions.swift */; };
 		10D3828D703ACFA6E008F0A6DBD51D5B /* Pods-Connectivity_Example_macOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3690542DB83A630A06B06E35787159C5 /* Pods-Connectivity_Example_macOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11DAD04CAEE0EEEC7A68435A4181BE2D /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 98A73D49B47C8984AC072BADA66C3BF4 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		13EEBCC42BF20C6B009D89B7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13EEBCC32BF20C6B009D89B7 /* PrivacyInfo.xcprivacy */; };
+		13EEBCC52BF20C6B009D89B7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13EEBCC32BF20C6B009D89B7 /* PrivacyInfo.xcprivacy */; };
 		162EC02FCF506F1CA7935BD8D1BB2149 /* ConnectivityResponseRegExValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9FCB0D577561E6F7CB25FB3B985904 /* ConnectivityResponseRegExValidator.swift */; };
 		19FF16C15407ABBCAB0168CDE44709E1 /* NSURLRequest+HTTPBodyTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 5108C23AC87C098477CFFBD4D806F5A5 /* NSURLRequest+HTTPBodyTesting.m */; };
 		2114F7E4B02770BF53B9B521D0DBC801 /* HTTPStubsMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 7733FD4A1A3AB538B245BD517B663B28 /* HTTPStubsMethodSwizzling.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -125,6 +127,7 @@
 		0CDCC25F624C925846DDABD551FEA2CA /* add-package.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "add-package.png"; path = "docs/images/add-package.png"; sourceTree = "<group>"; };
 		0F208853FE495520D894A7722E108C71 /* Pods-Connectivity_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Connectivity_Example.release.xcconfig"; sourceTree = "<group>"; };
 		11C0B95B48DA95EC1AF40FCFACBB8880 /* Connectivity-macOS */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Connectivity-macOS"; path = Connectivity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		13EEBCC32BF20C6B009D89B7 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		17E33041B314FA837A3CAEB9DF3CDE9F /* OHHTTPStubs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18264901C3D3141AE52475DC257B8607 /* Pods-Connectivity_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Connectivity_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		1AC9AAE6418AF877A38D1FDCBC620BE5 /* NSURLRequest+HTTPBodyTesting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSURLRequest+HTTPBodyTesting.h"; path = "Sources/OHHTTPStubs/include/NSURLRequest+HTTPBodyTesting.h"; sourceTree = "<group>"; };
@@ -431,6 +434,7 @@
 				4F6CC45B8B36909AA9CB931AFE76DE55 /* Connectivity-macOS-umbrella.h */,
 				6BFC8752075783AB270054CFF8C0BC78 /* Connectivity-macOS.debug.xcconfig */,
 				D3F9BA93055745374067901CC7BDD0F2 /* Connectivity-macOS.release.xcconfig */,
+				13EEBCC32BF20C6B009D89B7 /* PrivacyInfo.xcprivacy */,
 			);
 			name = "Support Files";
 			path = "Example/Pods/Target Support Files/Connectivity-iOS";
@@ -841,6 +845,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13EEBCC42BF20C6B009D89B7 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,6 +853,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13EEBCC52BF20C6B009D89B7 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
