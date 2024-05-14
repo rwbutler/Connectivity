@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.2.0] - 2024-05-14
+### Added
+- Added Privacy Manifest to Swift package.
+### Changed
+- Bumped platform targets in `Package.swift` from iOS/tvOS 9 -> 12 and macOS 10_10 -> 10_13.
+	- Also updated in `Connectivity.podspec`.
+
 ## [6.1.1] - 2023-09-23
 ### Changed
 - Added the `connectivityURLs` property back as this was a breaking change see [issue #78](https://github.com/rwbutler/Connectivity/issues/78).
