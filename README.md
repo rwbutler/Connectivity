@@ -19,7 +19,6 @@ Connectivity's objective is to solve the captive portal problem whereby an iOS d
 To learn more about how to use Connectivity, take a look at the [keynote presentation](https://github.com/rwbutler/Connectivity/blob/main/docs/presentations/connectivity.pdf), check out the [blog post](https://medium.com/@rwbutler/solving-the-captive-portal-problem-on-ios-9a53ba2b381e), or make use of the table of contents below:
 
 - [Features](#features)
-- [What's New in Connectivity 6.0.0?](#whats-new-in-connectivity-530)
 - [Hyperconnectivity](#hyperconnectivity)
 - [Installation](#installation)
 	- [Cocoapods](#cocoapods)
@@ -53,10 +52,7 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 - [x] Polling connectivity checks may be performed where a constant network connection is required (optional).
 - [x] Combine support via [`Connectivity.Publisher`](https://github.com/rwbutler/Connectivity/blob/main/Connectivity/Classes/Combine/ConnectivityPublisher.swift).
 
-## What's new in Connectivity 6.0.0?
-
-- Added ability to set the authorization header used when contacting an endpoint (thanks to  [Nils Bergmann](https://github.com/TheNoim) - see [https://github.com/rwbutler/Connectivity/pull/73](https://github.com/rwbutler/Connectivity/pull/73)).
-- iOS base deployment target updated to iOS 11.0.
+## What's new in Connectivity 7.0.0?
 
 For more information, see [CHANGELOG.md](CHANGELOG.md).
 
