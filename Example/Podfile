@@ -17,3 +17,7 @@ end
 target 'Connectivity_Example_macOS' do
   connectivity
 end
+
+target 'Connectivity_Example_visionOS' do
+  connectivity
+end

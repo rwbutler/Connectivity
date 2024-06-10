@@ -1,0 +1,6 @@
+framework module Connectivity {
+  umbrella header "Connectivity-visionOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

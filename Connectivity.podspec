@@ -14,6 +14,7 @@ Connectivity wraps Apple's Reachability code to provide a reliable measure of wh
   s.ios.deployment_target = '12.0'
   s.tvos.deployment_target = '12.0'
   s.macos.deployment_target = '10.13'
+  s.visionos.deployment_target = '1.0'
   s.frameworks      = 'SystemConfiguration'
   s.weak_frameworks = 'Network', 'Combine'
   s.source_files = 'Connectivity/Classes/**/*'
