@@ -1,12 +1,12 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.10
 import PackageDescription
 
 let package = Package(
     name: "Connectivity",
     platforms: [
-        .iOS(.v9),
-        .tvOS(.v9),
-        .macOS(.v10_10)
+        .iOS(.v12),
+        .tvOS(.v12),
+        .macOS(.v10_13)
     ],
     products: [
         .library(
@@ -20,6 +20,7 @@ let package = Package(
             dependencies: ["Reachability"],
             path: "Connectivity/Classes",
             exclude: ["Reachability"],
+            resources: [.copy("../../Example/Pods/Target Support Files/Connectivity-iOS/PrivacyInfo.xcprivacy")],
             swiftSettings: [.define("IMPORT_REACHABILITY")]
         ),
         .target(
