@@ -11,10 +11,10 @@ import Foundation
 
 class MockResponseValidator: ResponseValidator {
     private let isResponseValid: Bool
-    private (set) var isResponseValidCalled = false
-    private (set) var lastData: Data?
-    private (set) var lastResponse: URLResponse?
-    private (set) var lastURLRequest: URLRequest?
+    private(set) var isResponseValidCalled = false
+    private(set) var lastData: Data?
+    private(set) var lastResponse: URLResponse?
+    private(set) var lastURLRequest: URLRequest?
     
     init(isResponseValid: Bool = true) {
         self.isResponseValid = isResponseValid
