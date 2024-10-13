@@ -10,12 +10,12 @@ import Foundation
 typealias Configuration = ConnectivityConfiguration // For internal use.
 
 @objc public class ConnectivityConfiguration: NSObject {
-    private (set) var authorizationHeader: String?
-    private (set) var bearerToken: String?
+    private(set) var authorizationHeader: String?
+    private(set) var bearerToken: String?
     let callbackQueue: DispatchQueue
-    private (set) var checkWhenApplicationDidBecomeActive: Bool = true
+    private(set) var checkWhenApplicationDidBecomeActive: Bool = true
     let connectivityQueue: DispatchQueue
-    private (set) var connectivityURLRequests: [URLRequest]
+    private(set) var connectivityURLRequests: [URLRequest]
     public static let defaultConnectivityURLRequests = [
         URL(string: "https://www.apple.com/library/test/success.html"),
         URL(string: "https://captive.apple.com/hotspot-detect.html")
@@ -34,16 +34,16 @@ typealias Configuration = ConnectivityConfiguration // For internal use.
         sessionConfiguration.timeoutIntervalForResource = 5.0
         return sessionConfiguration
     }()
-    private (set) var framework: Connectivity.Framework = .network
-    private (set) var pollingInterval: Double
-    private (set) var pollingIsEnabled: Bool
-    private (set) var pollWhileOfflineOnly: Bool
-    private (set) var responseValidator: ResponseValidator
+    private(set) var framework: Connectivity.Framework = .network
+    private(set) var pollingInterval: Double
+    private(set) var pollingIsEnabled: Bool
+    private(set) var pollWhileOfflineOnly: Bool
+    private(set) var responseValidator: ResponseValidator
     
     /// % successful connections required to be deemed to have connectivity
     let successThreshold: Connectivity.Percentage
-    private (set) var urlSessionConfiguration: URLSessionConfiguration
-    private (set) var validationMode: Connectivity.ValidationMode?
+    private(set) var urlSessionConfiguration: URLSessionConfiguration
+    private(set) var validationMode: Connectivity.ValidationMode?
     
     public init(
         callbackQueue: DispatchQueue = DispatchQueue.main,

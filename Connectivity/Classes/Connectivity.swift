@@ -94,13 +94,13 @@ public class Connectivity: NSObject {
     }
     
     /// Queue to callback on
-    private (set) var externalQueue = DispatchQueue.main
+    private(set) var externalQueue = DispatchQueue.main
     
     /// Whether or not to use System Configuration or Network (on iOS 12+) framework.
     public var framework: Connectivity.Framework = .network
     
     /// Used to for checks using NWPathMonitor
-    private (set) var internalQueue = DispatchQueue.global(qos: .default)
+    private(set) var internalQueue = DispatchQueue.global(qos: .default)
     
     /// Whether or not we are currently deemed to have connectivity
     public private(set) var isConnected: Bool = false
