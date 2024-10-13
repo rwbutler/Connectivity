@@ -52,7 +52,7 @@ To learn more about how to use Connectivity, take a look at the [keynote present
 - [x] Polling connectivity checks may be performed where a constant network connection is required (optional).
 - [x] Combine support via [`Connectivity.Publisher`](https://github.com/rwbutler/Connectivity/blob/main/Connectivity/Classes/Combine/ConnectivityPublisher.swift).
 
-## What's new in Connectivity 7.0.0?
+## What's new in Connectivity 8.0.0?
 
 For more information, see [CHANGELOG.md](CHANGELOG.md).
 
