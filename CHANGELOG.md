@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.0.1] - 2024-12-02
+### Changed
+- Remove privacy manifest from `Package.swift` and `Connectivity.podspec` which doesn’t appear to be needed given that the framework doesn’t access any of the resources described in [https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api](https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api).
+
 ## [8.0.0] - 2024-10-13
 ### Changed
 - Updated build settings for Xcode 16.

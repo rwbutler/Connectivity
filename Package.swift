@@ -20,7 +20,6 @@ let package = Package(
             dependencies: ["Reachability"],
             path: "Connectivity/Classes",
             exclude: ["Reachability"],
-            resources: [.copy("../../Example/Pods/Target Support Files/Connectivity-iOS/PrivacyInfo.xcprivacy")],
             swiftSettings: [.define("IMPORT_REACHABILITY")]
         ),
         .target(
